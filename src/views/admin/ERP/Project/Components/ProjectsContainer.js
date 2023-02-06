@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import ProjectItem from "./ProjectItem";
 import ModalProject from "./ModalProject";
-import ModalTask from "./ModalTask";
+// import ModalTask from "./ModalTask";
 
 export default function ProjectsContainer(props) {
   let key = 0;

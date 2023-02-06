@@ -27,7 +27,7 @@ canvas {
 	border: none;
 	text-decoration: none;
 	font-family: 'Roboto';
-	user-select: none;
+	// user-select: none;
 	list-style: none;
 	position: relative;
 }
@@ -157,7 +157,7 @@ $button-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.12);
   
   &-label {
     @include size(calc(100% - 10%), 100%);
-    @include flex(center, start);
+    @include flex(center, flex-start);
     position: absolute;
     font-size: 1em;
     left: 5%;

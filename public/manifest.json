@@ -1,0 +1,9 @@
+{
+  "short_name": "Funiture React App",
+  "name": "Furniture Admin Pnael",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}

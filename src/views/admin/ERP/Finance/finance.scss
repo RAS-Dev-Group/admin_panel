@@ -1,0 +1,61 @@
+* {
+    font-family: 'Lato';
+}
+
+.page-header {
+    line-height: 19.2px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-title {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.2px;
+    letter-spacing: 2%;
+}
+
+.page-tools {
+    margin-right: 110px;
+}
+
+.tool-btn {
+    width: 120px;
+    height: 30px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    border: 1px solid #82567A;
+    border-radius: 5px;
+    padding: 8px 28px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    background-color: white;
+    color: #82567A;
+}
+
+.tool-btn:hover {
+    background-color: #82567A;
+    color: white;
+}
+
+.page-content {
+
+}
+
+.page-section {
+    width: 100%;
+    padding: 15px 100px 30px 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart-container {
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 45%;
+    height: 340px;
+}

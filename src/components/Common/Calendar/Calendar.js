@@ -149,8 +149,8 @@ export default class Calendar extends React.Component {
 
     let tenyear = this.getDates(props, nextten);
 
-    tenyear.map((data) => {
-      months.push(
+    months = tenyear.map((data) => {
+      return (
         <td
           key={data}
           className="calendar-month"
@@ -206,7 +206,11 @@ export default class Calendar extends React.Component {
     });
     let blanks = [];
     for (let i = 0; i < this.firstDayOfMonth(); i++) {
-      blanks.push(<td key={i + 100} className="calendar-day empty">{""}</td>);
+      blanks.push(
+        <td key={i + 100} className="calendar-day empty">
+          {""}
+        </td>
+      );
     }
     let daysInMonth = [];
     for (let d = 1; d <= this.daysInMonth(); d++) {

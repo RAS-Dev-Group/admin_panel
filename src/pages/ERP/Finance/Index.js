@@ -3,7 +3,7 @@ import React from "react";
 import Chart from "react-apexcharts";
 import FinanceTable from './FinanceTable';
 
-import './finance.scss'
+// import './finance.scss'
 import chartdata from './chart-default-data';
 
 export default function Finance() {

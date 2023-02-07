@@ -6,7 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Header() {
   return (
     <div className="admin-header">
-      <div className=""></div>
+      <div className="float-right pl-5 w-400">
+        <select name="finance" className="w-3/4 sel-finance">
+          <option>Sales</option>
+          <option>Expenses</option>
+          <option>Profits</option>
+        </select>
+      </div>
       <div className="h-full px-4 bg-white header-bar mr-400">
         <div className="flex float-left">
           <div className="header-label">

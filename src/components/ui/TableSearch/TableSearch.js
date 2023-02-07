@@ -3,7 +3,7 @@ import React from "react";
 
 import './TableSearch.scss';
 
-export default function TableSearch(props) {
+export default function TableSearch() {
   return <div className="pl-2 table-search relative">
     <input className="input-search-warehouse pl-10 !ml-0 !border-none" type="text" />
     <FontAwesomeIcon

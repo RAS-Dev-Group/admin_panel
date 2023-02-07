@@ -18,15 +18,6 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 
-//  Select Components
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-
-
-
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -169,15 +160,15 @@ export default function FinanceTable() {
             <input type='text' className='search-box' onChange={handelChangeList} value={''}/>
         </div>
         <div className='text-right'>
-            <select onChange={handleNameSelect}>
+            <select className='finance-table-select' onChange={handleNameSelect}>
                 <option value={'-1'}>Name</option>
                 <option value='1'>Alex</option>
             </select>
-            <select onChange={handleAmountSelect}>
+            <select className='finance-table-select' onChange={handleAmountSelect}>
                 <option value={'-1'}>Amount</option>
                 <option value='1'>100</option>
             </select>
-            <select onChange={handleFilterSelect}>
+            <select className='finance-table-select' onChange={handleFilterSelect}>
                 <option value={'-1'}>More Filters</option>
                 <option value='1'>email</option>
             </select>

@@ -59,3 +59,47 @@
   width: 45%;
   height: 340px;
 }
+
+.table-container {
+  margin: 15px 100px 30px 100px;
+  padding: 20px 35px;
+  background-color: white;
+}
+
+
+.search-box {
+  width: 316px;
+  height: 30px;
+  border: 1px solid #82567A;
+  border-radius: 5px;
+  background-color: #d9d9d966;
+}
+
+select {
+  height: 30px;
+  border: 1px solid #82567A;
+  border-radius: 5px;
+  padding: 5px 10px;
+  min-width: 120px;
+  margin-right: 15px;
+}
+
+.finance-add {
+  height: 30px;
+  border: 1px solid #82567A;
+  border-radius: 5px;
+  padding: 5px 10px;
+  min-width: 120px;
+  background-color: #82567A;
+  color: white;
+}
+
+.big-font {
+  font-size: 14px;
+  color: #18020C;
+}
+
+.small-font {
+  font-size: 10px;
+  color: #18020C4c;
+}

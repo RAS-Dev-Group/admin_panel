@@ -5,12 +5,16 @@ import "./project.scss";
 
 export default function Project() {
   return (
-    <div className="flex content-wrapper">
-      <div>
-        <label className="page-title">Project Management</label>
-        <ProjectsContainer />
+    <div className="content-wrapper">
+      <div className="float-right">
+        <ProjectSchedule />
       </div>
-      <ProjectSchedule />
+      <div className="mr-400">
+        <label className="page-title">Project Management</label>
+        <div className="flex">
+          <ProjectsContainer />
+        </div>
+      </div>
     </div>
   );
 }

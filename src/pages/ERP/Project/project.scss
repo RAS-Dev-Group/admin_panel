@@ -5,7 +5,6 @@
 @tailwind utilities;
 
 .project-container {
-  width: 784px;
   margin-left: 5px;
   margin-top: 22px;
   background: white;
@@ -32,7 +31,7 @@
   }
 
   .items {
-    padding: 25px 20px 0;
+    padding: 25px 10px 0;
 
     .project-item {
       background: #FFFFFF;
@@ -42,6 +41,8 @@
       border-radius: 16.8889px;
       padding: 15px;
       margin-bottom: 40px;
+      margin-left: 15px;
+      margin-right: 15px;
 
       .btn-edit {
         height: 17px;
@@ -110,6 +111,7 @@
 }
 
 .project-schedule {
+  width: 380px;
   .label-date {
     margin-top: 25px;
     font-size: 18px;

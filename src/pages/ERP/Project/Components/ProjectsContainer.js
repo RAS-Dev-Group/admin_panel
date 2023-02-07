@@ -10,7 +10,7 @@ export default function ProjectsContainer(props) {
   const [showProjectModal, setShowProjectModal] = useState(false);
 
   return (
-    <div className="project-container">
+    <div className="w-full project-container">
       <div className="flex">
         <label className="container-title">Ongoing Projects</label>
         <div></div>
@@ -21,7 +21,7 @@ export default function ProjectsContainer(props) {
           + Add a Project
         </button>
       </div>
-      <div className="flex flex-wrap justify-between items">
+      <div className="flex flex-wrap items">
         <ProjectItem key={key++} title="Project1" progress={60} />
         <ProjectItem key={key++} title="Project1" progress={60} />
         <ProjectItem key={key++} title="Project1" progress={60} />
@@ -34,13 +34,6 @@ export default function ProjectsContainer(props) {
         <ProjectItem key={key++} title="Project1" progress={60} />
         <ProjectItem key={key++} title="Project1" progress={60} />
       </div>
-
-      <ModalProject
-        title="Add A Project"
-        className="modal-project"
-        onClose={() => setShowProjectModal(false)}
-        show={showProjectModal}
-      />
     </div>
   );
 }

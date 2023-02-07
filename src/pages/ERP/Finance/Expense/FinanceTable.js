@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -79,45 +80,24 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(name, card, cat, amount, condition) {
-    return { 
-        user: {
-            name: name,
-            email: name + '@uihut.com',
-        }, 
-        card: {
-            num: card,
-            type: 'Card Number',
-        },
-        cat: {
-            name: cat,
-            type: 'Category',
-        },
-        amount: {
-            total: amount,
-            type: 'Amount',
-        },
-        status: {
-            type: (condition > 5)? <span style={{fontSize: '14px', color: '#0B8A73'}}>Successful</span>: <span style={{fontSize: '14px',color: '#F01608'}}>UnSuccessful</span>,
-            mark: 'Remark',
-        },
-    };
+function createData(title, type, amount) {
+    return { title, type, amount };
 }
 
 const rows = [
-  createData('Cupcake','562XXXXXXXX4643' ,'Furniture', 305, 3.7),
-  createData('Donut','562XXXXXXXX4643' ,'Furniture', 452, 25.0),
-  createData('Eclair','562XXXXXXXX4643' ,'Furniture', 262, 16.0),
-  createData('Frozen yoghurt','562XXXXXXXX4643' ,'Furniture', 159, 6.0),
-  createData('Gingerbread','562XXXXXXXX4643' ,'Furniture', 356, 16.0),
-  createData('Honeycomb','562XXXXXXXX4643' ,'Furniture', 408, 3.2),
-  createData('Ice cream sandwich','562XXXXXXXX4643' ,'Furniture', 237, 9.0),
-  createData('Jelly Bean','562XXXXXXXX4643' ,'Furniture', 375, 0.0),
-  createData('KitKat','562XXXXXXXX4643' ,'Furniture', 518, 26.0),
-  createData('Lollipop','562XXXXXXXX4643' ,'Furniture', 392, 0.2),
-  createData('Marshmallow','562XXXXXXXX4643' ,'Furniture', 318, 0),
-  createData('Nougat','562XXXXXXXX4643' ,'Furniture', 360, 19.0),
-  createData('Oreo','562XXXXXXXX4643' ,'Furniture', 437, 18.0),
+  createData('Cupcake','Furniture', 305),
+  createData('Donut' ,'Furniture', 452),
+  createData('Eclair' ,'Furniture', 262),
+  createData('Frozen yoghurt' ,'Furniture', 159),
+  createData('Gingerbread' ,'Furniture', 356),
+  createData('Honeycomb', 'Furniture', 408),
+  createData('Ice cream sandwich' ,'Furniture', 237),
+  createData('Jelly Bean' ,'Furniture', 375),
+  createData('KitKat', 'Furniture', 518),
+  createData('Lollipop' ,'Furniture', 392),
+  createData('Marshmallow' ,'Furniture', 318),
+  createData('Nougat' ,'Furniture', 360),
+  createData('Oreo','Furniture', 437),
 ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
 export default function FinanceTable() {
@@ -161,12 +141,12 @@ export default function FinanceTable() {
         </div>
         <div className='text-right'>
             <select className='finance-table-select' onChange={handleNameSelect}>
-                <option value={'-1'}>Name</option>
-                <option value='1'>Alex</option>
+                <option value={'-1'}>Type of Expense</option>
+                <option value='1'>Furniture</option>
             </select>
             <select className='finance-table-select' onChange={handleAmountSelect}>
                 <option value={'-1'}>Amount</option>
-                <option value='1'>100</option>
+                <option value='1'>300</option>
             </select>
             <select className='finance-table-select' onChange={handleFilterSelect}>
                 <option value={'-1'}>More Filters</option>
@@ -178,36 +158,27 @@ export default function FinanceTable() {
 
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+        <TableHead>
+          <TableRow>
+            <TableCell align='left'>Title</TableCell>
+            <TableCell align='center'>Type of Expense</TableCell>
+            <TableCell align='right'>Amount</TableCell>
+          </TableRow>
+        </TableHead>
         <TableBody>
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.user.name}>
-              <TableCell component="th" scope="row">
-                <span className='big-font'>{row.user.name}</span>
-                <br/>
-                <span className='small-font'>{row.user.email}</span>
+            <TableRow key={row.title}>
+              <TableCell align='left' width={240}>
+                <span className='big-font'>{row.title}</span>
               </TableCell>
-              <TableCell align="right">
-                <span className='big-font'>{row.card.num}</span>
-                <br/>
-                <span className='small-font'>{row.card.type}</span>
+              <TableCell align="center" width={240}>
+                <span className='big-font'>{row.type}</span>
               </TableCell>
-              <TableCell align="right">
-                <span className='big-font'>{row.cat.name}</span>
-                <br/>
-                <span className='small-font'>{row.cat.type}</span>
-              </TableCell>
-              <TableCell align="right">
-              <span className='big-font'>{row.amount.total}</span>
-                <br/>
-                <span className='small-font'>{row.amount.type}</span>
-              </TableCell>
-              <TableCell align="right">
-                {row.status.type}
-                <br/>
-                <span className='small-font'>{row.status.mark}</span>
+              <TableCell align="right" width={240}>
+                <span className='big-font'>$ {row.amount}</span>
               </TableCell>
             </TableRow>
           ))}

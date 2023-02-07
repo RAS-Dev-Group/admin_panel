@@ -77,3 +77,11 @@ body {
 .mr-400 {
   margin-right: 400px;
 }
+
+.w-400 {
+  width: 400px;
+}
+
+select:focus-visible {
+  outline: none;
+}

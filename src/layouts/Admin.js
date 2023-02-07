@@ -4,17 +4,17 @@ import { Outlet } from "react-router-dom";
 
 import "./admin.scss";
 
-import AdminSidebar from "../components/Sidebar/Sidebar";
-import AdminHeader from "../components/Header/Header";
+import Sidebar from "./Sidebar/Sidebar";
+import Header from "./Header/Header";
 
-export default function Admin() {
+export default function Admin({ mode }) {
   return (
-    <div className="">
-      <AdminSidebar />
+    <>
+      <Sidebar mode={mode} />
       <div className="p-4 admin-wrapper">
-        <AdminHeader />
+        <Header />
         <Outlet />
       </div>
-    </div>
+    </>
   );
 }

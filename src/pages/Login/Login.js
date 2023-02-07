@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./auth.scss";
+import "./Login.scss";
 
 class FluidInput extends React.Component {
   constructor(props) {
@@ -10,12 +10,14 @@ class FluidInput extends React.Component {
       value: "",
     };
   }
+
   focusField() {
     const { focused } = this.state;
     this.setState({
       focused: !focused,
     });
   }
+
   handleChange(event) {
     const { target } = event;
     const { value } = target;
@@ -23,6 +25,7 @@ class FluidInput extends React.Component {
       value: value,
     });
   }
+
   render() {
     const { type, label, style, id } = this.props;
     const { focused, value } = this.state;
@@ -76,23 +79,24 @@ export default function LoginContainer() {
   const navigate = useNavigate();
 
   return (
-    <div className="login-container">
-      <div className="title">Login</div>
-      <FluidInput type="text" label="name" id="name" style={style} />
-      <FluidInput
-        type="password"
-        label="password"
-        id="password"
-        style={style}
-      />
-      <Button
-        buttonText="log in"
-        onClick={() => {
-          console.log("login");
-          navigate("/admin/erp/project");
-        }}
-        buttonClass="login-button"
-      />
+    <div className="login-page">
+      <div className="login-container">
+        <div className="title">Login</div>
+        <FluidInput type="text" label="name" id="name" style={style} />
+        <FluidInput
+          type="password"
+          label="password"
+          id="password"
+          style={style}
+        />
+        <Button
+          buttonText="log in"
+          onClick={() => {
+            navigate("/erp/project");
+          }}
+          buttonClass="login-button"
+        />
+      </div>
     </div>
   );
 }

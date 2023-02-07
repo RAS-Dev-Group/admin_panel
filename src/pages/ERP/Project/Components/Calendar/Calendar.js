@@ -1,10 +1,26 @@
 import React from "react";
 import moment from "moment";
 // import { range } from "moment-range";
+import DropDown from "react-dropdown";
 
 import "./Calendar.scss";
 
-export default class Calendar extends React.Component {
+export default function Calendar1() {
+  let weekdayshort = moment.weekdaysShort();
+  let years = [2020, 2021, 2022, 2023];
+
+  return (
+    <>
+      <div className="flex mb-5">
+        <DropDown className="ml-auto" name="month" options={moment.months()} value={moment().format("MMMM")} />
+        <DropDown className="ml-1" name="year" options={years} value={'2023'} />
+      </div>
+      <div></div>
+    </>
+  );
+}
+
+class Calendar extends React.Component {
   weekdayshort = moment.weekdaysShort();
 
   state = {

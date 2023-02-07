@@ -1,6 +1,6 @@
 import React from "react";
 
-import Calendar from "../../../../../components/Common/Calendar/Calendar";
+import Calendar from "./Calendar/Calendar";
 import ScheduleItem from "./ScheduleItem";
 
 export default function ProjectSchedule(props) {

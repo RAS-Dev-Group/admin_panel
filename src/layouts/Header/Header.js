@@ -3,9 +3,9 @@ import Search from "./Search";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function AdminHeader() {
+export default function Header() {
   return (
-    <div className="admin-header w-784">
+    <div className="admin-header mr-400">
       <div className="h-full px-4 bg-white header-bar">
         <div className="flex float-left">
           <div className="header-label">

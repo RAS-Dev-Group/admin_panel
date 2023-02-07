@@ -1,6 +1,6 @@
 import React from "react";
 
-import TableSearch from "../../../../components/Common/TableSearch/TableSearch";
+import TableSearch from "../../../components/ui/TableSearch/TableSearch";
 import DropDown from "react-dropdown";
 import "react-dropdown/style.css";
 

@@ -12,10 +12,35 @@ export default function Calendar1() {
   return (
     <>
       <div className="flex mb-5">
-        <DropDown className="ml-auto" name="month" options={moment.months()} value={moment().format("MMMM")} />
-        <DropDown className="ml-1" name="year" options={years} value={'2023'} />
+        <select
+          className="ml-auto sel-calendar month"
+          name="month"
+          value={moment().format("MMMM")}
+        >
+          {moment.months().map((month) => (
+            <option>{month}</option>
+          ))}
+        </select>
+        <select className="ml-1 sel-calendar year" name="year" value={"2023"}>
+          {years.map((year) => (
+            <option>{year}</option>
+          ))}
+        </select>
       </div>
-      <div></div>
+      <div>
+        <table>
+            <thead>
+              <tr>
+                {weekdayshort.map(weekday => (
+                  <th>{weekday}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+        </table>
+      </div>
     </>
   );
 }

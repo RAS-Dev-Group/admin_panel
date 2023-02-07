@@ -9,9 +9,7 @@ body {
 }
 
 .fixed-header {
-  // width: 400px;
   font-size: 12px;
-  // table-layout: fixed;
   border-collapse: collapse;
 
   tbody {
@@ -22,9 +20,6 @@ body {
   }
 
   thead {
-    // background: black;
-    // color: #fff;
-
     tr {
       display: block;
     }

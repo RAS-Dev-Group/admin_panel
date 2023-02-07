@@ -6,18 +6,21 @@ import "./inventory.scss";
 export default function Inventory() {
   return (
     <div className="content-wrapper">
-      <div className="w-784">
-        <label className="page-title">Inventory Management</label>
-        <label className="float-right page-title">Orders</label>
+      <div className="float-left w-3/4 pr-2">
+        <div className="flex mb-3">
+          <label className="page-title w-2/4">Inventory Management</label>
+          <label className="page-title">Orders</label>
+        </div>
+        <div className="">
+          <InventoryTable />
+        </div>
       </div>
-      <div className="float-left w-784">
-        <InventoryTable />
-      </div>
-      <div className="buttons">
-        <button className="common-button active">New Item</button>
-        <button className="common-button">Export CSV</button>
-        <button className="common-button">Import Items</button>
-        <button className="common-button">Create Category</button>
+      <div className="buttons w-1/4 float-left bg-white text-center">
+        <button className="common-button my-2 active">New Item</button>
+        <button className="common-button my-2">Export CSV</button>
+        <button className="common-button my-2">Import Items</button>
+        <button className="common-button my-2">Coupons</button>
+        <button className="common-button my-2">Select Product</button>
       </div>
     </div>
   );

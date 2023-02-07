@@ -1,0 +1,57 @@
+
+.filter {
+  
+    .Dropdown-control {
+      height: 24px;
+      padding-top: 0!important;
+      padding-bottom: 0!important;
+      border-radius: 5px;
+  
+      .Dropdown-placeholder {
+        line-height: 24px;
+        padding-right: 4px;
+      }
+  
+      .Dropdown-arrow {
+        top: 9px;
+      }
+    }
+}
+
+.supplier-table {
+    font-size: 12px;
+
+    th{
+        color: #82567A;
+    }
+
+    img {
+        height: 42px;
+    }
+
+    .color1{
+        color: #82567A;
+    }
+
+    .color2{
+        color: #08BA73;
+    }
+
+    .fa-icon{
+        color: #F24E1E;
+    }
+}
+
+.btn-add {
+    font-size: 12px;
+    background: linear-gradient(180deg, #8B5E83 20.45%, #82567A 100%, #82567A 100%);
+    box-shadow: 0px 20px 24px rgb(70 6 81 / 8%);
+    color: white;
+    border-radius: 5px;
+}
+
+.buttons {
+    border-radius: 20px;
+    padding: 80px 0px;
+}
+  

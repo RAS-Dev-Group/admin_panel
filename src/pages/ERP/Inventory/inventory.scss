@@ -1,14 +1,44 @@
-.buttons {
-  margin-left: 800px;
-  background: #FFFFFF;
-  border-radius: 20px;
-  width: 371px;
-  height: 461px;
-  padding: 60px 72px;
+.filter {
+  
+  .Dropdown-control {
+    height: 24px;
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    border-radius: 5px;
+
+    .Dropdown-placeholder {
+      line-height: 24px;
+      padding-right: 4px;
+    }
+
+    .Dropdown-arrow {
+      top: 9px;
+    }
+  }
 }
 
+
 .inventory-table {
+  font-size: 12px;
+
+  th {
+    color: #82567A;
+  }
+
   img {
     height: 42px;
   }
+
+  .color1 {
+    color: #82567A;
+  }
+
+  .fa-icon {
+    color: #F24E1E;
+  }
+}
+
+.buttons {
+  border-radius: 20px;
+  padding: 20px 0;
 }

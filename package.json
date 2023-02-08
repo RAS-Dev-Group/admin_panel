@@ -16,6 +16,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "apexcharts": "^3.37.0",
     "css-loader": "^6.7.3",
     "datepicker": "^0.0.0",
     "dayjs": "^1.11.7",
@@ -42,7 +43,6 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
       "react-app/jest"
     ]
   },

@@ -1,0 +1,58 @@
+.sel-calendar {
+  border: solid 1px #C8CDD6;
+  border-radius: 3px;
+  height: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'DM Sans', Lato;
+  color: #615E83;
+  padding-left: 7px;
+}
+
+.sel-calendar.month {
+  width: 85px;
+}
+
+.sel-calendar.year {
+  width: 69px;
+}
+
+.calendar-wrapper {
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #615E83;
+  padding: 7.5px;
+  background: white;
+  width: 333px;
+
+  .row {
+    margin-bottom: 7.5px;
+    display: flex;
+
+    .cell {
+      padding: 7.5px;
+      text-align: center;
+      margin-right: 7.5px;
+      height: 28px;
+      width: 38px;
+    }
+    
+    .cell:last-child {
+      margin-right: none;
+    }
+    
+    .cell.disabled {
+      color: #C8CDD6;
+    }
+  
+    .cell.active {
+      background: #05182D;
+      color: white;
+    }
+  }
+
+  .row:last-child {
+    margin-bottom: 0;
+  }
+}

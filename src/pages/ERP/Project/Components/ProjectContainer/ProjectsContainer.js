@@ -68,11 +68,3 @@ export default function ProjectsContainer(props) {
   );
 }
 
-/*
-<ModalProjectDetail
-  name="Project1"
-  description={description}
-  members={members}
-  tasks={tasks}
-/>
-*/

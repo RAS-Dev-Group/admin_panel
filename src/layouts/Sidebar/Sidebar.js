@@ -33,7 +33,20 @@ export default function Sidebar({ mode }) {
       },
     ],
     crm: [],
-    pos: [],
+    pos: [
+      {
+        uri: "/pos/order",
+        title: "Order Management",
+      },
+      {
+        uri: "/pos/invoices",
+        title: "Invoices",
+      },
+      {
+        uri: "/pos/coupon",
+        title: "Coupon Management",
+      },
+    ],
   };
 
   return (

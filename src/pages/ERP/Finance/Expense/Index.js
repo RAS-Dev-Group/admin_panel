@@ -16,7 +16,7 @@ import "../finance.scss";
 //  import Default Data
 import barchart from "./chart-default-data";
 
-export default function Finance() {
+export default function FinanceExpense() {
   const handleAddExpense = () => {};
 
   const [open, setOpen] = React.useState(false);

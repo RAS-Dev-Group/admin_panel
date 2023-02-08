@@ -18,10 +18,8 @@
   .btn-add-project {
     background: #F56B3F;
     border-radius: 5px;
-    width: 110px;
-    height: 30px;
     margin-right: 75px;
-    font-size: 12px;
+    font-size: 13px;
     color: white;
   }
 
@@ -30,8 +28,7 @@
 
     .project-item {
       background: #FFFFFF;
-      width: 186px;
-      height: 214px;
+      width: 216px;
       box-shadow: 0px 21.1111px 33.7778px rgba(0, 0, 0, 0.03);
       border-radius: 16.8889px;
       padding: 15px;
@@ -45,26 +42,33 @@
         border: 0.3px solid #0B8A73;
         border-radius: 5px;
         font-weight: 400;
-        font-size: 9px;
+        font-size: 11px;
         color: #0B8A73;
       }
 
       .label-check {
         color: #82567A;
-        font-size: 9px;
+        font-size: 11px;
         line-height: 17px;
         margin-right: 5px;
       }
 
       .users-container {
-        margin-bottom: 20px;
+        margin-bottom: 28px;
 
         .avatar {
-          height: 32px;
-          width: 32px;
+          height: 40px;
+          width: 40px;
           box-shadow: 0px 20px 24px rgba(70, 6, 81, 0.08);
           border-radius: 50%;
           background: #E3E6E8;
+          margin-right: 8px;
+        }
+        .avatar:first-child {
+          margin-left: auto;
+        }
+        .avatar:last-child {
+          margin-right: auto;
         }
       }
 
@@ -98,7 +102,7 @@
       }
 
       .label-date {
-        font-size: 9px;
+        font-size: 11px;
         line-height: 12px;
       }
     }
@@ -201,7 +205,7 @@
 
     label {
       font-weight: 400;
-      font-size: 10px;
+      font-size: 13px;
       line-height: 12px;
       letter-spacing: 0.01em;
       color: #ADADAD;
@@ -215,7 +219,7 @@
       padding: 12px 0 11px;
 
       font-weight: 400;
-      font-size: 10px;
+      font-size: 13px;
       line-height: 12px;
       letter-spacing: 0.01em;
       color: #ADADAD;
@@ -229,7 +233,7 @@
   .btn-add-task {
     font-style: italic;
     font-weight: 400;
-    font-size: 10px;
+    font-size: 13px;
     line-height: 12px;
     letter-spacing: 0.01em;
     color: #82567A;
@@ -259,7 +263,7 @@
 
   input,
   textarea {
-    font-size: 10px;
+    font-size: 13px;
     color: gray;
     border-radius: 5px;
   }
@@ -281,7 +285,7 @@
 
     label {
       font-weight: 600;
-      font-size: 9px;
+      font-size: 11px;
       line-height: 12px;
     }
 
@@ -344,7 +348,7 @@
     .input-task {
       width: 351px;
       height: 35px;
-      font-size: 10px;
+      font-size: 13px;
       border: 0.5px solid #8B5E83;
       border-radius: 5px;
     }
@@ -353,7 +357,7 @@
       background: rgba(11, 138, 115, 0.2);
       border-radius: 5px;
       height: 17px;
-      font-size: 9px;
+      font-size: 11px;
       color: #0B8A73;
     }
   }
@@ -385,7 +389,7 @@
     color: white;
 
     .btn-edit {
-      font-size: 9px;
+      font-size: 11px;
       border: solid 1px white;
       border-radius: 5px;
       height: 17px;

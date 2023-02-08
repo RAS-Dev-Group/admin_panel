@@ -11,7 +11,7 @@ export default function ProjectItem(props) {
         </label>
         <input type="checkbox" />
       </div>
-      <div className="flex justify-between users-container">
+      <div className="flex users-container">
         <img className="avatar" src="/images/avatar1.png" alt="avatar" />
         <img className="avatar" src="/images/avatar2.png" alt="avatar" />
         <img className="avatar" src="/images/avatar1.png" alt="avatar" />

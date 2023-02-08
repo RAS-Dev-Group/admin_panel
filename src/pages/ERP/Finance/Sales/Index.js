@@ -12,7 +12,7 @@ import '../finance.scss';
 //  import Default Data
 import chartdata from './chart-default-data';
 
-export default function Finance() {
+export default function FinanceSales() {
 
   return (
     <>

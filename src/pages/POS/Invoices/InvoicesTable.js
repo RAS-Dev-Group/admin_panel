@@ -1,8 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "react-dropdown/style.css";
-
 export default function InvoicesTables(props) {
   let rows = [];
 

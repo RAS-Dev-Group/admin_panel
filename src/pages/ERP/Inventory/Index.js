@@ -16,7 +16,7 @@ export default function Inventory() {
         </div>
       </div>
       <div className="float-left w-1/4 text-center bg-white buttons">
-        <button className="my-2 common-button active">New Item</button>
+        <button className="my-2 common-button">New Item</button>
         <button className="my-2 common-button">Export CSV</button>
         <button className="my-2 common-button">Import Items</button>
         <button className="my-2 common-button">Coupons</button>

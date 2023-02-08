@@ -59,7 +59,7 @@ export default function Sidebar({ mode }) {
               navigate(page.uri);
             }}
             name={page.title}
-            active={location.pathname === page.uri}
+            active={location.pathname.indexOf(page.uri) >= 0}
           />
         ))}
       </div>

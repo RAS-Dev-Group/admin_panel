@@ -3,12 +3,11 @@ import FinanceExpense from "./Expense/Index";
 import FinanceProfits from "./Profits/Index";
 import FinanceSales from "./Sales/Index";
 
-export default function Finance() {
-  let [page, setPage] = useState("expense");
+export default function Finance({ page }) {
 
   return (
     <>
-      {page === "expense" ? (
+      {page === "expenses" ? (
         <FinanceExpense />
       ) : page === "profits" ? (
         <FinanceProfits />

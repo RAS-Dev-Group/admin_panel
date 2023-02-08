@@ -11,6 +11,10 @@ import Inventory from "../pages/ERP/Inventory/Index";
 import Finance from "../pages/ERP/Finance/Expense/Index";
 import Supplier from "../pages/ERP/Supplier/Index";
 import Warehouse from "../pages/ERP/Warehouse/Index";
+
+import Coupon from "../pages/POS/Coupon/Index";
+import Invoices from "../pages/POS/Invoices/Index";
+import Order from "../pages/POS/Order/Index";
 import ErrorPage from "../pages/error-page";
 
 // routing
@@ -53,6 +57,20 @@ const router = createBrowserRouter([
   {
     path: "/pos",
     element: <POS />,
+    children: [
+      {
+        path: "order",
+        element: <Order />,
+      },
+      {
+        path: "invoices",
+        element: <Invoices />,
+      },
+      {
+        path: "coupon",
+        element: <Coupon />,
+      },
+    ],
   },
 ]);
 

@@ -1,5 +1,5 @@
 import React from "react";
-import InventoryTable from "./SupplierTable";
+import SupplierTable from "./SupplierTable";
 
 import "./supplier.scss";
 
@@ -12,7 +12,7 @@ export default function Supplier() {
           <label className="page-title absolute right-2">Supply History</label>
         </div>
         <div className="">
-          <InventoryTable />
+          <SupplierTable />
         </div>
       </div>
       <div className="buttons w-1/4 float-left bg-white text-center">

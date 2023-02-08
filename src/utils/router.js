@@ -1,6 +1,6 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 
-import Login from '../pages/Login/Login';
+import Login from "../pages/Login/Login";
 
 import ERP from "../pages/ERP/Index";
 import CRM from "../pages/CRM/Index";
@@ -8,7 +8,7 @@ import POS from "../pages/POS/Index";
 
 import Project from "../pages/ERP/Project/Index";
 import Inventory from "../pages/ERP/Inventory/Index";
-import Finance from "../pages/ERP/Finance/Profits/Index";
+import Finance from "../pages/ERP/Finance/Index";
 import Supplier from "../pages/ERP/Supplier/Index";
 import Warehouse from "../pages/ERP/Warehouse/Index";
 
@@ -16,6 +16,8 @@ import Coupon from "../pages/POS/Coupon/Index";
 import Invoices from "../pages/POS/Invoices/Index";
 import Order from "../pages/POS/Order/Index";
 import ErrorPage from "../pages/error-page";
+import FinanceSales from "../pages/ERP/Finance/Sales/Index";
+import FinanceExpense from "../pages/ERP/Finance/Expense/Index";
 
 // routing
 const router = createBrowserRouter([
@@ -38,7 +40,25 @@ const router = createBrowserRouter([
       },
       {
         path: "finance",
-        element: <Finance />,
+        element: <Outlet />,
+        children: [
+          {
+            path: '',
+            element: <Finance page="sales" />
+          },
+          {
+            path: "sales",
+            element: <Finance page="sales" />,
+          },
+          {
+            path: "expenses",
+            element: <Finance page="expenses" />,
+          },
+          {
+            path: "profits",
+            element: <Finance page="profits" />,
+          },
+        ],
       },
       {
         path: "supplier",

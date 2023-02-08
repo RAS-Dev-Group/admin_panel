@@ -1,10 +1,7 @@
 import React from "react";
 
 import TableSearch from "../../../components/ui/TableSearch/TableSearch";
-import DropDown from "react-dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import "react-dropdown/style.css";
 
 export default function InventoryTable(props) {
   let rows = [];
@@ -35,22 +32,22 @@ export default function InventoryTable(props) {
         </div>
         <div className="float-right h-full">
           <div className="flex my-auto">
-            <DropDown
+            <select
               className="filter mr-2"
               placeholder="Date"
               options={[{ value: "1", label: "Date" }]}
             />
-            <DropDown
+            <select
               className="filter mr-2"
               placeholder="Product Category"
               options={[{ value: "1", label: "Product Category" }]}
             />
-            <DropDown
+            <select
               className="filter mr-2"
               placeholder="Status Delivery"
               options={[{ value: "1", label: "Status Delivery" }]}
             />
-            <DropDown
+            <select
               className="filter mr-2"
               placeholder="More Filters"
               options={[{ value: "1", label: "More Filters" }]}
@@ -84,7 +81,7 @@ export default function InventoryTable(props) {
                 </td>
                 <td className="color1">{row.tag}</td>
                 <td>
-                  <DropDown
+                  <select
                     className="filter"
                     options={options}
                     placeholder="input details"

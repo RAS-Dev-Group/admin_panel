@@ -1,8 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "react-dropdown/style.css";
-
 export default function OrderTable(props) {
   let rows = [];
 
@@ -19,9 +17,9 @@ export default function OrderTable(props) {
 
   return (
     <>
-      <div className="w-11/12 mx-auto p-8 bg-white rounded-xl">
+      <div className="w-11/12 p-8 mx-auto bg-white rounded-xl">
         <div className="pl-1 mb-4">
-            <label className="font-bold text-base">Transaction history</label>
+            <label className="text-base font-bold">Transaction history</label>
         </div>
         <table className="table w-full text-center supplier-table">
           <thead>
@@ -39,7 +37,7 @@ export default function OrderTable(props) {
           <tbody>
             {rows.map((row, index) => (
               <tr className="my-2" key={index}>
-                <td className="text-left font-bold">{row.name}</td>
+                <td className="font-bold text-left">{row.name}</td>
                 <td>{row.cate}</td>
                 <td className="color1">{row.quantity}</td>
                 <td className="color1">{row.tax_rate}</td>

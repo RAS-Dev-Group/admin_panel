@@ -45,11 +45,11 @@ export default function ProjectsContainer(props) {
           <div className="flex">
             <label className="container-title">Ongoing Projects</label>
             <div></div>
-            <button className="ml-auto btn-add-project">
+            <button className="px-4 py-2 ml-auto btn-add-project">
               + Add a Project
             </button>
           </div>
-          <div className="flex flex-wrap items">
+          <div className="flex flex-wrap justify-evenly items">
             <ProjectItem key={key++} title="Project1" progress={60} />
             <ProjectItem key={key++} title="Project1" progress={60} />
             <ProjectItem key={key++} title="Project1" progress={60} />

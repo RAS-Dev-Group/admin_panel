@@ -8,14 +8,14 @@ export default function WarehousesContainer(props) {
     <div className="warehouse-container">
       <div className="flex">
         <div className="relative">
-          <input className="input-search-warehouse pl-10" type="text" />
+          <input className="pl-10 input-search-warehouse" type="text" />
           <FontAwesomeIcon
-            className="absolute top-2 left-4 text-white"
+            className="absolute text-white top-2 left-4"
             icon="search"
             size="1x"
           />
         </div>
-        <button className="ml-auto btn-add-warehouse">+ Add Warehouse</button>
+        <button className="px-4 py-2 ml-auto btn-add-warehouse">+ Add Warehouse</button>
       </div>
       <ul className="items">
         <li className="flex flex-wrap warehouse-item">

@@ -6,7 +6,10 @@ const ModalTask = (props) => {
   return (
     <div className="modal-task">
       <label className="block text-center title">ADD NEW TASK</label>
-      <input className="block text-center w-full mt-8 p-2.5" placeholder="input task name" />
+      <input
+        className="block text-center w-full mt-8 p-2.5"
+        placeholder="input task name"
+      />
       <textarea
         className="block w-full p-3 mt-5 text-center"
         placeholder="input description here"

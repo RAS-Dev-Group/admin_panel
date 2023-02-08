@@ -1,12 +1,15 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Search from "./Search";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Header() {
+  let location = useLocation();
+
   return (
     <div className="admin-header">
-      <div className="float-right pl-5 w-400">
+      <div className="float-right pl-5 w-400" show={location.pathname === 'erp/finance'}>
         <select name="finance" className="w-3/4 sel-finance">
           <option>Sales</option>
           <option>Expenses</option>

@@ -1,12 +1,12 @@
 import React from "react";
-import ReactDropdown from "react-dropdown";
 
-const ModalProject = (props) => {
-  let tasks = [];
+const ModalProjectEdit = (props) => {
+  let tasks = [{}, {}, {}];
 
   return (
-    <div>
-      <div className="mb-3">
+    <div className="relative modal-project">
+      <button className="close-button">X</button>
+      <div className="mb-3 text-center">
         <label className="modal-title">ADD A PROJECT</label>
       </div>
       <div>
@@ -39,8 +39,8 @@ const ModalProject = (props) => {
         </div>
       </div>
       <div className="mb-3 mt-7">
-        <ReactDropdown className="sel-project-title" />
-        <button className="pl-2 admin-primary-button">Add</button>
+        <select className="text-center sel-project-title" placeholder="Input project title" />
+        <button className="ml-2 admin-primary-button">Add</button>
       </div>
       <div className="mb-9">
         <textarea
@@ -49,27 +49,27 @@ const ModalProject = (props) => {
         ></textarea>
       </div>
       <div>
-        <label className="modal-title">Tasks</label>
+        <label className="sub-title">Tasks</label>
         {tasks.map((task, index) => (
-          <div>
-            <label>Task1</label>
-            <button>input task here</button>
+          <div className="flex task-item" key={index + 1}>
+            <label className="my-auto">Task1</label>
+            <button className="ml-auto">input task here</button>
           </div>
         ))}
         <div>
-          <button>add more tasks</button>
+          <button className="btn-add-task">add more tasks</button>
         </div>
       </div>
-      <div>
-        <label className="modal-title">Assign Team Members</label>
-        <div>
-          <ReactDropdown placeholder="Add team member here" />
-          <button className="admin-secondary-button">Back</button>
-          <button className="admin-primary-button">Create</button>
+      <div className="mt-4">
+        <label className="sub-title">Assign Team Members</label>
+        <div className="flex mt-3">
+          <select className="sel-member" placeholder="Add team member here" />
+          <button className="ml-auto admin-secondary-button">Back</button>
+          <button className="ml-7 admin-primary-button">Create</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default ModalProject;
+export default ModalProjectEdit;

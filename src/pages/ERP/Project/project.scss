@@ -1,8 +1,3 @@
-@tailwind base;
-
-@tailwind components;
-
-@tailwind utilities;
 
 .project-container {
   margin-left: 5px;
@@ -112,6 +107,7 @@
 
 .project-schedule {
   width: 380px;
+
   .label-date {
     margin-top: 25px;
     font-size: 18px;
@@ -119,27 +115,33 @@
     line-height: 27px;
   }
 
-  .schedule-item {
-    margin-bottom: 40px;
+  .schedule-items {
+    overflow-y: auto;
 
-    .schedule-title {
-      font-size: 18px;
-      font-weight: 500;
+    .schedule-item {
+      margin-bottom: 40px;
+
+      .schedule-title {
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .schedule-duration {
+        font-size: 18px;
+        font-weight: 300;
+      }
     }
 
-    .schedule-duration {
-      font-size: 18px;
-      font-weight: 300;
+    .schedule-item:last-child {
+      margin-bottom: 10px;
     }
-  }
-
-  .schedule-item:last-child {
-    margin-bottom: 10px;
   }
 }
 
 .modal-project {
   padding: 45px 65px 60px 100px;
+  border-radius: 20px;
+  background: white;
 
   .modal-title {
     color: #86597E;
@@ -160,12 +162,18 @@
     margin-right: 0;
   }
 
-  .label-membes {
+  .label-members {
     font-weight: 500;
     font-size: 14px;
     line-height: 12px;
     letter-spacing: 0.01em;
     color: #F56B3F;
+  }
+
+  select {
+    border: solid 0.5px #8B5E83;
+    height: 35px;
+    border-radius: 10px;
   }
 
   .sel-project-title {
@@ -180,11 +188,211 @@
     border-radius: 20px;
   }
 
-  .modal-title {
+  .sub-title {
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
     letter-spacing: 0.02em;
     color: #0A0A1F;
+  }
+
+  .task-item {
+    margin-bottom: 10px;
+
+    label {
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 12px;
+      letter-spacing: 0.01em;
+      color: #ADADAD;
+    }
+
+    button {
+      width: 351px;
+      border: solid 0.5px #8B5E83;
+      border-radius: 5px;
+
+      padding: 12px 0 11px;
+
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 12px;
+      letter-spacing: 0.01em;
+      color: #ADADAD;
+    }
+  }
+
+  .task-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .btn-add-task {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.01em;
+    color: #82567A;
+  }
+
+  .sel-member {
+    width: 224px;
+  }
+}
+
+.modal-task {
+  background: linear-gradient(180deg, #8B5E83 20.45%, #82567A 100%, #82567A 100%);
+  box-shadow: 0px 20px 24px rgba(70, 6, 81, 0.2);
+  border-radius: 20px;
+  padding: 35px 20px 20px;
+  width: 358px;
+  color: white;
+
+  .title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    letter-spacing: 0.02em;
+  }
+
+  input,
+  textarea {
+    font-size: 10px;
+    color: gray;
+    border-radius: 5px;
+  }
+
+  button {
+    background: #F56B3F;
+    border: 0.5px solid #8B5E83;
+    box-shadow: 0px 20px 24px rgba(70, 6, 81, 0.08);
+    border-radius: 5px;
+  }
+}
+
+.modal-project-detail {
+  width: 786px;
+
+  .schedule {
+    color: #767676;
+    margin-bottom: 25px;
+
+    label {
+      font-weight: 600;
+      font-size: 9px;
+      line-height: 12px;
+    }
+
+    img {
+      height: 10px;
+      width: 10px;
+    }
+  }
+
+  .member-avatar {
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    margin-right: 9px;
+  }
+
+  .member-avatar:last-child {
+    margin-right: auto;
+  }
+
+  .member-avatar:first-child {
+    margin-left: auto;
+  }
+
+  .description-wrapper {
+    background: #FFFFFF;
+    box-shadow: 0px 20px 24px rgba(70, 6, 81, 0.08);
+    border-radius: 20px;
+
+    .description {
+      color: #CBCBCB;
+    }
+
+    .btn-edit {
+      background: linear-gradient(180deg, #8B5E83 20.45%, #82567A 100%, #82567A 100%);
+      border-radius: 5px;
+    }
+  }
+
+  .progress-wrapper {
+    margin-left: -32px;
+    margin-right: -32px;
+    height: 12px;
+    background: #D9D9D9;
+
+    .progress {
+      background: #1A8B70;
+      border-radius: 0px 50px 50px 0px;
+      height: 12px;
+    }
+  }
+
+  .sub-title {
+    color: #6D6B6B;
+  }
+
+  .task-item {
+    margin-bottom: 15px;
+
+    .input-task {
+      width: 351px;
+      height: 35px;
+      font-size: 10px;
+      border: 0.5px solid #8B5E83;
+      border-radius: 5px;
+    }
+
+    .btn-finish-task {
+      background: rgba(11, 138, 115, 0.2);
+      border-radius: 5px;
+      height: 17px;
+      font-size: 9px;
+      color: #0B8A73;
+    }
+  }
+
+  .task-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .btn-show-all {
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 11px;
+    color: #82567A;
+  }
+
+  .btn-up {
+    color: #82567A;
+    opacity: 0.6;
+  }
+}
+
+.task-list-container {
+  border: 0.510516px solid rgba(24, 2, 12, 0.05);
+  border-radius: 8px;
+
+  .task-item {
+    background: #85587D;
+    margin-bottom: 10px;
+    color: white;
+
+    .btn-edit {
+      font-size: 9px;
+      border: solid 1px white;
+      border-radius: 5px;
+      height: 17px;
+    }
+  }
+
+  .task-item:last-child {
+    margin-bottom: 0;
   }
 }

@@ -58,7 +58,8 @@ body {
   border-radius: 6px;
   height: 35px;
   min-width: 121px;
-  color: #82567A;
+  color: white;
+  font-size: 14px;
 }
 
 .admin-secondary-button {
@@ -67,6 +68,8 @@ body {
   border-radius: 6px;
   height: 35px;
   min-width: 97px;
+  color: #85597D;
+  font-size: 14px;
 }
 
 .mr-400 {
@@ -79,4 +82,25 @@ body {
 
 select:focus-visible {
   outline: none;
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+textarea:focus-visible {
+  outline: none;
+}
+
+.close-button {
+  background: #F24E1E;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }

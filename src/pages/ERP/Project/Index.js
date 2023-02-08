@@ -1,6 +1,6 @@
 import React from "react";
-import ProjectSchedule from "./Components/ProjectSchedule";
-import ProjectsContainer from "./Components/ProjectsContainer";
+import ProjectSchedule from "./Components/ProjectSchedule/ProjectSchedule";
+import ProjectsContainer from "./Components/ProjectContainer/ProjectsContainer";
 import "./project.scss";
 
 export default function Project() {
@@ -10,10 +10,7 @@ export default function Project() {
         <ProjectSchedule />
       </div>
       <div className="mr-400">
-        <label className="page-title">Project Management</label>
-        <div className="flex">
-          <ProjectsContainer />
-        </div>
+        <ProjectsContainer />
       </div>
     </div>
   );

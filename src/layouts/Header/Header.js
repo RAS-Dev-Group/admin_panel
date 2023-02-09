@@ -50,11 +50,9 @@ export default function Header() {
       <div className="h-full px-4 bg-white header-bar mr-400">
         <div className="flex float-left">
           <div className="header-label">
-            <label>ERP</label>
-            {/* <HeaderDropDown /> */}
+            <HeaderDropDown />
           </div>
         </div>
-        <button></button>
         <div className="flex float-right h-full">
           <button className="relative my-auto btn-notification">
             <FontAwesomeIcon icon="fa-regular fa-bell" className="gray" />

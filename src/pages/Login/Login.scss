@@ -84,7 +84,7 @@
     @include size(400px, auto);
     @include flex(center, center, column);
 
-    margin: 0 auto;
+    margin: auto;
     background-color: white;
     box-shadow: $login-container-shadow;
     overflow: hidden;

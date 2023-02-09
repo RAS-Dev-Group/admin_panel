@@ -157,7 +157,7 @@
 
   .member-avatar {
     width: 70px;
-    height: 70px;
+    height: 70px; 
     border-radius: 50%;
     margin-right: 9px;
   }
@@ -181,6 +181,10 @@
   }
 
   .sel-project-title {
+    padding: 2px 15px;
+    border: solid 0.5px #8B5E83;
+    height: 35px;
+    border-radius: 10px;
     width: 454px;
   }
 
@@ -211,18 +215,48 @@
       color: #ADADAD;
     }
 
-    button {
+    input.input-task{
       width: 351px;
       border: solid 0.5px #8B5E83;
       border-radius: 5px;
 
-      padding: 12px 0 11px;
+      padding: 12px 11px;
 
       font-weight: 400;
       font-size: 13px;
       line-height: 12px;
       letter-spacing: 0.01em;
-      color: #ADADAD;
+    }
+
+    button.delete {
+      width: 100px;
+      height: 42px;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 12px;
+      letter-spacing: 0.01em;
+      background-color: #ADADAD;
+      color: #000000;
+      margin-left: auto;
+    }
+
+
+    .input-with-icon {
+      margin-left: auto;
+      height: 45px; 
+      border: 1px solid #8B5E83;
+      fieldset{
+        border: none;
+        margin-left: -5px;
+        width: 351px;
+      }
+
+      input{
+        width: 280px;
+
+        padding: 10px;
+      }
+
     }
   }
 
@@ -273,6 +307,19 @@
     border: 0.5px solid #8B5E83;
     box-shadow: 0px 20px 24px rgba(70, 6, 81, 0.08);
     border-radius: 5px;
+  }
+
+  button.cancel {
+    background: white;
+    border: 0.5px solid #8B5E83;
+    box-shadow: 0px 20px 24px rgba(70, 6, 81, 0.08);
+    border-radius: 5px;
+    color: #F56B3F;
+  }
+
+  button.cancel:hover {
+    background: #F56B3F;
+    color: white;
   }
 }
 
@@ -353,6 +400,12 @@
       border-radius: 5px;
     }
 
+    .check-label {
+      color: #82567A;
+      font-size: 11px;
+      line-height: 17px;
+      margin-right: 5px;
+    }
     .btn-finish-task {
       background: rgba(11, 138, 115, 0.2);
       border-radius: 5px;
@@ -364,6 +417,14 @@
 
   .task-item:last-child {
     margin-bottom: 0;
+  }
+
+  .button-edit {
+    width: 300px;
+    height: 45px;
+    border-radius: 7px;
+    background-color: #82567A;
+    color: white;
   }
 
   .btn-show-all {

@@ -8,8 +8,8 @@ export default function Inventory() {
     <>
       <div className="float-left w-3/4 pr-2">
         <div className="flex mb-3">
-          <label className="w-2/4 page-title">Inventory Management</label>
-          <label className="page-title">Orders</label>
+          <label className="page-title">Inventory Management</label>
+          <label className="ml-auto mr-5 page-title">Orders</label>
         </div>
         <div className="">
           <InventoryTable />

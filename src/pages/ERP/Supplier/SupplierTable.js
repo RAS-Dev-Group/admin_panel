@@ -27,27 +27,23 @@ export default function SupplierTable(props) {
         </div>
         <div className="float-right h-full">
           <div className="flex my-auto">
-            <select
-              className="mr-2 filter"
-              placeholder="Date"
-              options={[{ value: "1", label: "Date" }]}
-            />
+            <select className="mr-2 filter" placeholder="Date">
+              <option>Date</option>
+            </select>
             <select
               className="mr-2 filter"
               placeholder="OrderID"
               options={[{ value: "1", label: "OrderID" }]}
-            />
-            <select
-              className="mr-2 filter"
-              placeholder="Status"
-              options={[{ value: "1", label: "Status" }]}
-            />
-            <select
-              className="mr-2 filter"
-              placeholder="More Filters"
-              options={[{ value: "1", label: "More Filters" }]}
-            />
-            <button className="px-3 btn-add">Add</button>
+            >
+              <option>Order ID</option>
+            </select>
+            <select className="mr-2 filter" placeholder="Status">
+              <option>Status</option>
+            </select>
+            <select className="mr-2 filter" placeholder="More Filters">
+              <option>More Filters</option>
+            </select>
+            <button className="px-4 py-1 btn-add">Add</button>
           </div>
         </div>
       </div>

@@ -84,7 +84,7 @@ export default function InventoryTable(props) {
                 <td className="color1">{row.sku}</td>
                 <td>{row.vendor}</td>
                 <td className="color1">
-                  <button className="ml-auto btn-edit-invent-management font-icon-wrapper">
+                  <button className="ml-auto btn-edit-invent-management font-icon-wrapper" onClick={props.editItem}>
                     <FontAwesomeIcon
                       className="pr-1 fa-icon opacity-20"
                       icon="trash"

@@ -1,27 +1,26 @@
-
 .filter {
-  
+
     .Dropdown-control {
-      height: 24px;
-      padding-top: 0!important;
-      padding-bottom: 0!important;
-      border-radius: 5px;
-  
-      .Dropdown-placeholder {
-        line-height: 24px;
-        padding-right: 4px;
-      }
-  
-      .Dropdown-arrow {
-        top: 9px;
-      }
+        height: 24px;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        border-radius: 5px;
+
+        .Dropdown-placeholder {
+            line-height: 24px;
+            padding-right: 4px;
+        }
+
+        .Dropdown-arrow {
+            top: 9px;
+        }
     }
 }
 
 .supplier-table {
     font-size: 13px;
 
-    th{
+    th {
         color: #82567A;
     }
 
@@ -29,16 +28,20 @@
         height: 42px;
     }
 
-    .color1{
+    .color1 {
         color: #82567A;
     }
 
-    .color2{
+    .color2 {
         color: #08BA73;
     }
 
-    .fa-icon{
+    .fa-icon {
         color: #F24E1E;
+    }
+
+    td {
+        vertical-align: bottom;
     }
 }
 
@@ -54,4 +57,3 @@
     border-radius: 20px;
     padding: 80px 0px;
 }
-  

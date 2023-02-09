@@ -36,9 +36,9 @@ export default function ModalProjectDetail(
         {name}
       </label>
       <div className="mx-16 mb-6 description-wrapper">
-        <div className="mt-6 mb-2 text-sm description font-sm mx-14">
+        <textarea className="mt-6 mb-2 text-sm description font-sm mx-14" cols="66" rows={10}>
           {description}
-        </div>
+        </textarea>
         <div className="text-right">
           <button className="px-8 py-2 mx-6 mb-4 btn-edit white">Edit</button>
         </div>
@@ -46,7 +46,7 @@ export default function ModalProjectDetail(
       <div className="progress-wrapper mb-7">
         <div className="progress" style={{ width: "60%" }} />
       </div>
-      <div className="ml-7">
+      <div className="ml-7 mb-3">
         <div className="mb-6">
           <label className="text-sm sub-title">Recent tasks</label>
         </div>
@@ -56,19 +56,30 @@ export default function ModalProjectDetail(
               {task.name}
             </label>
             <input
-              className="px-3 mx-auto text-center input-task"
+              className="px-3 mx-auto input-task"
               placeholder="input task here"
+              value={task.description}
             />
-            <button className="px-3 my-auto btn-finish-task">Done</button>
+            <div className="flex">
+              <label className="my-auto ml-auto check-label"  >
+                Mark as complete
+              </label>
+              <input type="checkbox"/>
+            </div>
+            {/* <button className="px-3 my-auto btn-finish-task">Done</button> */}
           </div>
         ))}
-        <button className="btn-show-all">View all tasks</button>
+        {/* <button className="btn-show-all">View all tasks</button> */}
       </div>
-      <div className="mt-5 text-center">
+      <hr />
+      <div className="text-center mt-5">
+        <button className="button-edit" onClick={modalCloseFunc}>Update</button>
+      </div>
+      {/* <div className="mt-5 text-center">
         <button className="btn-up" onClick={modalCloseFunc}>
           <FontAwesomeIcon icon={faChevronUp} className="fa-lg" />
         </button>
-      </div>
+      </div> */}
     </div>
     </div>
   );

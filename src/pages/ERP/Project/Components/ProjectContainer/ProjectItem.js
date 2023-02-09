@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ProjectItem(props) {
   return (
-    <div className="project-item" onClick={props.showdetail}>
+    <div className="project-item">
       <div className="flex" style={{ marginBottom: "27px" }}>
         <button className="btn-edit">Edit</button>
-        <label className="my-auto ml-auto label-check">
+        <label className="my-auto ml-auto label-check"  onClick={props.showdetail}>
           Mark as complete
         </label>
-        <input type="checkbox" />
+        <input type="checkbox"/>
       </div>
       <div className="flex users-container">
         <img className="avatar" src="/images/avatar1.png" alt="avatar" />

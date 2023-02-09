@@ -34,11 +34,9 @@ export default function ProjectsContainer(props) {
     },
   ];
   const tasks = [
-    { name: "Task 1" },
-    { name: "Task 4" },
-    { name: "Task 6" },
-    { name: "Task 7" },
-    { name: "Task 8" },
+    { name: "Task 1", description: 'This is the first Task' },
+    { name: "Task 2", description: 'This is the seconde Task'  },
+    { name: "Task 3", description: 'This is the three Task'  },
   ];
   const [openProjectModal, setOpenProjectModal] = useState(false);
   const [openDetailModal, setOpenDetailModal ] = useState(false);

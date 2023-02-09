@@ -17,9 +17,10 @@ const ModalTask = (props) => {
         rows={5}
       />
       <button className="block w-full p-2 mt-5" onClick={props.taskModalClose}>ADD</button>
-      <div className="text-center mt-14">
+      <button className="cancel block w-full p-2 mt-5" onClick={props.taskModalClose}>CANCEL</button>
+      {/* <div className="text-center mt-14">
         <FontAwesomeIcon icon={faChevronUp} />
-      </div>
+      </div> */}
     </div>
     </div>
   );

@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
 
+import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 //  Task modal import
 import ModalTask from './ModalTask';
 
 import './modal.css'
 
 const ModalProjectEdit = (props) => {
-  let tasks = [{}, {}, {}];
+  let tasks = [{},];
 
   const [taskOpen, setTaskOpen] = useState(false);
   const handleTaskOpen = () => setTaskOpen(true);
   const handleTaskClose = () => setTaskOpen(false);
+
+  const [value, setValue] = useState(new Date());
 
   return (
     <>
@@ -50,7 +61,7 @@ const ModalProjectEdit = (props) => {
             </div>
           </div>
           <div className="mb-3 mt-7">
-            <select className="text-center sel-project-title" placeholder="Input project title" />
+            <input className="sel-project-title" placeholder="Input project title" />
             <button className="ml-2 admin-primary-button">Add</button>
           </div>
           <div className="mb-9">
@@ -59,12 +70,35 @@ const ModalProjectEdit = (props) => {
               placeholder="Type your project details here"
             ></textarea>
           </div>
+          <div className="mb-9">
+            <div className="flex task-item">
+              <label className="my-auto">DeadLine</label>
+              <div className="input-with-icon">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Stack spacing={3}>
+                    <DatePicker
+                      value={value}
+                      onChange={(newValue) => {
+                        setValue(newValue);
+                      }}
+                      renderInput={(params) => <TextField {...params} helperText={null} />}
+                    />
+                  </Stack>
+                </LocalizationProvider>
+              </div>
+              {/* <div className="input-with-icon">
+                <input className="ml-auto input-deadline" placeholder="input task here" />
+                <span className="input-deadline-icon"><FontAwesomeIcon icon={faCalendarDays} /></span>
+              </div> */}
+            </div>
+          </div>
           <div>
             <label className="sub-title">Tasks</label>
             {tasks.map((task, index) => (
               <div className="flex task-item" key={index + 1}>
                 <label className="my-auto">Task1</label>
-                <button className="ml-auto">input task here</button>
+                <input className="ml-auto input-task" placeholder="input task here" />
+                <button className="delete">Delete</button>
               </div>
             ))}
             <div>

@@ -3,13 +3,17 @@ import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-export default function ModalProjectDetail({
-  name,
-  description,
-  members,
-  tasks,
-}) {
+export default function ModalProjectDetail(
+    {
+      name,
+      description,
+      members,
+      tasks,
+      open,
+      modalCloseFunc,
+    }) {
   return (
+    <div className="modal" style={{display: open? 'block' : 'none'}}>    
     <div className="px-8 py-6 bg-white modal-project-detail">
       <div className="flex pr-1 schedule">
         <label className="ml-auto">
@@ -61,10 +65,11 @@ export default function ModalProjectDetail({
         <button className="btn-show-all">View all tasks</button>
       </div>
       <div className="mt-5 text-center">
-        <button className="btn-up">
+        <button className="btn-up" onClick={modalCloseFunc}>
           <FontAwesomeIcon icon={faChevronUp} className="fa-lg" />
         </button>
       </div>
+    </div>
     </div>
   );
 }

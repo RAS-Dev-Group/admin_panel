@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ProjectItem(props) {
   return (
-    <div className="project-item">
+    <div className="project-item" onClick={props.showdetail}>
       <div className="flex" style={{ marginBottom: "27px" }}>
         <button className="btn-edit">Edit</button>
         <label className="my-auto ml-auto label-check">

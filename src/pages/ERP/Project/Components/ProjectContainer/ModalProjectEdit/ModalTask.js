@@ -4,6 +4,7 @@ import React from "react";
 
 const ModalTask = (props) => {
   return (
+    <div className="more-modal" style={{display: props.open? 'block' : 'none'}}>
     <div className="modal-task">
       <label className="block text-center title">ADD NEW TASK</label>
       <input
@@ -15,10 +16,11 @@ const ModalTask = (props) => {
         placeholder="input description here"
         rows={5}
       />
-      <button className="block w-full p-2 mt-5">ADD</button>
+      <button className="block w-full p-2 mt-5" onClick={props.taskModalClose}>ADD</button>
       <div className="text-center mt-14">
         <FontAwesomeIcon icon={faChevronUp} />
       </div>
+    </div>
     </div>
   );
 };

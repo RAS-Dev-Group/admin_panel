@@ -2,20 +2,16 @@ import React from "react";
 
 import WarehouseItem from "./WarehouseItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TableSearch from "../../../../components/ui/TableSearch/TableSearch";
 
 export default function WarehousesContainer(props) {
   return (
     <div className="warehouse-container">
       <div className="flex">
-        <div className="relative">
-          <input className="pl-10 input-search-warehouse" type="text" />
-          <FontAwesomeIcon
-            className="absolute text-white top-2 left-4"
-            icon="search"
-            size="1x"
-          />
-        </div>
-        <button className="px-4 py-2 ml-auto btn-add-warehouse">+ Add Warehouse</button>
+        <TableSearch />
+        <button className="px-4 py-2 ml-auto btn-add-warehouse">
+          + Add Warehouse
+        </button>
       </div>
       <ul className="items">
         <li className="flex flex-wrap warehouse-item">

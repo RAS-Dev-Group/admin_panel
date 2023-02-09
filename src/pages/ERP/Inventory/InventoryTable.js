@@ -32,31 +32,23 @@ export default function InventoryTable(props) {
         </div>
         <div className="float-right h-full">
           <div className="flex my-auto">
-            <select
-              className="filter mr-2"
-              placeholder="Date"
-              options={[{ value: "1", label: "Date" }]}
-            />
-            <select
-              className="filter mr-2"
-              placeholder="Product Category"
-              options={[{ value: "1", label: "Product Category" }]}
-            />
-            <select
-              className="filter mr-2"
-              placeholder="Status Delivery"
-              options={[{ value: "1", label: "Status Delivery" }]}
-            />
-            <select
-              className="filter mr-2"
-              placeholder="More Filters"
-              options={[{ value: "1", label: "More Filters" }]}
-            />
+            <select className="mr-2 filter" placeholder="Date">
+              <option>Date</option>
+            </select>
+            <select className="mr-2 filter" placeholder="Product Category">
+              <option>Product Category</option>
+            </select>
+            <select className="mr-2 filter" placeholder="Status Delivery">
+              <option>Status Devlivery</option>
+            </select>
+            <select className="mr-2 filter" placeholder="More Filters">
+              <option>More Filters</option>
+            </select>
           </div>
         </div>
       </div>
       <div className="clear-both"></div>
-      <div className="mt-3 pl-2">
+      <div className="pl-2 mt-3">
         <table className="table w-full text-center inventory-table">
           <thead>
             <tr>
@@ -74,7 +66,7 @@ export default function InventoryTable(props) {
           <tbody>
             {rows.map((row, index) => (
               <tr className="my-2" key={index}>
-                <td className="text-left font-bold">{row.name}</td>
+                <td className="font-bold text-left">{row.name}</td>
                 <td>{row.category}</td>
                 <td>
                   <img className="mx-auto mt-2" src={row.image} alt="img" />
@@ -93,7 +85,10 @@ export default function InventoryTable(props) {
                 <td>{row.vendor}</td>
                 <td className="color1">
                   <button className="ml-auto btn-edit-invent-management font-icon-wrapper">
-                    <FontAwesomeIcon className="pr-1 fa-icon opacity-20" icon="trash" />
+                    <FontAwesomeIcon
+                      className="pr-1 fa-icon opacity-20"
+                      icon="trash"
+                    />
                     Edit
                   </button>
                 </td>

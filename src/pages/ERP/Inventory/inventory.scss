@@ -1,9 +1,12 @@
 .filter {
-  
+  color: #82567A;
+  border: 0.2px solid #82567A;
+  border-radius: 5px;
+
   .Dropdown-control {
     height: 24px;
-    padding-top: 0!important;
-    padding-bottom: 0!important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     border-radius: 5px;
 
     .Dropdown-placeholder {
@@ -16,7 +19,6 @@
     }
   }
 }
-
 
 .inventory-table {
   font-size: 13px;

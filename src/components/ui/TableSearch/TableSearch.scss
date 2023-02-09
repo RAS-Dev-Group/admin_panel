@@ -7,4 +7,13 @@
     border-radius: 5px;
     border: 0.4px solid #82567A;
   }
+
+  input:focus {
+    background: white;
+    color: gray;
+  }
+
+  svg {
+    color: gray;
+  }
 }

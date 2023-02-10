@@ -8,6 +8,9 @@ const CategoryModal = (props) => {
     <>
       <div className="modal" style={{display: props.open? 'block' : 'none'}}>
         <div className="relative inventory-modal">
+          <div className="text-right">
+            <button style={{width: '24px', height: '24px', borderRadius: '50%', backgroundColor: '#F24E1E', color: 'white' }} onClick={props.closeFunc}>x</button>
+            </div>
           <div className="text-center inventory-modal-title">
             <label className="title">{props.type?'Create Category':'Edit Category'}</label>
           </div>

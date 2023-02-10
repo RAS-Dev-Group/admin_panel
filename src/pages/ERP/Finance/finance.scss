@@ -2,6 +2,16 @@
   font-family: 'Lato';
 }
 
+.finance-table {
+  .table-search {
+    padding-left: 0;
+
+    input {
+      border: solid 1px #82567A;
+    }
+  }
+}
+
 .page-header {
   line-height: 19.2px;
   margin-top: 20px;
@@ -85,10 +95,9 @@
 }
 
 .finance-table-select {
-  height: 30px;
   border: 1px solid #82567A;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 3px 10px;
   min-width: 120px;
   margin-right: 7px;
   margin-left: 7px;

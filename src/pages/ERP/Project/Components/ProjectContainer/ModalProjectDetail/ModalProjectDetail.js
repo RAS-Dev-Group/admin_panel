@@ -15,6 +15,9 @@ export default function ModalProjectDetail(
   return (
     <div className="modal" style={{display: open? 'block' : 'none'}}>    
     <div className="px-8 py-6 bg-white modal-project-detail">
+    <div className="mb-5 mt-5 text-right">
+        <button style={{width: '24px', height: '24px', borderRadius: '50%', backgroundColor: '#F24E1E', color: 'white' }} onClick={modalCloseFunc}>x</button>
+      </div>
       <div className="flex pr-1 schedule">
         <label className="ml-auto">
           <FontAwesomeIcon icon={faCalendarCheck} />

@@ -79,7 +79,7 @@ export default function LoginContainer() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex w-screen h-screen login-page">
+    <div className="flex h-screen login-page">
       <div className="login-container">
         <div className="title">Login</div>
         <FluidInput type="text" label="name" id="name" style={style} />

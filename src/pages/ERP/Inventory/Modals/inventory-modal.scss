@@ -1,52 +1,53 @@
 .modal {
-  
-    .inventory-modal {
-      
-      width: 748px;
-      margin-top: 50px;
+  .inventory-modal {
+    width: 548px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 35px 35px 40px 50px;
+    background-color: white;
+    border-radius: 20px;
+
+    .inventory-modal-title {
+      margin-top: 20px;
       margin-bottom: 50px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 45px 65px 60px 100px;
-      background-color: white;
-      border-radius: 20px;
-      
-      .inventory-modal-title {
-        margin-top: 40px;
-        margin-bottom: 100px;
-        
-        .title {
-          font-size: 20px;
-          font-weight: 700;
-          line-height: 24px;
-        }
+
+      .title {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 24px;
       }
-
-      .modal-item {
-        margin-bottom: 50px;
-
-        .item {
-          width: 450px;
-          height: 60px;
-          border: 1px solid #82567A;
-          border-radius: 10px;
-          padding: 15px 25px;
-          font-size: 20px;
-          font-weight: 400;
-        }
-
-        .danger {
-          border-color: #F24E1E;
-          color: #FD3838;
-        }
-
-        .button {
-          background-color: #82567A;
-          color: white;
-        }
-      }
-  
-  
     }
-  
+
+    .modal-item {
+      margin-bottom: 30px;
+
+      .item {
+        width: 450px;
+        border: 1px solid #82567A;
+        border-radius: 10px;
+        padding: 10px 15px;
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      .danger {
+        border-color: #F24E1E;
+        color: #FD3838;
+      }
+    }
+
+    .button {
+      width: 450px;
+      border: 1px solid #82567A;
+      border-radius: 10px;
+      padding: 12px 15px;
+      font-size: 16px;
+      font-weight: 400;
+
+      background-color: #82567A;
+      color: white;
+    }
   }
+}

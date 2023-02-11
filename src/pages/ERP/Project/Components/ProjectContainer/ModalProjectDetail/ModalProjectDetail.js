@@ -3,15 +3,14 @@ import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-export default function ModalProjectDetail(
-    {
-      name,
-      description,
-      members,
-      tasks,
-      open,
-      modalCloseFunc,
-    }) {
+export default function ModalProjectDetail({
+  name,
+  description,
+  members,
+  tasks,
+  open,
+  modalCloseFunc,
+}) {
   return (
     <div className="modal" style={{display: open? 'block' : 'none'}}>    
     <div className="px-8 py-6 bg-white modal-project-detail">

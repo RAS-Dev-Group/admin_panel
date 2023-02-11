@@ -29,7 +29,7 @@ const ItemModal = (props) => {
           <div className="text-center modal-item">
             <input className="item danger" type='number' placeholder="Amount" min={0}></input>
           </div>
-          <div className="text-center modal-item">
+          <div className="text-center">
             <button className="item button" onClick={props.closeFunc}>{props.type?'Add Item':'Update Item'}</button>
           </div>
         </div>

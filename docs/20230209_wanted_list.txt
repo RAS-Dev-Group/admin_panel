@@ -1,0 +1,44 @@
+1:
+in Project modal
+change the select to text box ///
+
+2:
+in task modal
+add cancel button ///
+
+3 :
+in project modal
+ delete empty task ///
+
+4:
+in project modal
+task input is editable ///
+
+5:
+add delete button at task input ///
+
+6:
+in project modal
+description textarea increase problem ///
+
+7:
+when Mark as complete is clicked
+edit modal show ///
+
+8:
+project modal should have deadline input ///
+
+9: 
+popup modal should have Edit button ///
+
+10:
+Button View all task
+no need of this in edit pupup just show all the tasks there only ///
+
+11:
+instead Button done
+add checkbox saying mark as complete ///
+
+12:
+in project detail modal
+description is editable ///

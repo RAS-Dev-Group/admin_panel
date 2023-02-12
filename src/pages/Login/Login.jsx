@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
+import axios from "axios";
 
 class FluidInput extends React.Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class FluidInput extends React.Component {
             onChange={this.handleChange.bind(this)}
             autoComplete="off"
           />
-          <label className="fluid-input-label" forhtml={id}>
+          <label className={"fluid-input-label" + (this.state.value ? ' invisible' : '')} forhtml={id}>
             {label}
           </label>
         </div>
@@ -58,17 +59,15 @@ class FluidInput extends React.Component {
   }
 }
 
-class Button extends React.Component {
-  render() {
-    return (
-      <div
-        className={`button ${this.props.buttonClass}`}
-        onClick={this.props.onClick}
-      >
-        {this.props.buttonText}
-      </div>
-    );
-  }
+function Button({ buttonClass, onClick, buttonText }) {
+  return (
+    <div
+      className={`button ${buttonClass}`}
+      onClick={onClick}
+    >
+      {buttonText}
+    </div>
+  );
 }
 
 export default function LoginContainer() {
@@ -77,10 +76,32 @@ export default function LoginContainer() {
   };
 
   const navigate = useNavigate();
+  const [appState, setAppState] = useState({
+    loading: false,
+    repos: null
+  });
+
+  function handleSubmit(e) {
+    setAppState({ loading: true });
+    e.preventDefault();
+    axios.post('https://furniture-dusky.vercel.app/token', {
+      name: 'bipin',
+      password: 'Bipin@123'
+    })
+      .then((data) => {
+        setAppState({ loading: false });
+        console.log(data);
+        // store data.access_token ; we will use this for ...
+        navigate('/erp/project');
+      })
+      .catch((err) => {
+        console.log(err.messag);
+      });
+  }
 
   return (
     <div className="flex h-screen login-page">
-      <div className="login-container">
+      <form className="login-container">
         <div className="title">Login</div>
         <FluidInput type="text" label="name" id="name" style={style} />
         <FluidInput
@@ -91,12 +112,17 @@ export default function LoginContainer() {
         />
         <Button
           buttonText="log in"
-          onClick={() => {
-            navigate("/erp/project");
-          }}
+          onClick={handleSubmit}
           buttonClass="login-button"
         />
-      </div>
+      </form>
     </div>
   );
 }
+
+/*
+sample authentication
+
+bipin
+Bipin@123
+*/

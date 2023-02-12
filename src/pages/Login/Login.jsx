@@ -82,6 +82,9 @@ export default function LoginContainer() {
   });
 
   function handleSubmit(e) {
+    navigate('/erp/project');
+    return false;
+
     setAppState({ loading: true });
     e.preventDefault();
     axios.post('https://furniture-dusky.vercel.app/token', {

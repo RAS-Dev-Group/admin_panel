@@ -35,11 +35,11 @@ export default function ProjectsContainer(props) {
   ];
   const tasks = [
     { name: "Task 1", description: 'This is the first Task' },
-    { name: "Task 2", description: 'This is the seconde Task'  },
-    { name: "Task 3", description: 'This is the three Task'  },
+    { name: "Task 2", description: 'This is the seconde Task' },
+    { name: "Task 3", description: 'This is the three Task' },
   ];
   const [openProjectModal, setOpenProjectModal] = useState(false);
-  const [openDetailModal, setOpenDetailModal ] = useState(false);
+  const [openDetailModal, setOpenDetailModal] = useState(false);
 
   //  Project Modal Handles
   const handleProjectModalOpen = () => setOpenProjectModal(true);
@@ -74,13 +74,13 @@ export default function ProjectsContainer(props) {
             <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
             <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
           </div>
-          <ModalProject open={openProjectModal} modalCloseFunc={handleProjectModalClose}/>
-          <ModalProjectDetail 
-          name="Sample Project"
-          description={description}
-          members={members}
-          tasks={tasks}
-          open={openDetailModal} modalCloseFunc={handleProjectDetailModalClose} />
+          <ModalProject open={openProjectModal} modalCloseFunc={handleProjectModalClose} />
+          <ModalProjectDetail
+            name="Sample Project"
+            description={description}
+            members={members}
+            tasks={tasks}
+            open={openDetailModal} modalCloseFunc={handleProjectDetailModalClose} />
         </div>
       </div>
     </>

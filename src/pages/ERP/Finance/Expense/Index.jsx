@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
 //  import My Finace Table
-import FinanceTable from "./FinanceTable";
+import FinanceTable from "./ExpenseTable";
 
 //  import Icon
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
@@ -24,7 +24,7 @@ import "../finance.scss";
 import barchart from "./chart-default-data";
 
 export default function FinanceExpense() {
-  const handleAddExpense = () => {};
+  const handleAddExpense = () => { };
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -79,7 +79,7 @@ export default function FinanceExpense() {
 
         <div className="table-container">
           <FinanceTable />
-          <div className="text-center mt-5 mb-5" style={{color: '#82567A', fontSize: '14px', fontWeight:'700', cursor: 'pointer'}} onClick={handleTableModalOpen}>
+          <div className="mt-5 mb-5 text-center" style={{ color: '#82567A', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }} onClick={handleTableModalOpen}>
             View all transaction
             <div className="text-center">
               <FontAwesomeIcon icon={faChevronDown} />

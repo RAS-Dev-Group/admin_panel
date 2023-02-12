@@ -137,7 +137,7 @@ const rows = [
   createData("Oreo", "562XXXXXXXX4643", "Furniture", 437, 18.0),
 ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
-export default function FinanceTable() {
+export default function FinanceSalesTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -154,41 +154,37 @@ export default function FinanceTable() {
     setPage(0);
   };
 
-  const handelChangeList = (event) => {};
+  const handelChangeList = (event) => { };
 
-  const handleNameSelect = (event) => {};
+  const handleNameSelect = (event) => { };
 
-  const handleAmountSelect = (event) => {};
+  const handleAmountSelect = (event) => { };
 
-  const handleFilterSelect = (event) => {};
+  const handleFilterSelect = (event) => { };
 
   return (
     <div className="finance-table">
-      <div className="columns-2" style={{ margin: "15px" }}>
-        <div className="text-left">
-          <TableSearch />
-        </div>
-        <div className="text-right">
-          <select className="finance-table-select" onChange={handleNameSelect}>
-            <option value={"-1"}>Name</option>
-            <option value="1">Alex</option>
-          </select>
-          <select
-            className="finance-table-select"
-            onChange={handleAmountSelect}
-          >
-            <option value={"-1"}>Amount</option>
-            <option value="1">100</option>
-          </select>
-          <select
-            className="finance-table-select"
-            onChange={handleFilterSelect}
-          >
-            <option value={"-1"}>More Filters</option>
-            <option value="1">email</option>
-          </select>
-          <a className="finance-add"> Add </a>
-        </div>
+      <div className="flex mb-2">
+        <TableSearch />
+        <select className="ml-auto finance-table-select" onChange={handleNameSelect}>
+          <option value={"-1"}>Name</option>
+          <option value="1">Alex</option>
+        </select>
+        <select
+          className="finance-table-select"
+          onChange={handleAmountSelect}
+        >
+          <option value={"-1"}>Amount</option>
+          <option value="1">100</option>
+        </select>
+        <select
+          className="finance-table-select"
+          onChange={handleFilterSelect}
+        >
+          <option value={"-1"}>More Filters</option>
+          <option value="1">email</option>
+        </select>
+        <button className="finance-add"> Add </button>
       </div>
 
       <TableContainer component={Paper}>

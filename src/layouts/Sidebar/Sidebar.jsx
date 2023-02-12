@@ -64,9 +64,9 @@ export default function Sidebar({ mode }) {
         ))}
       </div>
       <div className="absolute second-buttons">
-        <SecondButton icon="icon-fog" text="Settings" />
+        <SecondButton icon="settings" text="Settings" />
         <SecondButton
-          icon="icon-signout"
+          icon="logout"
           text="Log Out"
           active={true}
           onClick={() => {

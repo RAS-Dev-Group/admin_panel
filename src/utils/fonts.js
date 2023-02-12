@@ -5,11 +5,18 @@ import {
   faEdit,
   faSearch,
   faTrash,
+  faGear,
+  faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
-import {
+import { faBell, faCalendarCheck } from "@fortawesome/free-regular-svg-icons";
+
+library.add(
+  faEdit,
+  faSearch,
+  faTrash,
   faBell,
   faCalendarCheck,
-} from '@fortawesome/free-regular-svg-icons';
-
-library.add(faEdit, faSearch, faTrash, faBell, faCalendarCheck);
+  faGear,
+  faArrowRightFromBracket
+);

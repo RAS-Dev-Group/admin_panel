@@ -9,57 +9,55 @@ import "./inventory.scss";
 
 export default function Inventory() {
 
-  const [openItem, setOpenItem] = React.useState(false);
-  const [itemType, setItemType] = React.useState(true);
-  const [openCat,  setOpenCat] = React.useState(false);
-  const [catType, setCatType] = React.useState(true);
-  
-  //  handle Item modal
-  const handleItemOpen = () => setOpenItem(true);
-  const handleItemClose = () => setOpenItem(false);
+  const [openItemModal, setOpenItemModal] = React.useState(false);
+  const [itemModalType, setItemModalType] = React.useState(true);
+  const [openCatModal, setOpenCatModal] = React.useState(false);
+  const [catModalType, setCatModalType] = React.useState(true);
 
-  const handleItemTypeNew = () => {
-    setItemType(true);
+  //  handle Item modal
+  const handleItemOpen = () => setOpenItemModal(true);
+  const handleItemClose = () => setOpenItemModal(false);
+
+  const handleItemModalTypeNew = () => {
+    setItemModalType('NEW');
     handleItemOpen();
   };
-  const handleItemTypeEdit = () => {
-    setItemType(false);
+  const handleItemModalTypeEdit = () => {
+    setItemModalType('EDIT');
     handleItemOpen();
   };
 
   //  handle Category modal
-  const handleCatOpen = () => setOpenCat(true);
-  const handleCatClose = () => setOpenCat(false);
+  const handleCatOpen = () => setOpenCatModal(true);
+  const handleCatClose = () => setOpenCatModal(false);
 
   const handleCatTypeNew = () => {
-    setCatType(true);
+    setCatModalType('NEW');
     handleCatOpen();
   };
   const handleCatTypeEdit = () => {
-    setCatType(false);
+    setCatModalType('EDIT');
     handleCatOpen();
   }
 
   return (
     <>
-      <div className="float-left w-3/4 pr-2">
+      <div className="float-right text-center bg-white w-96 buttons">
+        <button className="my-2 common-button" onClick={handleItemModalTypeNew}>New Item</button>
+        <button className="my-2 common-button">Export CSV</button>
+        <button className="my-2 common-button">Import Items</button>
+        <button className="my-2 common-button" onClick={handleCatTypeNew}>Create Category</button>
+        <button className="my-2 common-button" onClick={handleCatTypeEdit}>Edit Category</button>
+      </div>
+      <div className="pr-2 mr-400">
         <div className="flex mb-5">
           <label className="page-title">Inventory Management</label>
           <label className="ml-auto mr-5 page-title">Orders</label>
         </div>
-        <div className="">
-          <InventoryTable editItem={handleItemTypeEdit}/>
-        </div>
+        <InventoryTable editItem={handleItemModalTypeEdit} />
       </div>
-      <div className="float-left w-1/4 text-center bg-white buttons">
-        <button className="my-2 common-button" onClick={handleItemTypeNew}>New Item</button>
-        <button className="my-2 common-button">Export CSV</button>
-        <button className="my-2 common-button">Import Items</button>
-        <button className="my-2 common-button" onClick={handleCatTypeNew}>Create Category</button>
-        <button className="my-2 common-button">Edit Category</button>
-      </div>
-      <ItemModal open={openItem} type={itemType} closeFunc={handleItemClose}/>
-      <CategoryModal open={openCat} type={catType} closeFunc={handleCatClose}/>
+      <ItemModal open={openItemModal} editType={itemModalType} closeFunc={handleItemClose} />
+      <CategoryModal open={openCatModal} editType={catModalType} closeFunc={handleCatClose} />
     </>
   );
 }

@@ -4,7 +4,7 @@ import React from "react";
 import Chart from "react-apexcharts";
 
 //  import My Finace Table
-import FinanceTable from './FinanceTable';
+import FinanceTable from './SalesTable';
 
 //  import Icon
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";

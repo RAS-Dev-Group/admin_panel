@@ -26,28 +26,21 @@ export default function InventoryTable(props) {
 
   return (
     <>
-      <div className="table-filter">
-        <div className="float-left">
-          <TableSearch />
-        </div>
-        <div className="float-right h-full">
-          <div className="flex my-auto">
-            <select className="mr-2 filter" placeholder="Date">
-              <option>Date</option>
-            </select>
-            <select className="mr-2 filter" placeholder="Product Category">
-              <option>Product Category</option>
-            </select>
-            <select className="mr-2 filter" placeholder="Status Delivery">
-              <option>Status Devlivery</option>
-            </select>
-            <select className="mr-2 filter" placeholder="More Filters">
-              <option>More Filters</option>
-            </select>
-          </div>
-        </div>
+      <div className="flex table-filter">
+        <TableSearch />
+        <select className="ml-auto mr-2 filter" placeholder="Date">
+          <option>Date</option>
+        </select>
+        <select className="mr-2 filter" placeholder="Product Category">
+          <option>Product Category</option>
+        </select>
+        <select className="mr-2 filter" placeholder="Status Delivery">
+          <option>Status Devlivery</option>
+        </select>
+        <select className="mr-2 filter" placeholder="More Filters">
+          <option>More Filters</option>
+        </select>
       </div>
-      <div className="clear-both"></div>
       <div className="pl-2 mt-3">
         <table className="table w-full text-center inventory-table">
           <thead>

@@ -25,7 +25,7 @@ const ModalProjectEdit = (props) => {
 
   return (
     <>
-      <div className="modal" style={{display: props.open? 'block' : 'none'}}>
+      <div className="modal" style={{ display: props.open ? 'block' : 'none' }}>
         <div className="relative modal-project">
           <button className="close-button" onClick={props.modalCloseFunc}>X</button>
           <div className="mb-3 text-center">
@@ -115,7 +115,7 @@ const ModalProjectEdit = (props) => {
           </div>
         </div>
       </div>
-        <ModalTask open={taskOpen} taskModalClose={handleTaskClose}/>
+      <ModalTask open={taskOpen} taskModalClose={handleTaskClose} />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import FinanceTable from './FinanceTable';
+import FinanceTable from './SalesTable';
 
 const SalesModal = (props) => {
     

@@ -12,6 +12,7 @@
     cursor: default;
 
     .Dropdown-placeholder {
+      cursor: pointer;
       width: 50px;
       line-height: 39px;
       background: #82567A;
@@ -48,6 +49,7 @@
     // -webkit-overflow-scrolling: touch;
 
     .Dropdown-option {
+      cursor: pointer;
       width: 50px;
       line-height: 39px;
       background: #82567A;

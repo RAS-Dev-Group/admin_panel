@@ -29,6 +29,10 @@ const router = createBrowserRouter([
     element: <ERP />,
     children: [
       {
+        path: '',
+        element: <Project />,
+      },
+      {
         path: "project",
         element: <Project />,
       },
@@ -76,6 +80,10 @@ const router = createBrowserRouter([
     path: "/pos",
     element: <POS />,
     children: [
+      {
+        path: '',
+        element: <Order />,
+      },
       {
         path: "order",
         element: <Order />,

@@ -25,7 +25,7 @@ body {
   .header-bar {
     height: 68px;
     border-radius: 10px;
-    
+
     label {
       line-height: 39px;
       font-size: 16px;
@@ -130,24 +130,30 @@ body {
     background: #F56B3F;
   }
 
-  .second-button {
-    height: 44px;
-    width: 100%;
-    display: block;
-    border-radius: 6px;
-    margin-bottom: 10px;
+  .second-buttons {
+    width: 228px;
+    bottom: 100px;
 
-    i {
-      font-size: 16px;
+    .second-button {
+      height: 44px;
+      width: 100%;
+      display: block;
+      font-size: 14px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+
+      i {
+        font-size: 16px;
+      }
+
+      label {
+        margin-left: 20px;
+      }
     }
 
-    label {
-      margin-left: 20px;
+    .second-button.active {
+      color: #FD3838;
     }
-  }
-
-  .second-button.active {
-    color: #FD3838;
   }
 }
 

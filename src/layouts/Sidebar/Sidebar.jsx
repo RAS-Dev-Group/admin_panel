@@ -63,18 +63,16 @@ export default function Sidebar({ mode }) {
           />
         ))}
       </div>
-      <div className="flex content-center h-full">
-        <div className="w-full my-auto">
-          <SecondButton icon="icon-fog" text="Settings" />
-          <SecondButton
-            icon="icon-signout"
-            text="Log Out"
-            active={true}
-            onClick={() => {
-              navigate("/auth");
-            }}
-          />
-        </div>
+      <div className="absolute second-buttons">
+        <SecondButton icon="icon-fog" text="Settings" />
+        <SecondButton
+          icon="icon-signout"
+          text="Log Out"
+          active={true}
+          onClick={() => {
+            navigate("/auth");
+          }}
+        />
       </div>
     </div>
   );

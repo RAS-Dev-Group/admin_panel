@@ -21,33 +21,26 @@ export default function SupplierTable(props) {
 
   return (
     <>
-      <div className="table-filter">
-        <div className="float-left">
-          <TableSearch />
-        </div>
-        <div className="float-right h-full">
-          <div className="flex my-auto">
-            <select className="mr-2 filter" placeholder="Date">
-              <option>Date</option>
-            </select>
-            <select
-              className="mr-2 filter"
-              placeholder="OrderID"
-              options={[{ value: "1", label: "OrderID" }]}
-            >
-              <option>Order ID</option>
-            </select>
-            <select className="mr-2 filter" placeholder="Status">
-              <option>Status</option>
-            </select>
-            <select className="mr-2 filter" placeholder="More Filters">
-              <option>More Filters</option>
-            </select>
-            <button className="px-4 py-1 btn-add" onClick={props.openNewModal}>Add</button>
-          </div>
-        </div>
+      <div className="flex table-filter">
+        <TableSearch />
+        <select className="ml-auto mr-2 filter" placeholder="Date">
+          <option>Date</option>
+        </select>
+        <select
+          className="mr-2 filter"
+          placeholder="OrderID"
+          options={[{ value: "1", label: "OrderID" }]}
+        >
+          <option>Order ID</option>
+        </select>
+        <select className="mr-2 filter" placeholder="Status">
+          <option>Status</option>
+        </select>
+        <select className="mr-2 filter" placeholder="More Filters">
+          <option>More Filters</option>
+        </select>
+        <button className="px-6 py-1 btn-add" onClick={props.openNewModal}>Add</button>
       </div>
-      <div className="clear-both"></div>
       <div className="pl-2 mt-3">
         <table className="table w-full text-center supplier-table">
           <thead>

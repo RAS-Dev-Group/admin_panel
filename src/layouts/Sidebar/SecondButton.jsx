@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { LogOut, Settings } from 'react-feather';
 
 export default function SecondButton({ text, onClick, active, icon }) {
   return (
@@ -7,7 +7,7 @@ export default function SecondButton({ text, onClick, active, icon }) {
       onClick={onClick}
       className={"second-button " + (active ? 'active' : '')}
     >
-      <FontAwesomeIcon icon={icon} />
+      {icon === 'logout' ? <LogOut /> : <Settings />}
       {text}
     </button>
   );

@@ -6,22 +6,23 @@ import "./warehouse.scss";
 export default function Warehouse() {
 
   const [open, setOpen] = React.useState(false);
-  const [type, setType] = React.useState(true);
-  const handleOpen = () => setOpen(true);
+  const [type, setType] = React.useState('ADD');
+
   const handleClose = () => setOpen(false);
   const handleTypeNew = () => {
-    setType(true);
+    setType('ADD');
     setOpen(true);
   }
   const handleTypeEdit = () => {
-    setType(false);
+    setType('UPDATE');
     setOpen(true);
   }
+
   return (
     <>
       <label className="page-title">Warehousing</label>
       <WarehousesContainer modalopennew={handleTypeNew} modalopenedit={handleTypeEdit} />
-      <WarehouseModal open={open} type={type} closeFunc={handleClose} />
+      <WarehouseModal open={open} editType={type} closeFunc={handleClose} />
     </>
   );
 }

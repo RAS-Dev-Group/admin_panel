@@ -142,12 +142,10 @@ body {
       border-radius: 6px;
       margin-bottom: 10px;
 
-      i {
+      svg {
         font-size: 16px;
-      }
-
-      label {
-        margin-left: 20px;
+        display: inline-block;
+        margin-right: 10px;
       }
     }
 

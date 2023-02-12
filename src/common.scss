@@ -33,10 +33,6 @@ body {
   }
 }
 
-.w-784 {
-  width: 784px;
-}
-
 // .Dropdown-control {
 //   padding: 2px 20px 2px 5px !important;
 //   font-size: 13px;
@@ -103,4 +99,16 @@ textarea:focus-visible {
   position: absolute;
   right: 20px;
   top: 20px;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-size: 0.875rem;
+}
+
+button:focus-visible {
+  outline: none;
 }

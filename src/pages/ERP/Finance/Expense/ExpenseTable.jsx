@@ -18,6 +18,7 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
+import TableSearch from "../../../../components/ui/TableSearch/TableSearch";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -108,7 +109,7 @@ const rows = [
   createData("Oreo", "Furniture", 437),
 ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
-export default function FinanceTable() {
+export default function FinanceExpensesTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
@@ -125,46 +126,37 @@ export default function FinanceTable() {
     setPage(0);
   };
 
-  const handelChangeList = (event) => {};
+  const handelChangeList = (event) => { };
 
-  const handleNameSelect = (event) => {};
+  const handleNameSelect = (event) => { };
 
-  const handleAmountSelect = (event) => {};
+  const handleAmountSelect = (event) => { };
 
-  const handleFilterSelect = (event) => {};
+  const handleFilterSelect = (event) => { };
 
   return (
     <>
-      <div className="columns-2" style={{ margin: "15px" }}>
-        <div className="text-left">
-          <input
-            type="text"
-            className="search-box"
-            onChange={handelChangeList}
-            value={""}
-          />
-        </div>
-        <div className="text-right">
-          <select className="finance-table-select" onChange={handleNameSelect}>
-            <option value={"-1"}>Type of Expense</option>
-            <option value="1">Furniture</option>
-          </select>
-          <select
-            className="finance-table-select"
-            onChange={handleAmountSelect}
-          >
-            <option value={"-1"}>Amount</option>
-            <option value="1">300</option>
-          </select>
-          <select
-            className="finance-table-select"
-            onChange={handleFilterSelect}
-          >
-            <option value={"-1"}>More Filters</option>
-            <option value="1">email</option>
-          </select>
-          <a className="finance-add"> Add </a>
-        </div>
+      <div className="flex mb-2">
+        <TableSearch />
+        <select className="ml-auto finance-table-select" onChange={handleNameSelect}>
+          <option value={"-1"}>Type of Expense</option>
+          <option value="1">Furniture</option>
+        </select>
+        <select
+          className="finance-table-select"
+          onChange={handleAmountSelect}
+        >
+          <option value={"-1"}>Amount</option>
+          <option value="1">300</option>
+        </select>
+        <select
+          className="finance-table-select"
+          onChange={handleFilterSelect}
+        >
+          <option value={"-1"}>More Filters</option>
+          <option value="1">email</option>
+        </select>
+        <button className="finance-add"> Add </button>
       </div>
 
       <TableContainer component={Paper}>

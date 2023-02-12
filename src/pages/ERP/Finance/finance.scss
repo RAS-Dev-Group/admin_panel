@@ -4,8 +4,6 @@
 
 .finance-table {
   .table-search {
-    padding-left: 0;
-
     input {
       border: solid 1px #82567A;
     }
@@ -98,15 +96,13 @@
   border-radius: 5px;
   padding: 3px 10px;
   min-width: 120px;
-  margin-right: 7px;
-  margin-left: 7px;
+  margin-right: 10px;
 }
 
 .finance-add {
-  height: 30px;
   border: 1px solid #82567A;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 3px 10px;
   min-width: 120px;
   background-color: #82567A;
   color: white;
@@ -122,7 +118,7 @@
   color: #18020C4c;
 }
 
-.cancel-modal{
+.cancel-modal {
   width: 20px;
   height: 20px;
   padding: 0 7px;
@@ -134,9 +130,7 @@
   cursor: pointer;
 }
 
-.finance-expense-form {
-
-}
+.finance-expense-form {}
 
 .expense-type {
   width: 454px;
@@ -146,6 +140,7 @@
   border-radius: 10px;
   margin-bottom: 16px;
 }
+
 .expense-action {
   width: 454px;
   height: 50px;

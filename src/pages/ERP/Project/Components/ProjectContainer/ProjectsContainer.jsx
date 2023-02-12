@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import ProjectItem from "./ProjectItem";
 // import ModalProject Component
 import ModalProject from './ModalProjectEdit/ModalProject';
+import ModalTask from './ModalProjectEdit/ModalTask';
 
 //  import ModalDetailProejct Component
 import ModalProjectDetail from './ModalProjectDetail/ModalProjectDetail';
+
 
 export default function ProjectsContainer(props) {
   let key = 0;
@@ -35,19 +37,23 @@ export default function ProjectsContainer(props) {
   ];
   const tasks = [
     { name: "Task 1", description: 'This is the first Task' },
-    { name: "Task 2", description: 'This is the seconde Task'  },
-    { name: "Task 3", description: 'This is the three Task'  },
+    { name: "Task 2", description: 'This is the seconde Task' },
+    { name: "Task 3", description: 'This is the three Task' },
   ];
-  const [openProjectModal, setOpenProjectModal] = useState(false);
-  const [openDetailModal, setOpenDetailModal ] = useState(false);
+  const [showProjectModal, setShowProjectModal] = useState(false);
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [showTaskModal, setShowTaskModal] = useState(false);
 
   //  Project Modal Handles
-  const handleProjectModalOpen = () => setOpenProjectModal(true);
-  const handleProjectModalClose = () => setOpenProjectModal(false);
+  const handleProjectModalOpen = () => setShowProjectModal(true);
+  const handleProjectModalClose = () => setShowProjectModal(false);
 
   //  Project Detail Modal Handles
-  const handleProjectDetailModalOpen = () => setOpenDetailModal(true);
-  const handleProjectDetailModalClose = () => setOpenDetailModal(false);
+  const handleProjectDetailModalOpen = () => setShowDetailModal(true);
+  const handleProjectDetailModalClose = () => setShowDetailModal(false);
+
+  const handleTaskModalOpen = () => setShowTaskModal(true);
+  const handleTaskModalClose = () => setShowTaskModal(false);
 
   return (
     <>
@@ -74,16 +80,21 @@ export default function ProjectsContainer(props) {
             <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
             <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
           </div>
-          <ModalProject open={openProjectModal} modalCloseFunc={handleProjectModalClose}/>
-          <ModalProjectDetail 
-          name="Sample Project"
-          description={description}
-          members={members}
-          tasks={tasks}
-          open={openDetailModal} modalCloseFunc={handleProjectDetailModalClose} />
+          <ModalProject
+            open={showProjectModal}
+            modalCloseFunc={handleProjectModalClose}
+            taskModalOpen={handleTaskModalOpen}
+          />
+          <ModalProjectDetail
+            name="Sample Project"
+            description={description}
+            members={members}
+            tasks={tasks}
+            open={showDetailModal}
+            modalCloseFunc={handleProjectDetailModalClose} />
+          <ModalTask open={showTaskModal} taskModalClose={handleTaskModalClose} />
         </div>
       </div>
     </>
   );
 }
-

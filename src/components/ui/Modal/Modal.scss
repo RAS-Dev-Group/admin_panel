@@ -1,3 +1,20 @@
+.modal.enter-done {
+  opacity: 1;
+  pointer-events: visible;
+}
+
+.modal.exit {
+  opacity: 0;
+}
+
+.modal.enter-done .modal-content {
+  transform: translateY(0);
+}
+
+.modal.exit .modal-content {
+  transform: translateY(-200px);
+}
+
 .modal {
   position: fixed;
   left: 0;
@@ -11,43 +28,98 @@
   opacity: 0;
   transition: all 0.3s ease-in-out;
   pointer-events: none;
+
+  .edit-modal {
+    width: 548px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 35px 35px 40px 50px;
+    background-color: white;
+    border-radius: 20px;
+
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-200px);
+
+    .modal-header {
+      margin-top: 20px;
+      margin-bottom: 50px;
+
+      .modal-title {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 24px;
+      }
+    }
+
+    .modal-item {
+      margin-bottom: 30px;
+
+      .item {
+        width: 450px;
+        border: 1px solid #82567A;
+        border-radius: 10px;
+        padding: 10px 15px;
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      .danger {
+        border-color: #F24E1E;
+        color: #FD3838;
+      }
+    }
+
+    .button {
+      width: 450px;
+      border: 1px solid #82567A;
+      border-radius: 10px;
+      padding: 12px 15px;
+      font-size: 16px;
+      font-weight: 400;
+
+      background-color: #82567A;
+      color: white;
+    }
+  }
+
+  .action-buttons {
+    width: 80%;
+    position: absolute;
+    top: 20px;
+    right: 10%;
+
+    .tool-btn {
+      float: right;
+    }
+  }
+
+  .finance-modal {
+    width: 80%;
+    margin-top: 70px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 35px 35px 40px 50px;
+    background-color: white;
+    border-radius: 20px;
+  }
 }
 
-.modal.enter-done {
-  opacity: 1;
-  pointer-events: visible;
-}
+.btn-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  height: 20px;
+  width: 20px;
+  background: #F24E1E;
+  color: white;
+  border-radius: 50%;
 
-.modal.exit {
-  opacity: 0;
-}
-
-.modal-content {
-  width: 500px;
-  background-color: #fff;
-  transition: all 0.3s ease-in-out;
-  transform: translateY(-200px);
-}
-
-.modal.enter-done .modal-content {
-  transform: translateY(0);
-}
-
-.modal.exit .modal-content {
-  transform: translateY(-200px);
-}
-
-.modal-header,
-.modal-footer {
-  padding: 10px;
-}
-
-.modal-title {
-  margin: 0;
-}
-
-.modal-body {
-  padding: 10px;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  svg {
+    height: 16px;
+    width: 16px;
+    margin: 2px;
+  }
 }

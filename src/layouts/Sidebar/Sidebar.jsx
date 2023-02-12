@@ -55,6 +55,7 @@ export default function Sidebar({ mode }) {
       <div>
         {pages[mode].map((page) => (
           <MainButton
+            key={Math.random()}
             onClick={() => {
               navigate(page.uri);
             }}

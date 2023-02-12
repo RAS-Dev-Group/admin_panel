@@ -8,26 +8,24 @@ import Stack from '@mui/material/Stack';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import Modal from "../../../../../../components/ui/Modal/Modal";
 
 //  Task modal import
-import ModalTask from './ModalTask';
 
 import './modal.css'
 
-const ModalProjectEdit = (props) => {
+const ModalProjectEdit = ({ open, modalCloseFunc, taskModalOpen, taskModalClose }) => {
   let tasks = [{},];
-
-  const [taskOpen, setTaskOpen] = useState(false);
-  const handleTaskOpen = () => setTaskOpen(true);
-  const handleTaskClose = () => setTaskOpen(false);
 
   const [value, setValue] = useState(new Date());
 
   return (
-    <>
-      <div className="modal" style={{ display: props.open ? 'block' : 'none' }}>
-        <div className="relative modal-project">
-          <button className="close-button" onClick={props.modalCloseFunc}>X</button>
+    <Modal
+      show={open}
+      onClose={modalCloseFunc}
+      contentClassName="modal-project"
+      content={(
+        <>
           <div className="mb-3 text-center">
             <label className="modal-title">ADD A PROJECT</label>
           </div>
@@ -102,21 +100,20 @@ const ModalProjectEdit = (props) => {
               </div>
             ))}
             <div>
-              <button className="btn-add-task" onClick={handleTaskOpen}>add more tasks</button>
+              <button className="btn-add-task" onClick={taskModalOpen}>add more tasks</button>
             </div>
           </div>
           <div className="mt-4">
             <label className="sub-title">Assign Team Members</label>
             <div className="flex mt-3">
               <select className="sel-member" placeholder="Add team member here" />
-              <button className="ml-auto admin-secondary-button" onClick={props.modalCloseFunc}>Back</button>
+              <button className="ml-auto admin-secondary-button" onClick={modalCloseFunc}>Back</button>
               <button className="ml-7 admin-primary-button">Create</button>
             </div>
           </div>
-        </div>
-      </div>
-      <ModalTask open={taskOpen} taskModalClose={handleTaskClose} />
-    </>
+        </>
+      )}
+    />
   );
 };
 

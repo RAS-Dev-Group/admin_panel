@@ -3,10 +3,6 @@ import React from "react";
 //  import Chart Component
 import Chart from "react-apexcharts";
 
-//  import Modal mui pieces
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-
 //  import My Finace Table
 import FinanceTable from "./ExpenseTable";
 
@@ -15,10 +11,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //  import Modal
-import ExpenseModal from './ExpenseModal';
-
-//  import CSS
-import "../finance.scss";
+import ExpenseModal from '../TransactionsModal';
 
 //  import Default Data
 import barchart from "./chart-default-data";
@@ -88,50 +81,7 @@ export default function FinanceExpense() {
           <ExpenseModal open={openModal} closeFunc={handleTableModalClose} />
         </div>
       </div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <div>
-            <div style={{ marginBottom: "10px" }}>
-              <div className="cancel-modal" onClick={handleClose}>
-                x
-              </div>
-              <div style={{ height: "20px" }}></div>
-            </div>
-            <form className="text-center finance-expense-form">
-              <h3
-                style={{
-                  color: "#86597E",
-                  fontWeight: "700",
-                  marginBottom: "120px",
-                }}
-              >
-                ADD EXPENSE
-              </h3>
-              <div>
-                <select className="expense-type">
-                  <option>Expnese Type</option>
-                </select>
-              </div>
-              <div>
-                <input
-                  className="expense-type"
-                  placeholder="Expense Amount"
-                ></input>
-              </div>
-              <div>
-                <a className="expense-action" onClick={handleAddExpense}>
-                  ADD
-                </a>
-              </div>
-            </form>
-          </div>
-        </Box>
-      </Modal>
+      <ExpenseModal open={open} onClose={handleClose} />
     </>
   );
 }

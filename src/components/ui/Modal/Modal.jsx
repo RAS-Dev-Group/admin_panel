@@ -5,7 +5,7 @@ import "./Modal.scss";
 import PropTypes from "prop-types";
 import { X } from 'react-feather';
 
-const EditModal = ({ onClose, show, title, content }) => {
+const Modal = ({ onClose, show, content, contentClassName, hasCloseBtn = true }) => {
   const closeOnEscapeKeyDown = e => {
     if ((e.charCode || e.keyCode) === 27) {
       onClose();
@@ -26,11 +26,8 @@ const EditModal = ({ onClose, show, title, content }) => {
       timeout={{ enter: 0, exit: 300 }}
     >
       <div className="modal" onClick={onClose}>
-        <div className="edit-modal modal-content" onClick={e => e.stopPropagation()}>
-          <button className="btn-modal-close" onClick={onClose}><X /></button>
-          <div className="text-center modal-header">
-            <label className="modal-title">{title}</label>
-          </div>
+        <div className={"relative modal-content " + (contentClassName ? contentClassName : 'edit-modal')} onClick={e => e.stopPropagation()}>
+          {hasCloseBtn ? <button className="btn-modal-close" onClick={onClose}><X /></button> : ''}
           {content}
         </div>
       </div>
@@ -39,9 +36,9 @@ const EditModal = ({ onClose, show, title, content }) => {
   );
 };
 
-EditModal.propTypes = {
+Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired
 };
 
-export default EditModal;
+export default Modal;

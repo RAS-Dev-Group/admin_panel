@@ -1,14 +1,16 @@
 import React from "react";
-import EditModal from "../../../../components/ui/Modal/Modal";
+import Modal from "../../../../components/ui/Modal/Modal";
 
 const CategoryModal = ({ open, editType, closeFunc }) => {
   return (
-    <EditModal
+    <Modal
       show={open}
-      title={editType === 'NEW' ? "Create Category" : "Edit Category"}
       onClose={closeFunc}
       content={(
         <>
+          <div className="text-center modal-header">
+            <label className="modal-title">{editType === 'NEW' ? "Create Category" : "Edit Category"}</label>
+          </div>
           <div className="text-center modal-item">
             <input
               className="item"

@@ -108,3 +108,7 @@ select,
 textarea {
   font-size: 0.875rem;
 }
+
+button:focus-visible {
+  outline: none;
+}

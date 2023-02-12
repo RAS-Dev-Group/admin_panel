@@ -137,7 +137,7 @@ const rows = [
   createData("Oreo", "562XXXXXXXX4643", "Furniture", 437, 18.0),
 ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
-export default function FinanceSalesTable() {
+export default function FinanceSalesTable({ handleOpenAdd }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -184,7 +184,7 @@ export default function FinanceSalesTable() {
           <option value={"-1"}>More Filters</option>
           <option value="1">email</option>
         </select>
-        <button className="finance-add"> Add </button>
+        <button className="finance-add" onClick={handleOpenAdd}> Add </button>
       </div>
 
       <TableContainer component={Paper}>

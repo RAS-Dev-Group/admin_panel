@@ -1,14 +1,16 @@
-import EditModal from "../../../../components/ui/Modal/Modal";
+import Modal from "../../../../components/ui/Modal/Modal";
 
 const SupplierModal = ({ open, editType, closeFunc }) => {
 
   return (
-    <EditModal
+    <Modal
       show={open}
-      title={editType === 'ADD' ? 'New Supplier' : 'Edit Supplier'}
       onClose={closeFunc}
       content={(
         <>
+          <div className="text-center modal-header">
+            <label className="modal-title">{editType === 'ADD' ? 'New Supplier' : 'Edit Supplier'}</label>
+          </div>
           <div className="text-center inventory-modal-title">
           </div>
           <div className="text-center modal-item">

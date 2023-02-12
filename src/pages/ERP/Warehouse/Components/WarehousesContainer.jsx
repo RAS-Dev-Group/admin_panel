@@ -1,7 +1,6 @@
 import React from "react";
 
 import WarehouseItem from "./WarehouseItem";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableSearch from "../../../../components/ui/TableSearch/TableSearch";
 
 export default function WarehousesContainer(props) {

@@ -16,8 +16,6 @@ import Coupon from "../pages/POS/Coupon/Index";
 import Invoices from "../pages/POS/Invoices/Index";
 import Order from "../pages/POS/Order/Index";
 import ErrorPage from "../pages/error-page";
-import FinanceSales from "../pages/ERP/Finance/Sales/Index";
-import FinanceExpense from "../pages/ERP/Finance/Expense/Index";
 
 // routing
 const router = createBrowserRouter([

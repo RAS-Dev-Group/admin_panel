@@ -43,7 +43,7 @@ export default function SupplierTable(props) {
             <select className="mr-2 filter" placeholder="More Filters">
               <option>More Filters</option>
             </select>
-            <button className="px-4 py-1 btn-add">Add</button>
+            <button className="px-4 py-1 btn-add" onClick={props.openNewModal}>Add</button>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@ export default function SupplierTable(props) {
                 <td className="color1">{row.quantity}</td>
                 <td className="color2">{row.status}</td>
                 <td className="color1">
-                  <button className="ml-auto btn-edit-invent-management font-icon-wrapper">
+                  <button className="ml-auto btn-edit-invent-management font-icon-wrapper" onClick={props.openEditModal}>
                     <FontAwesomeIcon
                       className="pr-1 fa-icon opacity-20"
                       icon="trash"

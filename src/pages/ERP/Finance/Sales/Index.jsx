@@ -6,13 +6,27 @@ import Chart from "react-apexcharts";
 //  import My Finace Table
 import FinanceTable from './FinanceTable';
 
+//  import Icon
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+//  import Modal
+import SalesModal from './SalesModal';
+
 //  import CSS
 import '../finance.scss';
 
 //  import Default Data
 import chartdata from './chart-default-data';
 
+
+
 export default function FinanceSales() {
+
+  const [open, setOpen] = React.useState(false);
+  
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -35,6 +49,13 @@ export default function FinanceSales() {
 
         <div className="table-container">
           <FinanceTable />
+          <div className="text-center mt-5 mb-5" style={{color: '#82567A', fontSize: '14px', fontWeight:'700', cursor: 'pointer'}} onClick={handleOpen}>
+            View all transaction
+            <div className="text-center">
+              <FontAwesomeIcon icon={faChevronDown} />
+            </div>
+          </div>
+          <SalesModal open={open} closeFunc={handleClose} />
         </div>
       </div>
     </>

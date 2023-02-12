@@ -15,7 +15,7 @@ export default function WarehouseItem(props) {
         <label className="location">Location</label>
       </div>
       <div className="my-auto action-container">
-        <button className="ml-auto btn-edit-warehouse font-icon-wrapper">
+        <button className="ml-auto btn-edit-warehouse font-icon-wrapper" onClick={props.editmodal}>
           <FontAwesomeIcon className="pr-1 fa-icon opacity-20" icon="trash" />
           edit
         </button>

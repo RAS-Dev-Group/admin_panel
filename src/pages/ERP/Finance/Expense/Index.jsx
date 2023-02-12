@@ -10,6 +10,13 @@ import Modal from "@mui/material/Modal";
 //  import My Finace Table
 import FinanceTable from "./FinanceTable";
 
+//  import Icon
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+//  import Modal
+import ExpenseModal from './ExpenseModal';
+
 //  import CSS
 import "../finance.scss";
 
@@ -22,6 +29,10 @@ export default function FinanceExpense() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleTableModalOpen = () => setOpenModal(true);
+  const handleTableModalClose = () => setOpenModal(false);
 
   const style = {
     position: "absolute",
@@ -68,6 +79,13 @@ export default function FinanceExpense() {
 
         <div className="table-container">
           <FinanceTable />
+          <div className="text-center mt-5 mb-5" style={{color: '#82567A', fontSize: '14px', fontWeight:'700', cursor: 'pointer'}} onClick={handleTableModalOpen}>
+            View all transaction
+            <div className="text-center">
+              <FontAwesomeIcon icon={faChevronDown} />
+            </div>
+          </div>
+          <ExpenseModal open={openModal} closeFunc={handleTableModalClose} />
         </div>
       </div>
       <Modal

@@ -9,7 +9,7 @@ export default function WarehousesContainer(props) {
     <div className="warehouse-container">
       <div className="flex">
         <TableSearch />
-        <button className="px-4 py-2 ml-auto btn-add-warehouse">
+        <button className="px-4 py-2 ml-auto btn-add-warehouse" onClick={props.modalopennew}>
           + Add Warehouse
         </button>
       </div>
@@ -25,15 +25,15 @@ export default function WarehousesContainer(props) {
             <label className="title">Action</label>
           </div>
         </li>
-        <WarehouseItem title="Ware House1" />
-        <WarehouseItem title="Ware House1" />
-        <WarehouseItem title="Ware House1" />
-        <WarehouseItem title="Ware House1" />
-        <WarehouseItem title="Ware House1" />
-        <WarehouseItem title="Ware House1" />
-        <WarehouseItem title="Ware House1" />
-        <WarehouseItem title="Ware House1" />
-        <WarehouseItem title="Ware House1" />
+        <WarehouseItem title="Ware House1" editmodal={props.modalopenedit}/>
+        <WarehouseItem title="Ware House1" editmodal={props.modalopenedit} />
+        <WarehouseItem title="Ware House1" editmodal={props.modalopenedit} />
+        <WarehouseItem title="Ware House1" editmodal={props.modalopenedit} />
+        <WarehouseItem title="Ware House1" editmodal={props.modalopenedit} />
+        <WarehouseItem title="Ware House1" editmodal={props.modalopenedit} />
+        <WarehouseItem title="Ware House1" editmodal={props.modalopenedit} />
+        <WarehouseItem title="Ware House1" editmodal={props.modalopenedit} />
+        <WarehouseItem title="Ware House1" editmodal={props.modalopenedit} />
       </ul>
     </div>
   );

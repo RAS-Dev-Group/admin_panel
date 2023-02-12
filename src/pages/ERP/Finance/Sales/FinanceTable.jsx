@@ -139,7 +139,7 @@ const rows = [
 
 export default function FinanceTable() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(25);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -244,7 +244,7 @@ export default function FinanceTable() {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TablePagination
+              {/* <TablePagination
                 rowsPerPageOptions={[25, 40, 100, { label: "All", value: -1 }]}
                 colSpan={3}
                 count={rows.length}
@@ -259,7 +259,7 @@ export default function FinanceTable() {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
                 ActionsComponent={TablePaginationActions}
-              />
+              /> */}
             </TableRow>
           </TableFooter>
         </Table>

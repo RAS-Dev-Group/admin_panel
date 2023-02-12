@@ -43,7 +43,7 @@ export default function Inventory() {
   return (
     <>
       <div className="float-left w-3/4 pr-2">
-        <div className="flex mb-3">
+        <div className="flex mb-5">
           <label className="page-title">Inventory Management</label>
           <label className="ml-auto mr-5 page-title">Orders</label>
         </div>
@@ -54,9 +54,9 @@ export default function Inventory() {
       <div className="float-left w-1/4 text-center bg-white buttons">
         <button className="my-2 common-button" onClick={handleItemTypeNew}>New Item</button>
         <button className="my-2 common-button">Export CSV</button>
-        <button className="my-2 common-button" onClick={handleCatTypeNew}>Import Items</button>
-        <button className="my-2 common-button">Coupons</button>
-        <button className="my-2 common-button">Select Product</button>
+        <button className="my-2 common-button">Import Items</button>
+        <button className="my-2 common-button" onClick={handleCatTypeNew}>Create Category</button>
+        <button className="my-2 common-button">Edit Category</button>
       </div>
       <ItemModal open={openItem} type={itemType} closeFunc={handleItemClose}/>
       <CategoryModal open={openCat} type={catType} closeFunc={handleCatClose}/>

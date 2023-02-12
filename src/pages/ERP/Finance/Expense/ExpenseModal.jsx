@@ -15,7 +15,6 @@ const SalesModal = (props) => {
         <div className="relative finance-modal">
             <FinanceTable />
         </div>
-        
       </div>
     </>
   );

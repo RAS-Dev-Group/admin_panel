@@ -70,9 +70,7 @@ export default function Sidebar({ mode }) {
           icon="logout"
           text="Log Out"
           active={true}
-          onClick={() => {
-            navigate("/auth");
-          }}
+          onClick={() => { navigate("/"); }}
         />
       </div>
     </div>

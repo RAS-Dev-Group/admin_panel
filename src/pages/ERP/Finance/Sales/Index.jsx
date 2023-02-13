@@ -11,7 +11,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //  import Modal
-import SalesModal from '../TransactionsModal';
+import TransactionsModal from '../TransactionsModal';
 import SalesAddModal from './SalesAddModal';
 
 
@@ -59,7 +59,7 @@ export default function FinanceSales() {
               <FontAwesomeIcon icon={faChevronDown} />
             </div>
           </div>
-          <SalesModal open={open} closeFunc={handleClose} />
+          <TransactionsModal open={open} closeFunc={handleClose} />
           <SalesAddModal open={openAdd} closeFunc={handleCloseAdd} />
         </div>
       </div>

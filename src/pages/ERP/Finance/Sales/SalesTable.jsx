@@ -84,7 +84,7 @@ export default function FinanceSalesTable({ handleOpenAdd }) {
       </div>
       <table className="w-full">
         <tbody>
-          {rows.map((row) => (
+          {rows.map(row => (
             <tr key={row.user.name}>
               <td align="left" width="20%">
                 <span className="big-font">{row.user.name}</span>

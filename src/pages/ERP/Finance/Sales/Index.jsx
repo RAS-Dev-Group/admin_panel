@@ -53,7 +53,7 @@ export default function FinanceSales() {
 
         <div className="table-container">
           <FinanceTable handleOpenAdd={handleOpenAdd} />
-          <div className="mt-5 mb-5 text-center" style={{ color: '#82567A', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }} onClick={handleOpen}>
+          <div className="mt-5 text-center" style={{ color: '#82567A', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }} onClick={handleOpen}>
             View all transaction
             <div className="text-center">
               <FontAwesomeIcon icon={faChevronDown} />

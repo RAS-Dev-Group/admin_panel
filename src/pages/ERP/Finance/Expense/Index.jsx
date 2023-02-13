@@ -72,7 +72,7 @@ export default function FinanceExpense() {
 
         <div className="table-container">
           <FinanceTable />
-          <div className="mt-5 mb-5 text-center" style={{ color: '#82567A', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }} onClick={handleTableModalOpen}>
+          <div className="mt-5 text-center" style={{ color: '#82567A', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }} onClick={handleTableModalOpen}>
             View all transaction
             <div className="text-center">
               <FontAwesomeIcon icon={faChevronDown} />

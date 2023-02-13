@@ -106,8 +106,11 @@ export default function LoginContainer() {
   }
 
   return (
+    <>
+    <div className="text-center">{token}</div>
     <div className="flex h-screen login-page">
       <form className="login-container">
+      
         <div className="title">Login</div>
         <FluidInput type="text" label="name" id="name" defValue={appState.name} onChange={onNameChange} />
         <FluidInput type="password" label="password" id="password" defValue={appState.password} onChange={onPasswordChange} />
@@ -117,7 +120,9 @@ export default function LoginContainer() {
           buttonClass="login-button"
         />
       </form>
+
     </div>
+    </>
   );
 }
 

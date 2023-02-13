@@ -13,11 +13,78 @@ import Modal from "../../../../../../components/ui/Modal/Modal";
 //  Task modal import
 
 import './modal.css'
+import axios from "axios";
 
-const ModalProjectEdit = ({ open, modalCloseFunc, taskModalOpen, taskModalClose }) => {
-  let tasks = [{},];
+const ModalProjectEdit = ({ 
+  open, 
+  modalCloseFunc, 
+  taskModalOpen, 
+  taskModalClose, 
+  currenttasks,
+  currentmembers, 
+  memberlist,
+  addMember,
+}) => {
 
-  const [value, setValue] = useState(new Date());
+  const [dueDate, setDueDate] = useState(new Date());
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [tasks, setTasks] = useState([]);
+  const [users, setUsers] = useState([]);
+
+
+  //  handle Add Project
+  const handleSubmit = (e) =>  {
+    e.preventDefault();
+    const formdata = new FormData();
+    
+    //  title check
+    if(title != ''){
+      formdata.append('title', title);
+    } else {
+      return;
+    }
+
+    //  description check
+    if(description != ''){
+      formdata.append('description', description);
+    } else {
+      return;
+    }
+
+    formdata.append('status', true);
+    
+    //  tasks check
+    if(tasks == []) {
+      alert('Tasks is nothing!');
+      return;
+    } else {
+      formdata.append('tasks', tasks);
+    }
+
+    if(users == []){
+      alert('Members is nothing!');
+      return;
+    } else {
+      formdata.append('users', users);
+    }
+
+    formdata.append('created_at', new Date());
+
+    axios({
+        url: 'https://furniture-dusky.vercel.app/project/',
+        header: {
+          Authorization: '',
+        },
+        method: 'POST',
+        data: formdata,
+    })
+    .then((res) => res.json());
+  };
+
+  const handleAddMember = (e) => {
+    addMember(memberlist[e.target.value-1]);
+  };
 
   return (
     <Modal
@@ -32,26 +99,9 @@ const ModalProjectEdit = ({ open, modalCloseFunc, taskModalOpen, taskModalClose 
           <div>
             <div className="flex mb-2.5">
               <div className="mx-auto">
-                <img
-                  className="inline member-avatar"
-                  src="/images/avatar1.png"
-                  alt="avatar"
-                />
-                <img
-                  className="inline member-avatar"
-                  src="/images/avatar2.png"
-                  alt="avatar"
-                />
-                <img
-                  className="inline member-avatar"
-                  src="/images/avatar1.png"
-                  alt="avatar"
-                />
-                <img
-                  className="inline member-avatar"
-                  src="/images/avatar2.png"
-                  alt="avatar"
-                />
+                {currentmembers.map((member, index) => (
+                  <img className="inline member-avatar" src={'/images/avatar1.png'} alt='avatar'/>
+                ))}
               </div>
             </div>
             <div className="text-center">
@@ -59,14 +109,19 @@ const ModalProjectEdit = ({ open, modalCloseFunc, taskModalOpen, taskModalClose 
             </div>
           </div>
           <div className="mb-3 mt-7">
-            <input className="sel-project-title" placeholder="Input project title" />
+            <input 
+            className="sel-project-title" 
+            placeholder="Input project title" 
+            value={title} 
+            onChange={(e) => {setTitle(e.target.value)}} />
             <button className="ml-2 admin-primary-button">Add</button>
           </div>
           <div className="mb-9">
             <textarea
               className="w-full"
               placeholder="Type your project details here"
-            ></textarea>
+              onChange={(e) => {setDescription(e.target.value)}}
+            >{description}</textarea>
           </div>
           <div className="mb-9">
             <div className="flex task-item">
@@ -75,9 +130,9 @@ const ModalProjectEdit = ({ open, modalCloseFunc, taskModalOpen, taskModalClose 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Stack spacing={3}>
                     <DatePicker
-                      value={value}
+                      value={dueDate}
                       onChange={(newValue) => {
-                        setValue(newValue);
+                        setDueDate(newValue);
                       }}
                       renderInput={(params) => <TextField {...params} helperText={null} />}
                     />
@@ -92,10 +147,10 @@ const ModalProjectEdit = ({ open, modalCloseFunc, taskModalOpen, taskModalClose 
           </div>
           <div>
             <label className="sub-title">Tasks</label>
-            {tasks.map((task, index) => (
-              <div className="flex task-item" key={index + 1}>
-                <label className="my-auto">Task1</label>
-                <input className="ml-auto input-task" placeholder="input task here" />
+            {currenttasks.map((task, index) => (
+              <div className="flex task-item">
+                <label className="my-auto">{task.title}</label>
+                <input className="ml-auto input-task" placeholder="input task here" value={task.description} />
                 <button className="delete">Delete</button>
               </div>
             ))}
@@ -106,9 +161,13 @@ const ModalProjectEdit = ({ open, modalCloseFunc, taskModalOpen, taskModalClose 
           <div className="mt-4">
             <label className="sub-title">Assign Team Members</label>
             <div className="flex mt-3">
-              <select className="sel-member" placeholder="Add team member here" />
+              <select className="sel-member" placeholder="Add team member here" onChange={handleAddMember}>
+              {memberlist.map((member, index) => (
+                <option value={member.id}>{member.full_name}</option>
+              ))}
+              </select>
               <button className="ml-auto admin-secondary-button" onClick={modalCloseFunc}>Back</button>
-              <button className="ml-7 admin-primary-button">Create</button>
+              <button className="ml-7 admin-primary-button" onClick={handleSubmit}>Create</button>
             </div>
           </div>
         </>

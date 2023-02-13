@@ -11,6 +11,7 @@ import Inventory from "../pages/ERP/Inventory/Index";
 import Finance from "../pages/ERP/Finance/Index";
 import Supplier from "../pages/ERP/Supplier/Index";
 import Warehouse from "../pages/ERP/Warehouse/Index";
+import Settings from "../pages/ERP/Settings/Index";
 
 import Coupon from "../pages/POS/Coupon/Index";
 import Invoices from "../pages/POS/Invoices/Index";
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "warehouse",
         element: <Warehouse />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
       },
     ],
   },

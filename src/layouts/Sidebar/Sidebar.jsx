@@ -65,14 +65,12 @@ export default function Sidebar({ mode }) {
         ))}
       </div>
       <div className="absolute second-buttons">
-        <SecondButton icon="settings" text="Settings" />
+        <SecondButton icon="settings" text="Settings" onClick={() => {navigate("/erp/settings")}} />
         <SecondButton
           icon="logout"
           text="Log Out"
           active={true}
-          onClick={() => {
-            navigate("/auth");
-          }}
+          onClick={() => { navigate("/"); }}
         />
       </div>
     </div>

@@ -1,4 +1,11 @@
-import React, { useState } from "react";
+import 
+  React, 
+  { 
+    useState,
+    createContext,
+    useEffect, 
+  }
+from "react";
 
 import ProjectItem from "./ProjectItem";
 // import ModalProject Component
@@ -8,8 +15,42 @@ import ModalTask from './ModalProjectEdit/ModalTask';
 //  import ModalDetailProejct Component
 import ModalProjectDetail from './ModalProjectDetail/ModalProjectDetail';
 
+import axios from "axios";
+
+
+const ProjectContext = createContext();
 
 export default function ProjectsContainer(props) {
+  const [appState, setAppState] = useState({
+    loading: false,
+    repos: null
+  });
+  const [project, setProject] = useState({});
+
+  useEffect(() => {
+    axios({
+  
+      // Endpoint to send files
+      url: "https://furniture-dusky.vercel.app/projects",
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiaXBpbiIsImV4cCI6MTY3NjMwMDQxNH0.nM2VG_aRGkAig71uyuit_QQPK32iB1XutnY7X6Tm3FM`
+        },
+  
+      // Attaching the form data
+    })
+  
+      // Handle the response from backend here
+      .then((res) => { 
+        console.log(res.data);
+      })
+  
+      // Catch errors if any
+      .catch((err) => { 
+        console.log(err);
+      });
+  }, []);
+
   let key = 0;
 
   // const [showProjectModal, setShowProjectModal] = useState(false);

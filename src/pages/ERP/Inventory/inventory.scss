@@ -44,3 +44,19 @@
   border-radius: 20px;
   padding: 20px 0;
 }
+
+.category-item {
+  margin-bottom: 10px;
+
+  .btn-delete {
+    color: #82567A;
+
+    svg {
+      color: #F24E1E;
+    }
+  }
+}
+
+.category-item:last-child {
+  margin-bottom: 0;
+}

@@ -1,8 +1,54 @@
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { AddTask } from "@mui/icons-material";
+import React, { useEffect, useState } from "react";
 
 const ModalTask = (props) => {
+  
+  const [title,  setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [dueTime, setDueTime] = useState(new Date());
+
+  const NewTaskAdd = () => {
+    if (title  == '') {
+      alert('Title is required.');
+      return;
+    }
+    if (description == '') {
+      alert('Description is required');
+    }
+
+    if (dueTime == '') {
+      alert('Due Time is required.');
+    }
+
+    const newtask = {
+      title: title,
+      description: description,
+      status: true,
+      due_date: dueTime,
+    }
+
+    props.addTask(newtask);
+    setTitle('');
+    setDescription('');
+    setDueTime(new Date());
+    props.taskModalClose();
+  }
+
+  const handleClose = () => {
+    setTitle('');
+    setDescription('');
+    setDueTime(new Date());
+    props.taskModalClose();
+  }
+
+  // useEffect(() => {
+  //   setTitle('');
+  //   setDescription('');
+  //   setDueTime(new Date());
+  // }, [NewTaskAdd]);
+
   return (
     <div className="more-modal" style={{display: props.open? 'block' : 'none'}}>
     <div className="modal-task">
@@ -10,14 +56,18 @@ const ModalTask = (props) => {
       <input
         className="block text-center w-full mt-8 p-2.5"
         placeholder="input task name"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
       />
       <textarea
         className="block w-full p-3 mt-5 text-center"
         placeholder="input description here"
         rows={5}
+        onChange={(e) => setDescription(e.target.value)}
+        value={description}
       />
-      <button className="block w-full p-2 mt-5" onClick={props.taskModalClose}>ADD</button>
-      <button className="cancel block w-full p-2 mt-5" onClick={props.taskModalClose}>CANCEL</button>
+      <button className="block w-full p-2 mt-5" onClick={NewTaskAdd}>ADD</button>
+      <button className="cancel block w-full p-2 mt-5" onClick={handleClose}>CANCEL</button>
       {/* <div className="text-center mt-14">
         <FontAwesomeIcon icon={faChevronUp} />
       </div> */}

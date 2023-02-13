@@ -80,6 +80,7 @@ export default function LoginContainer() {
     loading: false,
     repos: null
   });
+  const [token, setToken] = useState('');
 
   function handleSubmit(e) {
     // navigate('/erp/project');
@@ -100,6 +101,7 @@ export default function LoginContainer() {
       .then((data) => {
         setAppState({ loading: false });
         console.log(data);
+        setToken(data.data.access_token);
         // store data.access_token ; we will use this for ...
         // navigate('/erp/project');
       })
@@ -109,8 +111,11 @@ export default function LoginContainer() {
   }
 
   return (
+    <>
+    <div className="text-center">{token}</div>
     <div className="flex h-screen login-page">
       <form className="login-container">
+      
         <div className="title">Login</div>
         <FluidInput type="text" label="name" id="name" style={style} />
         <FluidInput
@@ -125,7 +130,9 @@ export default function LoginContainer() {
           buttonClass="login-button"
         />
       </form>
+
     </div>
+    </>
   );
 }
 

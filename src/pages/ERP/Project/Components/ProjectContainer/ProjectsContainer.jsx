@@ -60,20 +60,48 @@ export default function ProjectsContainer(props) {
   Nec arcu sagittis orci fames gravida sed etiam. Feugiat maecenas pellentesque massa tempor. Fermentum placerat dictum vivamus et accumsan consequat mauris lorem feugiat. Nisi lorem pellentesque proin lacus convallis at. Luctus massa vitae diam volutpat ipsum eget.";
   const members = [
     {
-      avatar: "avatar1.png",
-      name: "member1",
+      id: 1,
+      username: "member1",
+      full_name: "Member 1",
+      role: "string",
+      email: "member1@gmail.com",
+      password: "password1",
+      contact: 0,
+      address: "Address 1",
+      created_at: new Date(),
     },
     {
-      avatar: "avatar2.png",
-      name: "member2",
+      id: 2,
+      username: "member2",
+      full_name: "Member 2",
+      role: "string",
+      email: "member2@gmail.com",
+      password: "password2",
+      contact: 0,
+      address: "Address 2",
+      created_at: new Date(),
     },
     {
-      avatar: "avatar1.png",
-      name: "member3",
+      id: 3,
+      username: "member3",
+      full_name: "Member 3",
+      role: "string",
+      email: "member1@gmail.com",
+      password: "password3",
+      contact: 0,
+      address: "Address 3",
+      created_at: new Date(),
     },
     {
-      avatar: "avatar2.png",
-      name: "member4",
+      id: 4,
+      username: "member4",
+      full_name: "Member 4",
+      role: "string",
+      email: "member1@gmail.com",
+      password: "password4",
+      contact: 0,
+      address: "Address 4",
+      created_at: new Date(),
     },
   ];
   const tasks = [
@@ -84,6 +112,37 @@ export default function ProjectsContainer(props) {
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [showTaskModal, setShowTaskModal] = useState(false);
+
+  const [currentTasks, setCurrentTask] = useState([{}]);
+
+  const [currentMembers, setCurrentMembers] = useState([{}]);
+
+  const handleAddTask = (task) => {
+    let tasklist = currentTasks;
+
+    if (JSON.stringify(tasklist[0]) === '{}') {
+      tasklist = [task];
+    } else {
+      tasklist.push(task);
+    }
+
+    setCurrentTask(tasklist);
+  }
+
+  const handleTasksEmpty = () => setCurrentTask([{}]);
+
+  const handleAddMember = (member) => {
+    let memberlist = currentMembers;
+
+    if (JSON.stringify(memberlist[0]) === '{}') {
+      memberlist = [member];
+    } else {
+      memberlist.push(member);
+    }
+    setCurrentMembers(memberlist)
+  }
+
+  const handleMembersEmpty = () => setCurrentMembers([{}]);
 
   //  Project Modal Handles
   const handleProjectModalOpen = () => setShowProjectModal(true);
@@ -122,18 +181,26 @@ export default function ProjectsContainer(props) {
             <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
           </div>
           <ModalProject
+            currenttasks={currentTasks}
+            currentmembers={currentMembers}
             open={showProjectModal}
             modalCloseFunc={handleProjectModalClose}
             taskModalOpen={handleTaskModalOpen}
+            addMember={handleAddMember}
+            memberlist={members}
           />
           <ModalProjectDetail
             name="Sample Project"
             description={description}
             members={members}
-            tasks={tasks}
+            tasks={currentTasks}
             open={showDetailModal}
             modalCloseFunc={handleProjectDetailModalClose} />
-          <ModalTask open={showTaskModal} taskModalClose={handleTaskModalClose} />
+          <ModalTask 
+            open={showTaskModal} 
+            taskModalClose={handleTaskModalClose} 
+            addTask={handleAddTask}
+          />
         </div>
       </div>
     </>

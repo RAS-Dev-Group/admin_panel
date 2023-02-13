@@ -80,6 +80,7 @@
   margin: 15px 100px 30px 100px;
   padding: 30px 35px 20px;
   background-color: white;
+  border-radius: 20px;
 }
 
 
@@ -152,12 +153,23 @@
 }
 
 .modal-transactions {
-  width: 80%;
+  width: 70%;
   background: transparent;
   
   .finance-table {
-    padding: 35px 35px 40px 50px;
+    padding: 25px 35px 25px 50px;
     background-color: white;
     border-radius: 20px;
+  }
+}
+
+.table-expenses {
+  thead > tr > th {
+    color: #82567A;
+    font-weight: normal;
+  }
+
+  tbody > tr > td {
+    padding-top: 7px;
   }
 }

@@ -82,20 +82,26 @@ export default function LoginContainer() {
   });
 
   function handleSubmit(e) {
-    navigate('/erp/project');
-    return false;
+    // navigate('/erp/project');
+    // return false;
+
+    const logindata = new FormData();
+    logindata.append('username', 'bipin');
+    logindata.append('password', 'Bipin@123');
 
     setAppState({ loading: true });
     e.preventDefault();
-    axios.post('https://furniture-dusky.vercel.app/token', {
-      name: 'bipin',
-      password: 'Bipin@123'
+    axios({
+            // Endpoint to send files
+            url: "https://furniture-dusky.vercel.app/token",
+            method: "POST",
+            data: logindata,
     })
       .then((data) => {
         setAppState({ loading: false });
         console.log(data);
         // store data.access_token ; we will use this for ...
-        navigate('/erp/project');
+        // navigate('/erp/project');
       })
       .catch((err) => {
         console.log(err.messag);

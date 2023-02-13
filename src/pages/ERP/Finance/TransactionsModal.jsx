@@ -1,23 +1,28 @@
 import React from "react";
 
 import FinanceTable from './Sales/SalesTable';
+import Modal from "../../../components/ui/Modal/Modal";
 
-const SalesModal = (props) => {
+const TransactionsModal = ({ open, closeFunc }) => {
 
   return (
-    <>
-      <div className="modal" style={{ display: props.open ? 'block' : 'none' }}>
-        <div className="action-buttons text-rigth">
-          <a className="tool-btn">Add Expense</a>
-          <a className="tool-btn">Export PDF</a>
-          <a className="tool-btn">Export CSV</a>
-        </div>
-        <div className="relative finance-modal">
+    <Modal
+      contentClassName={"modal-transactions"}
+      show={open}
+      onClose={closeFunc}
+      hasCloseBtn={false}
+      content={(
+        <>
+          <div className="mb-3 text-right">
+            <a className="tool-btn">Add Expense</a>
+            <a className="tool-btn">Export PDF</a>
+            <a className="tool-btn">Export CSV</a>
+          </div>
           <FinanceTable />
-        </div>
-      </div>
-    </>
+        </>
+      )}
+    />
   );
 };
 
-export default SalesModal;
+export default TransactionsModal;

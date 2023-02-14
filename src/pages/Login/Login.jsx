@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 import API from '../../utils/api';
+import { Loader } from "react-feather";
 
 function FluidInput({ type, label, id, defValue = '', onChange }) {
   let [focused, setFocused] = useState(false);
@@ -51,17 +52,17 @@ function Button({ buttonClass, onClick, buttonText }) {
 export default function LoginContainer() {
   const navigate = useNavigate();
   const [appState, setAppState] = useState({
-    loading: false,
+    isLoading: false,
     name: 'bipin',
     password: 'Bipin@123'
   });
 
   function onNameChange(name) {
-    setAppState({ ...appState, name });
+    setAppState({ name });
   }
 
   function onPasswordChange(password) {
-    setAppState({ ...appState, password });
+    setAppState({ password: password });
   }
 
   function handleSubmit(e) {
@@ -81,11 +82,11 @@ export default function LoginContainer() {
       return;
     }
 
-    setAppState({ ...appState, loading: true });
+    setAppState({ isLoading: true });
     e.preventDefault();
     API.post("/token", loginData)
       .then((data) => {
-        setAppState({ ...appState, loading: false });
+        setAppState({ isLoading: false });
         console.log('response', data);
         // store data.access_token ; we will use this for ...
         if (data.error) {
@@ -93,9 +94,8 @@ export default function LoginContainer() {
           return;
         }
         else {
-          alert('You are logged in');
           // save access_token to somewhere (for global use)
-          console.log('token', data.access_token);
+          console.log('login success ; token', data.access_token);
           navigate('erp/project');
           return;
         }
@@ -107,28 +107,31 @@ export default function LoginContainer() {
 
   return (
     <>
-    <div className="text-center">{token}</div>
-    <div className="flex h-screen login-page">
-      <form className="login-container">
-      
-        <div className="title">Login</div>
-        <FluidInput type="text" label="name" id="name" defValue={appState.name} onChange={onNameChange} />
-        <FluidInput type="password" label="password" id="password" defValue={appState.password} onChange={onPasswordChange} />
-        <Button
-          buttonText="log in"
-          onClick={handleSubmit}
-          buttonClass="login-button"
-        />
-      </form>
-
-    </div>
+      <div className="flex h-screen login-page">
+        <form className="login-container">
+          <div className="title">Login</div>
+          <FluidInput type="text" label="name" id="name" defValue={appState.name} onChange={onNameChange} />
+          <FluidInput type="password" label="password" id="password" defValue={appState.password} onChange={onPasswordChange} />
+          {appState.isLoading ?
+            <div
+              style={{
+                width: "100%",
+                height: "100",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
+            </div> :
+            <Button
+              buttonText="log in"
+              onClick={handleSubmit}
+              buttonClass="login-button"
+            />
+          }
+        </form>
+      </div>
     </>
   );
 }
-
-/*
-sample authentication
-
-bipin
-Bipin@123
-*/

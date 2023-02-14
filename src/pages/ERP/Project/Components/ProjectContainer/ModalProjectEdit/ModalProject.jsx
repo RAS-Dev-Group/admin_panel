@@ -15,13 +15,13 @@ import Modal from "../../../../../../components/ui/Modal/Modal";
 import './modal.css'
 import axios from "axios";
 
-const ModalProjectEdit = ({ 
-  open, 
-  modalCloseFunc, 
-  taskModalOpen, 
-  taskModalClose, 
+const ModalProjectEdit = ({
+  open,
+  modalCloseFunc,
+  taskModalOpen,
+  taskModalClose,
   currenttasks,
-  currentmembers, 
+  currentmembers,
   memberlist,
   addMember,
 }) => {
@@ -34,35 +34,35 @@ const ModalProjectEdit = ({
 
 
   //  handle Add Project
-  const handleSubmit = (e) =>  {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const formdata = new FormData();
-    
+
     //  title check
-    if(title != ''){
+    if (title != '') {
       formdata.append('title', title);
     } else {
       return;
     }
 
     //  description check
-    if(description != ''){
+    if (description != '') {
       formdata.append('description', description);
     } else {
       return;
     }
 
     formdata.append('status', true);
-    
+
     //  tasks check
-    if(tasks == []) {
+    if (tasks == []) {
       alert('Tasks is nothing!');
       return;
     } else {
       formdata.append('tasks', tasks);
     }
 
-    if(users == []){
+    if (users == []) {
       alert('Members is nothing!');
       return;
     } else {
@@ -72,18 +72,18 @@ const ModalProjectEdit = ({
     formdata.append('created_at', new Date());
 
     axios({
-        url: 'https://furniture-dusky.vercel.app/project/',
-        header: {
-          Authorization: '',
-        },
-        method: 'POST',
-        data: formdata,
+      url: 'https://furniture-dusky.vercel.app/project/',
+      header: {
+        Authorization: '',
+      },
+      method: 'POST',
+      data: formdata,
     })
-    .then((res) => res.json());
+      .then((res) => res.json());
   };
 
   const handleAddMember = (e) => {
-    addMember(memberlist[e.target.value-1]);
+    addMember(memberlist[e.target.value - 1]);
   };
 
   return (
@@ -91,88 +91,81 @@ const ModalProjectEdit = ({
       show={open}
       onClose={modalCloseFunc}
       contentClassName="modal-project"
-      content={(
-        <>
-          <div className="mb-3 text-center">
-            <label className="modal-title">ADD A PROJECT</label>
-          </div>
-          <div>
-            <div className="flex mb-2.5">
-              <div className="mx-auto">
-                {currentmembers.map((member, index) => (
-                  <img className="inline member-avatar" src={'/images/avatar1.png'} alt='avatar'/>
-                ))}
-              </div>
-            </div>
-            <div className="text-center">
-              <label className="label-members">Team members</label>
-            </div>
-          </div>
-          <div className="mb-3 mt-7">
-            <input 
-            className="sel-project-title" 
-            placeholder="Input project title" 
-            value={title} 
-            onChange={(e) => {setTitle(e.target.value)}} />
-            <button className="ml-2 admin-primary-button">Add</button>
-          </div>
-          <div className="mb-9">
-            <textarea
-              className="w-full"
-              placeholder="Type your project details here"
-              onChange={(e) => {setDescription(e.target.value)}}
-            >{description}</textarea>
-          </div>
-          <div className="mb-9">
-            <div className="flex task-item">
-              <label className="my-auto">DeadLine</label>
-              <div className="input-with-icon">
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Stack spacing={3}>
-                    <DatePicker
-                      value={dueDate}
-                      onChange={(newValue) => {
-                        setDueDate(newValue);
-                      }}
-                      renderInput={(params) => <TextField {...params} helperText={null} />}
-                    />
-                  </Stack>
-                </LocalizationProvider>
-              </div>
-              {/* <div className="input-with-icon">
-                <input className="ml-auto input-deadline" placeholder="input task here" />
-                <span className="input-deadline-icon"><FontAwesomeIcon icon={faCalendarDays} /></span>
-              </div> */}
-            </div>
-          </div>
-          <div>
-            <label className="sub-title">Tasks</label>
-            {currenttasks.map((task, index) => (
-              <div className="flex task-item">
-                <label className="my-auto">{task.title}</label>
-                <input className="ml-auto input-task" placeholder="input task here" value={task.description} />
-                <button className="delete">Delete</button>
-              </div>
+    >
+      <div className="mb-3 text-center">
+        <label className="modal-title">ADD A PROJECT</label>
+      </div>
+      <div>
+        <div className="flex mb-2.5">
+          <div className="mx-auto">
+            {currentmembers.map((member, index) => (
+              <img className="inline member-avatar" src={'/images/avatar1.png'} alt='avatar' />
             ))}
-            <div>
-              <button className="btn-add-task" onClick={taskModalOpen}>add more tasks</button>
-            </div>
           </div>
-          <div className="mt-4">
-            <label className="sub-title">Assign Team Members</label>
-            <div className="flex mt-3">
-              <select className="sel-member" placeholder="Add team member here" onChange={handleAddMember}>
-              {memberlist.map((member, index) => (
-                <option value={member.id}>{member.full_name}</option>
-              ))}
-              </select>
-              <button className="ml-auto admin-secondary-button" onClick={modalCloseFunc}>Back</button>
-              <button className="ml-7 admin-primary-button" onClick={handleSubmit}>Create</button>
-            </div>
+        </div>
+        <div className="text-center">
+          <label className="label-members">Team members</label>
+        </div>
+      </div>
+      <div className="mb-3 mt-7">
+        <input
+          className="sel-project-title"
+          placeholder="Input project title"
+          value={title}
+          onChange={(e) => { setTitle(e.target.value) }} />
+        <button className="ml-2 admin-primary-button">Add</button>
+      </div>
+      <div className="mb-9">
+        <textarea
+          className="w-full"
+          placeholder="Type your project details here"
+          onChange={(e) => { setDescription(e.target.value) }}
+        >{description}</textarea>
+      </div>
+      <div className="mb-9">
+        <div className="flex task-item">
+          <label className="my-auto">DeadLine</label>
+          <div className="input-with-icon">
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Stack spacing={3}>
+                <DatePicker
+                  value={dueDate}
+                  onChange={(newValue) => {
+                    setDueDate(newValue);
+                  }}
+                  renderInput={(params) => <TextField {...params} helperText={null} />}
+                />
+              </Stack>
+            </LocalizationProvider>
           </div>
-        </>
-      )}
-    />
+        </div>
+      </div>
+      <div>
+        <label className="sub-title">Tasks</label>
+        {currenttasks.map((task, index) => (
+          <div className="flex task-item">
+            <label className="my-auto">{task.title}</label>
+            <input className="ml-auto input-task" placeholder="input task here" value={task.description} />
+            <button className="delete">Delete</button>
+          </div>
+        ))}
+        <div>
+          <button className="btn-add-task" onClick={taskModalOpen}>add more tasks</button>
+        </div>
+      </div>
+      <div className="mt-4">
+        <label className="sub-title">Assign Team Members</label>
+        <div className="flex mt-3">
+          <select className="sel-member" placeholder="Add team member here" onChange={handleAddMember}>
+            {memberlist.map((member, index) => (
+              <option value={member.id}>{member.full_name}</option>
+            ))}
+          </select>
+          <button className="ml-auto admin-secondary-button" onClick={modalCloseFunc}>Back</button>
+          <button className="ml-7 admin-primary-button" onClick={handleSubmit}>Create</button>
+        </div>
+      </div>
+    </Modal>
   );
 };
 

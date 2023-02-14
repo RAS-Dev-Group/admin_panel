@@ -5,7 +5,7 @@ import "./Modal.scss";
 import PropTypes from "prop-types";
 import { X } from 'react-feather';
 
-const Modal = ({ onClose, show, content, contentClassName, hasCloseBtn = true }) => {
+const Modal = ({ onClose, show, children, contentClassName, hasCloseBtn = true }) => {
   const closeOnEscapeKeyDown = e => {
     if ((e.charCode || e.keyCode) === 27) {
       onClose();
@@ -28,7 +28,7 @@ const Modal = ({ onClose, show, content, contentClassName, hasCloseBtn = true })
       <div className="modal" onClick={onClose}>
         <div className={"relative modal-content " + (contentClassName ? contentClassName : 'edit-modal')} onClick={e => e.stopPropagation()}>
           {hasCloseBtn ? <button className="btn-modal-close" onClick={onClose}><X /></button> : ''}
-          {content}
+          {children}
         </div>
       </div>
     </CSSTransition>,

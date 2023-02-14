@@ -65,7 +65,7 @@ export default function SupplierTable(props) {
                 <td className="color1">{row.quantity}</td>
                 <td className="color2">{row.status}</td>
                 <td className="color1">
-                  <button className="ml-auto btn-edit-invent-management font-icon-wrapper" onClick={props.openEditModal}>
+                  <button className="ml-auto font-icon-wrapper" onClick={props.openEditModal}>
                     <FontAwesomeIcon
                       className="pr-1 fa-icon opacity-20"
                       icon="trash"

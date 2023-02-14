@@ -3,7 +3,7 @@ import React from "react";
 import TableSearch from "../../../components/ui/TableSearch/TableSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function InventoryTable(props) {
+export default function InventoryTable({ description, editItem, deleteItem }) {
   let rows = [];
 
   for (let i = 0; i < 20; i += 1) {
@@ -70,18 +70,21 @@ export default function InventoryTable(props) {
                     className="filter"
                     options={options}
                     placeholder="input details"
-                    value={props.description}
+                    value={description}
                   />
                 </td>
                 <td className="color1">{row.quantity}</td>
                 <td className="color1">{row.sku}</td>
                 <td>{row.vendor}</td>
                 <td className="color1">
-                  <button className="ml-auto btn-edit-invent-management font-icon-wrapper" onClick={props.editItem}>
+                  <button className="ml-auto font-icon-wrapper"
+                    onClick={deleteItem}>
                     <FontAwesomeIcon
                       className="pr-1 fa-icon opacity-20"
-                      icon="edit"
+                      icon="trash"
                     />
+                  </button>
+                  <button onClick={editItem}>
                     Edit
                   </button>
                 </td>

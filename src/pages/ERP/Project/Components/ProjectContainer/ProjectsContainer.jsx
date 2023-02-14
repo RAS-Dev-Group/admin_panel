@@ -29,8 +29,7 @@ export default function ProjectsContainer(props) {
 
   useEffect(() => {
     axios({
-  
-      // Endpoint to send files
+        // Endpoint to send files
       url: "https://furniture-dusky.vercel.app/projects",
       method: "GET",
       headers: {

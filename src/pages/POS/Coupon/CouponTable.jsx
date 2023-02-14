@@ -37,7 +37,7 @@ export default function CouponTables(props) {
                 <td className="color1">{row.validTill}</td>
                 <td className="color1">{row.discountPercentage}</td>
                 <td className="color1">
-                  <button className="ml-auto btn-edit-invent-management font-icon-wrapper">
+                  <button className="ml-auto font-icon-wrapper">
                     <FontAwesomeIcon className="pr-1 fa-icon opacity-20" icon="trash" />
                     Edit
                   </button>

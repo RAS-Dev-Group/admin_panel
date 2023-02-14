@@ -44,7 +44,7 @@ export default function OrderTable(props) {
                 <td className="color1">{row.amount}</td>
                 <td className="color2"><label className="px-2 rounded-sm coupon-state">{row.coupon}</label></td>
                 <td className="color1">
-                  <button className="ml-auto btn-edit-invent-management font-icon-wrapper">
+                  <button className="ml-auto font-icon-wrapper">
                     <FontAwesomeIcon className="pr-1 fa-icon opacity-20" icon="trash" />
                     Edit
                   </button>

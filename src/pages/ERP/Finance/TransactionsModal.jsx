@@ -10,18 +10,14 @@ const TransactionsModal = ({ open, closeFunc }) => {
       contentClassName={"modal-transactions"}
       show={open}
       onClose={closeFunc}
-      hasCloseBtn={false}
-      content={(
-        <>
-          <div className="mb-3 text-right">
-            <a className="tool-btn">Add Expense</a>
-            <a className="tool-btn">Export PDF</a>
-            <a className="tool-btn">Export CSV</a>
-          </div>
-          <FinanceTable />
-        </>
-      )}
-    />
+      hasCloseBtn={false} >
+      <div className="mb-3 text-right">
+        <a className="tool-btn">Add Expense</a>
+        <a className="tool-btn">Export PDF</a>
+        <a className="tool-btn">Export CSV</a>
+      </div>
+      <FinanceTable />
+    </Modal>
   );
 };
 

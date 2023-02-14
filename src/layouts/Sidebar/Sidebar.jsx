@@ -2,48 +2,45 @@ import React from "react";
 import UserInfo from "./UserInfo";
 import MainButton from "./MainButton";
 import SecondButton from "./SecondButton";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import "./sidebar.css";
-
-export default function Sidebar({ mode }) {
+export default function Sidebar({ mode, submenu, onSubmenu }) {
   const navigate = useNavigate();
-  const location = useLocation();
-  const pages = {
+  const menus = {
     erp: [
       {
-        uri: "/erp/project",
+        menu: "project",
         title: "Project Management",
       },
       {
-        uri: "/erp/inventory",
+        menu: "inventory",
         title: "Inventory Management",
       },
       {
-        uri: "/erp/supplier",
+        menu: "supplier",
         title: "Supplier",
       },
       {
-        uri: "/erp/finance",
+        menu: "finance",
         title: "Finance Management",
       },
       {
-        uri: "/erp/warehouse",
+        menu: "warehouse",
         title: "Warehousing",
       },
     ],
     crm: [],
     pos: [
       {
-        uri: "/pos/order",
+        menu: "/pos/order",
         title: "Order Management",
       },
       {
-        uri: "/pos/invoices",
+        menu: "/pos/invoices",
         title: "Invoices",
       },
       {
-        uri: "/pos/coupon",
+        menu: "/pos/coupon",
         title: "Coupon Management",
       },
     ],
@@ -53,19 +50,19 @@ export default function Sidebar({ mode }) {
     <div className="fixed h-screen px-4 mt-4 sidebar bg-white/40">
       <UserInfo />
       <div>
-        {pages[mode].map((page) => (
+        {menus[mode].map(menu => (
           <MainButton
-            key={Math.random()}
-            onClick={() => {
-              navigate(page.uri);
-            }}
-            name={page.title}
-            active={location.pathname.indexOf(page.uri) >= 0}
+            key={menu.menu}
+            onClick={() => { onSubmenu(menu.menu) }}
+            name={menu.title}
+            active={submenu === menu.menu}
           />
         ))}
       </div>
       <div className="absolute second-buttons">
-        <SecondButton icon="settings" text="Settings" onClick={() => {navigate("/erp/settings")}} />
+        <SecondButton icon="settings" text="Settings" 
+        // onClick={onSubmenu('setting')} 
+        />
         <SecondButton
           icon="logout"
           text="Log Out"

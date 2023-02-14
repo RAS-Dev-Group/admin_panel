@@ -3,6 +3,9 @@ import { loginFields } from "../../data/formFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
+import { login } from '../../utils/api';
+import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 const fields = loginFields;
 let fieldsState = {};
@@ -10,6 +13,8 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Login() {
   const [loginState, setLoginState] = useState(fieldsState);
+  const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(['token']);
 
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
@@ -21,24 +26,16 @@ export default function Login() {
   };
 
   //Handle Login API Integration here
-  const authenticateUser = () => {
+  const authenticateUser = async () => {
     let loginFields = {
       username: loginState['username'],
       password: loginState['password']
     };
-    const endpoint = `https://furniture-dusky.vercel.app/token`;
-    fetch(endpoint,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: loginFields
-      }).then(response => response.json())
-      .then(data => {
-        //API Success from LoginRadius Login API
-      })
-      .catch(error => console.log(error))
+    const resp = await login(loginFields);
+    if (resp.status === 'success') {
+      setCookie('TOKEN', resp.access_token, { path: '/' });
+      navigate('/erp');
+    }
   };
 
   return (

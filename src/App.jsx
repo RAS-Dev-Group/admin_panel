@@ -1,6 +1,9 @@
 import "./common.scss";
 import React, { useState } from "react";
 import { createBrowserRouter, BrowserRouter, redirect, RouterProvider } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
+
+import PageSpinner from "./components/ui/PageSpinner";
 import "./utils/fonts";
 
 import AuthLayout from './layouts/AuthLayout';
@@ -11,8 +14,6 @@ import ERP from "./pages/ERP";
 import POS from "./pages/POS";
 import CRM from "./pages/CRM";
 import NotFound from "./pages/NotFound";
-
-import PageSpinner from "./components/ui/PageSpinner";
 
 const router = createBrowserRouter([
   {
@@ -48,5 +49,7 @@ const router = createBrowserRouter([
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  return <RouterProvider router={router} />
+  return <CookiesProvider>
+    <RouterProvider router={router} />
+  </CookiesProvider>
 }

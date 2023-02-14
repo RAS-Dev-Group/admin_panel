@@ -32,7 +32,6 @@ const ModalTask = (props) => {
     props.addTask(newtask);
     setTitle('');
     setDescription('');
-    setDueTime(new Date());
     props.taskModalClose();
   }
 

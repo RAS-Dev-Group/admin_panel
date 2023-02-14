@@ -34,7 +34,7 @@ export default function ProjectsContainer(props) {
       url: "https://furniture-dusky.vercel.app/projects",
       method: "GET",
       headers: {
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiaXBpbiIsImV4cCI6MTY3NjMwMDQxNH0.nM2VG_aRGkAig71uyuit_QQPK32iB1XutnY7X6Tm3FM`
+        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiaXBpbiIsImV4cCI6MTY3NjM3MTMxMn0.MpI5OtbLZ4mot3zU2rFvS_v9j-F22TMG8fu4PPtJluw`
         },
   
       // Attaching the form data
@@ -129,9 +129,14 @@ export default function ProjectsContainer(props) {
     setCurrentTask(tasklist);
   }
 
+  const handleSetTasks = (list) => {
+    setCurrentTask(list);
+  }
+
   const handleTasksEmpty = () => setCurrentTask([{}]);
 
-  const handleAddMember = (member) => {
+  const handleAddMember = (e) => {
+    let member = members[e.target.value-1];
     let memberlist = currentMembers;
 
     if (JSON.stringify(memberlist[0]) === '{}') {
@@ -140,6 +145,7 @@ export default function ProjectsContainer(props) {
       memberlist.push(member);
     }
     setCurrentMembers(memberlist)
+    console.log(currentMembers);
   }
 
   const handleMembersEmpty = () => setCurrentMembers([{}]);
@@ -180,6 +186,9 @@ export default function ProjectsContainer(props) {
             <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
             <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
           </div>
+          {currentMembers.map((member, index) => (
+                  <span key={index}>{member.id}</span>
+                ))}
           <ModalProject
             currenttasks={currentTasks}
             currentmembers={currentMembers}
@@ -195,6 +204,7 @@ export default function ProjectsContainer(props) {
             members={members}
             tasks={currentTasks}
             open={showDetailModal}
+            setTasks={handleSetTasks}
             modalCloseFunc={handleProjectDetailModalClose} />
           <ModalTask 
             open={showTaskModal} 

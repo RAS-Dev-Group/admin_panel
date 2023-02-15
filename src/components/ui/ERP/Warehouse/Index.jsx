@@ -7,17 +7,19 @@ import { TokenContext } from "../../../../context/TokenContext";
 
 import "./warehouse.scss";
 
-import { deleteWarehouse, getWarehouses } from "../../../../utils/api";
+import { createWarehouse, deleteWarehouse, getWarehouses, updateWarehouse } from "../../../../utils/api";
 
 export default function Warehouse(props) {
+  const [loadingState, setLoadingState] = useState(false);
   const [warehouseList, setWarehouseList] = useState([]);
+  const [modalState, setModalState] = useState({ item: {}, show: false });
+
   const token = useContext(TokenContext);
   
   // load warehouses
   useEffect(() => {
     getWarehouses(token)
       .then(res => {
-        return;
         setWarehouseList(res.data.data);
       })
       .catch(err => {
@@ -25,8 +27,28 @@ export default function Warehouse(props) {
       });
   }, []);
 
-
-  const [modalState, setModalState] = useState({ item: {}, show: false });
+  function handleSubmit(data) {
+    setLoadingState(true);
+    if (data.id) { // update
+      updateWarehouse(token, data.id, data)
+        .then(res => {
+          setLoadingState(false);
+        })
+        .catch(err => {
+          setLoadingState(false);
+        });
+    }
+    else {
+      createWarehouse(token, data.id, data)
+      .then(res => {
+        setLoadingState(false);
+      })
+      .catch(err => {
+        setLoadingState(false);
+      });
+    }
+    setModalState({ ...modalState, show: false });
+  }
 
   function handleDelete(itemId) {
     Swal.fire({
@@ -97,9 +119,9 @@ export default function Warehouse(props) {
       </div>
       <WarehouseModal
         open={modalState.show}
-        item={modalState.item}
-        onSubmit={handleSubmit}
-        closeFunc={() => setModalState({ show: false })}
+        data={modalState.item}
+        submitFunc={handleSubmit}
+        closeFunc={() => setModalState({ ...modalState, show: false })}
       />
     </>
   );

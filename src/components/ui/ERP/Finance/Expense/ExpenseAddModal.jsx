@@ -14,7 +14,7 @@ const ExpenseAddModal = ({ open, closeFunc }) => {
         </select>
       </div>
       <div className="text-center modal-item">
-        <input className="item" type='number' placeholder="Amount" min={0}></input>
+        <input className="item" type='number' placeholder="Amount" min={0}/>
       </div>
       <div className="text-center">
         <button className="item button" onClick={closeFunc}>Add</button>

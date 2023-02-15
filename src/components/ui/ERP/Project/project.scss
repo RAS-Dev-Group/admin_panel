@@ -1,4 +1,3 @@
-
 .project-container {
   margin-left: 5px;
   margin-top: 22px;
@@ -64,9 +63,11 @@
           background: #E3E6E8;
           margin-right: 8px;
         }
+
         .avatar:first-child {
           margin-left: auto;
         }
+
         .avatar:last-child {
           margin-right: auto;
         }
@@ -157,7 +158,7 @@
 
   .member-avatar {
     width: 70px;
-    height: 70px; 
+    height: 70px;
     border-radius: 50%;
     margin-right: 9px;
   }
@@ -176,14 +177,12 @@
 
   select {
     border: solid 0.5px #8B5E83;
-    height: 35px;
-    border-radius: 10px;
+    border-radius: 7px;
   }
 
   .sel-project-title {
-    padding: 2px 15px;
+    padding: 6px 15px;
     border: solid 0.5px #8B5E83;
-    height: 35px;
     border-radius: 10px;
     width: 454px;
   }
@@ -215,12 +214,12 @@
       color: #ADADAD;
     }
 
-    input.input-task{
+    input.input-task {
       width: 351px;
       border: solid 0.5px #8B5E83;
       border-radius: 5px;
 
-      padding: 12px 11px;
+      padding: 10px 12px;
 
       font-weight: 400;
       font-size: 13px;
@@ -230,31 +229,33 @@
 
     button.delete {
       width: 100px;
-      height: 42px;
       font-weight: 400;
       font-size: 13px;
       line-height: 12px;
       letter-spacing: 0.01em;
-      background-color: #ADADAD;
-      color: #000000;
+      // background-color: #ADADAD;
+      background: brown;
+      border-radius: 5px;
+      color: white;
       margin-left: auto;
     }
 
 
     .input-with-icon {
       margin-left: auto;
-      height: 45px; 
       border: 1px solid #8B5E83;
-      fieldset{
+      border-radius: 5px;
+
+      fieldset {
         border: none;
         margin-left: -5px;
         width: 351px;
       }
 
-      input{
+      input {
         width: 280px;
-
         padding: 10px;
+        font-size: 13px;
       }
 
     }
@@ -395,7 +396,6 @@
 
     .input-task {
       width: 351px;
-      height: 35px;
       font-size: 13px;
       border: 0.5px solid #8B5E83;
       border-radius: 5px;
@@ -407,6 +407,7 @@
       line-height: 17px;
       margin-right: 5px;
     }
+
     .btn-finish-task {
       background: rgba(11, 138, 115, 0.2);
       border-radius: 5px;

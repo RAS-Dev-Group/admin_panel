@@ -7,7 +7,7 @@ export default function TaskItem({ name }) {
       <label className='mx-auto'>-</label>
       <label className='font-thin task-date'>Due Date 10 January 2023</label>
       <button className='px-1 my-auto font-normal ml-7 btn-edit'>Edit Task</button>
-      <input type="checkbox" className='ml-7'></input>
+      <input type="checkbox" className='ml-7'/>
     </div>
   )
 }

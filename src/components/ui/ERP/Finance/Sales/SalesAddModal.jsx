@@ -10,16 +10,16 @@ const SalesAddModal = ({ open, closeFunc }) => {
         <label className="modal-title">ADD SALES</label>
       </div>
       <div className="text-center modal-item">
-        <input className="item" type='text' placeholder="Input User Name"></input>
+        <input className="item" type='text' placeholder="Input User Name"/>
       </div>
       <div className="text-center modal-item">
-        <input className="item" type='text' placeholder="Input Card Number"></input>
+        <input className="item" type='text' placeholder="Input Card Number"/>
       </div>
       <div className="text-center modal-item">
-        <input className="item" type='text' placeholder="Input Category"></input>
+        <input className="item" type='text' placeholder="Input Category"/>
       </div>
       <div className="text-center modal-item">
-        <input className="item" type='number' placeholder="Amount ($)" min={0}></input>
+        <input className="item" type='number' placeholder="Amount ($)" min={0}/>
       </div>
       <div className="text-center modal-item">
         <select className="item">

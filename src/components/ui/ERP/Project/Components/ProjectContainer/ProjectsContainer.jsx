@@ -27,14 +27,15 @@ export default function ProjectsContainer(props) {
     repos: null
   });
   const [projects, setProjects] = useState([]);
-  const [cookie, setCookie, removeCookie] = useCookies(['token']);
+  const [cookie, _, removeCookie] = useCookies(['token']);
   const navigate = useNavigate();
 
   useEffect(() => {
     // load projects on mount
-    console.log('token', cookie.token);
+    setAppState({ loading: true }); // show spinner
     getProjects(cookie.token)
       .then(res => {
+        setAppState({ loading: false }); // hide spinner, show contents
         // show projects
         if (res.data.error) {
           console.log(res.data.error);
@@ -51,10 +52,9 @@ export default function ProjectsContainer(props) {
       })
       .catch(err => {
         // error occured
+        setAppState({ loading: false }); // hide spinner, show contents
       });
   }, []);
-
-  let key = 0;
 
   const description =
     "Lorem ipsum dolor sit amet consectetur. In nunc nunc donec bibendum risus. Amet amet est viverra condimentum sed praesent. Velit quis lectus pulvinar elementum nulla. Et rhoncus id habitant augue neque. Elementum tempor amet bibendum consectetur sem mattis est elementum sed. Odio velit egestas elit nulla nunc consequat diam morbi nec. \

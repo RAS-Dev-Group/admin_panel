@@ -1,21 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import SupplierTable from "./SupplierTable";
-import SupplierModal from "./SupplierModal";
 
 import "./supplier.scss";
 
 export default function Supplier() {
-
-  // modal
-  const handleTypeNew = () => {
-    setEditItem({}); // new item
-    setOpen(true);
-  }
-  const handleTypeEdit = (item) => {
-    setEditItem(item);
-    setOpen(true);
-  }
-
   return (
     <>
       <div className="float-right text-center bg-white w-96 buttons">
@@ -26,7 +14,7 @@ export default function Supplier() {
           <label className="page-title">Supplier Management</label>
           <label className="absolute page-title right-2">Supply History</label>
         </div>
-        <SupplierTable openNewModal={handleTypeNew} openEditModal={handleTypeEdit} />
+        <SupplierTable/>
       </div>
     </>
   );

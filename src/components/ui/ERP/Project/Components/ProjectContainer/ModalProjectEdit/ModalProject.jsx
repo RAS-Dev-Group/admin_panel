@@ -14,6 +14,7 @@ import Modal from "../../../../../../ui/Modal/Modal";
 
 import './modal.css'
 import axios from "axios";
+import TaskItem from "./TaskItem";
 
 const ModalProjectEdit = ({
   open,
@@ -25,7 +26,6 @@ const ModalProjectEdit = ({
   memberlist,
   addMember,
 }) => {
-
   const [dueDate, setDueDate] = useState(new Date());
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -34,7 +34,7 @@ const ModalProjectEdit = ({
 
 
   //  handle Add Project
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
     const formdata = new FormData();
 
@@ -82,9 +82,13 @@ const ModalProjectEdit = ({
       .then((res) => res.json());
   };
 
-  const handleAddMember = (e) => {
+  function handleAddMember(e) {
     addMember(memberlist[e.target.value - 1]);
   };
+
+  function handleDeleteTask(taskId) { // remove task
+    setTasks(tasks.filter(task => task.id !== taskId));
+  }
 
   return (
     <Modal
@@ -112,6 +116,7 @@ const ModalProjectEdit = ({
           className="sel-project-title"
           placeholder="Input project title"
           value={title}
+          required={true}
           onChange={(e) => { setTitle(e.target.value) }} />
         <button className="ml-2 admin-primary-button">Add</button>
       </div>
@@ -119,8 +124,10 @@ const ModalProjectEdit = ({
         <textarea
           className="w-full"
           placeholder="Type your project details here"
+          required={true}
+          value={description}
           onChange={(e) => { setDescription(e.target.value) }}
-        >{description}</textarea>
+        />
       </div>
       <div className="mb-9">
         <div className="flex task-item">
@@ -130,9 +137,7 @@ const ModalProjectEdit = ({
               <Stack spacing={3}>
                 <DatePicker
                   value={dueDate}
-                  onChange={(newValue) => {
-                    setDueDate(newValue);
-                  }}
+                  onChange={(newValue) => setDueDate(newValue)}
                   renderInput={(params) => <TextField {...params} helperText={null} />}
                 />
               </Stack>
@@ -142,24 +147,16 @@ const ModalProjectEdit = ({
       </div>
       <div>
         <label className="sub-title">Tasks</label>
-        {currenttasks.map((task, index) => (
-          <div key={index} className="flex task-item">
-            <label className="my-auto">{task.title}</label>
-            <input className="ml-auto input-task" placeholder="input task here" value={task.description} />
-            <button className="delete">Delete</button>
-          </div>
-        ))}
+        {currenttasks.map((task) => <TaskItem key={task.id} task={task} deleteFunc={handleDeleteTask} />)}
         <div>
-          <button className="btn-add-task" onClick={taskModalOpen}>add more tasks</button>
+          <button className="btn-add-task" onClick={taskModalOpen}>Add more tasks</button>
         </div>
       </div>
       <div className="mt-4">
         <label className="sub-title">Assign Team Members</label>
         <div className="flex mt-3">
-          <select className="sel-member" placeholder="Add team member here" onChange={handleAddMember}>
-            {memberlist.map((member, index) => (
-              <option key={member.id} value={member.id}>{member.full_name}</option>
-            ))}
+          <select className="p-1 sel-member" placeholder="Add team member here" onChange={handleAddMember}>
+            {memberlist.map((member) => <option key={member.id} value={member.id}>{member.full_name}</option>)}
           </select>
           <button className="ml-auto admin-secondary-button" onClick={modalCloseFunc}>Back</button>
           <button className="ml-7 admin-primary-button" onClick={handleSubmit}>Create</button>

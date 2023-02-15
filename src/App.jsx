@@ -54,10 +54,11 @@ export default function App() {
 
   // if logged in, update token every 5 minutes
   useEffect(() => {
-    return;
     setInterval(() => {
       refresh(cookie.token)
       .then(res => {
+        console.log(res);
+        return;
         setCookie(res.data.access_token); // refreshed token
       })
       .catch(err => {

@@ -1,32 +1,55 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2";
 
 import TableSearch from "../../../ui/TableSearch/TableSearch";
 import SupplierRow from "./SupplierRow";
 import SupplierModal from "./SupplierModal";
 
-import { getSuppliers } from "../../../../utils/api";
 import { TokenContext } from "../../../../context/TokenContext";
+import { getSuppliers, createSupplier, updateSupplier, deleteSupplier } from "../../../../utils/api";
 
-export default function SupplierTable({ }) {
+export default function SupplierTable({  }) {
   const token = useContext(TokenContext);
+  const [loadingState, setLoadingState] = useState(false);
   const [modalState, setModalState] = useState({ item: {}, show: false });
   const [suppliers, setSuppliers] = useState([]);
 
   useEffect(() => {
+    setLoadingState(true);
     getSuppliers(token)
       .then(res => {
-        return;
         setSuppliers(res.data.data);
+        setLoadingState(false);
       })
       .catch(err => {
-
+        setLoadingState(false);
       });
   }, []);
 
-  function handleItemDelete(itemId) {
+
+  function handleSubmit(supplier) {
+    if (supplier.id) {
+      updateSupplier(token, supplier.id, supplier)
+        .then(res => {
+          setLoadingState(false);
+        })
+        .catch(err => {
+          setLoadingState(false);
+        });
+    }
+    else {
+      createSupplier(token, supplier)
+        .then(res => {
+          setLoadingState(false);
+        })
+        .catch(err => {
+          setLoadingState(false);
+        });
+    }
+  }
+
+  function handleItemDelete(supplierId) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -37,7 +60,7 @@ export default function SupplierTable({ }) {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteInventory(token, itemId)
+        deleteSupplier(token, supplierId)
           .then(res => {
             if (res.status === 'success') {
               Swal.fire(
@@ -45,7 +68,7 @@ export default function SupplierTable({ }) {
                 'Your file has been deleted.',
                 'success'
               );
-              // TODO; remove from table
+              setSuppliers(suppliers.filter(item => item.id !== supplierId)); // remove from list
             }
           })
           .catch(err => {
@@ -86,31 +109,35 @@ export default function SupplierTable({ }) {
           Add</button>
       </div>
       <div className="pl-2 mt-3">
-        <table className="table w-full text-center supplier-table">
-          <thead>
-            <tr>
-              <th className="text-left">Product</th>
-              <th>Date</th>
-              <th>Supplier</th>
-              <th>Quantity</th>
-              <th>Status</th>
-              <th>Edit Supplier</th>
-            </tr>
-          </thead>
-          <tbody>
-            {suppliers.map((row, index) => <SupplierRow
-              key={index + 1}
-              item={row}
-              handleEdit={(item) => setModalState({ item: item, show: true })}
-              handleDelete={handleItemDelete}
-            />)}
-          </tbody>
-        </table>
+        {loadingState ?
+          'Loading ...' :
+          <table className="table w-full text-center supplier-table">
+            <thead>
+              <tr>
+                <th className="text-left">Product</th>
+                <th>Date</th>
+                <th>Supplier</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Edit Supplier</th>
+              </tr>
+            </thead>
+            <tbody>
+              {suppliers.map((row, index) => <SupplierRow
+                key={index + 1}
+                item={row}
+                handleEdit={(item) => setModalState({ item: item, show: true })}
+                handleDelete={handleItemDelete}
+              />)}
+            </tbody>
+          </table>
+        }
       </div>
       <SupplierModal
         open={modalState.show}
-        item={modalState.item}
-        closeFunc={() => setModalState({ show: false })}
+        data={modalState.item}
+        submitFunc={handleSubmit}
+        closeFunc={() => setModalState({ ...modalState, show: false })}
       />
     </>
   );

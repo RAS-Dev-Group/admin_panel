@@ -110,6 +110,10 @@ export const getWarehouses = function (token) {
   return get('warehouses', token);
 }
 
+export const createWarehouse = function (token, data) {
+  return post('warehouses', data, token);
+}
+
 export const getWarehouse = function (token, id) {
   return get(`warehouses/${id}`, token);
 }

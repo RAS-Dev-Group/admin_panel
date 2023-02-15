@@ -1,11 +1,13 @@
-import Modal from "../../../../ui/Modal/Modal";
+import Modal from "../../Modal/Modal";
 
-const SupplierModal = ({ open, editType, closeFunc }) => {
+const SupplierModal = ({ open, item, closeFunc }) => {
 
   return (
     <Modal show={open} onClose={closeFunc}>
       <div className="text-center modal-header">
-        <label className="modal-title">{editType === 'ADD' ? 'New Supplier' : 'Edit Supplier'}</label>
+        <label className="modal-title">
+          {item && item.id ? 'Edit Supplier' : 'New Supplier'}
+        </label>
       </div>
       <div className="text-center inventory-modal-title">
       </div>
@@ -19,7 +21,8 @@ const SupplierModal = ({ open, editType, closeFunc }) => {
         <input className="item" type='number' placeholder="Quantity" min={0}></input>
       </div>
       <div className="text-center">
-        <button className="item button" onClick={closeFunc}>{editType == 'ADD' ? 'Add' : 'Update'}</button>
+        <button className="item button" onClick={closeFunc}>
+          {item && item.id ? 'Update' : 'Add'}</button>
       </div>
     </Modal>
   );

@@ -1,6 +1,9 @@
 import "./common.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createBrowserRouter, BrowserRouter, redirect, RouterProvider } from "react-router-dom";
+import { CookiesProvider, useCookies } from "react-cookie";
+
+import PageSpinner from "./components/ui/PageSpinner";
 import "./utils/fonts";
 
 import AuthLayout from './layouts/AuthLayout';
@@ -12,7 +15,8 @@ import POS from "./pages/POS";
 import CRM from "./pages/CRM";
 import NotFound from "./pages/NotFound";
 
-import PageSpinner from "./components/ui/PageSpinner";
+import { TokenContext } from './context/TokenContext';
+import { refresh } from "./utils/api";
 
 const router = createBrowserRouter([
   {
@@ -46,7 +50,26 @@ const router = createBrowserRouter([
 ])
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [cookie, setCookie, removeCookie] = useCookies(['token']);
 
-  return <RouterProvider router={router} />
+  // if logged in, update token every 5 minutes
+  useEffect(() => {
+    return;
+    setInterval(() => {
+      refresh(cookie.token)
+      .then(res => {
+        setCookie(res.data.access_token); // refreshed token
+      })
+      .catch(err => {
+        // something wrong
+        removeCookie('token'); // remove token
+      });
+    }, 300000); // every 5 minutes
+  }, []);
+
+  return <CookiesProvider>
+    <TokenContext.Provider value={ cookie.token }>
+      <RouterProvider router={router} />
+    </TokenContext.Provider>
+  </CookiesProvider>
 }

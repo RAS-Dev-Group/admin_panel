@@ -43,12 +43,6 @@ const ModalTask = (props) => {
     props.taskModalClose();
   }
 
-  // useEffect(() => {
-  //   setTitle('');
-  //   setDescription('');
-  //   setDueTime(new Date());
-  // }, [NewTaskAdd]);
-
   return (
     <div className="more-modal" style={{display: props.open? 'block' : 'none'}}>
     <div className="modal-task">
@@ -67,7 +61,7 @@ const ModalTask = (props) => {
         value={description}
       />
       <button className="block w-full p-2 mt-5" onClick={NewTaskAdd}>ADD</button>
-      <button className="cancel block w-full p-2 mt-5" onClick={handleClose}>CANCEL</button>
+      <button className="block w-full p-2 mt-5 cancel" onClick={handleClose}>CANCEL</button>
       {/* <div className="text-center mt-14">
         <FontAwesomeIcon icon={faChevronUp} />
       </div> */}

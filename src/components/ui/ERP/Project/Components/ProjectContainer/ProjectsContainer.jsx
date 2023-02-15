@@ -1,11 +1,14 @@
-import 
-  React, 
-  { 
-    useState,
-    createContext,
-    useEffect, 
-  }
-from "react";
+import
+React,
+{
+  useState,
+  createContext,
+  useEffect,
+}
+  from "react";
+import { useCookies } from 'react-cookie';
+import { useNavigate } from "react-router";
+import { getProjects } from '../../../../../../utils/api';
 
 import ProjectItem from "./ProjectItem";
 // import ModalProject Component
@@ -15,8 +18,6 @@ import ModalTask from './ModalProjectEdit/ModalTask';
 //  import ModalDetailProejct Component
 import ModalProjectDetail from './ModalProjectDetail/ModalProjectDetail';
 
-import axios from "axios";
-
 
 const ProjectContext = createContext();
 
@@ -25,34 +26,35 @@ export default function ProjectsContainer(props) {
     loading: false,
     repos: null
   });
-  const [project, setProject] = useState({});
+  const [projects, setProjects] = useState([]);
+  const [cookie, setCookie, removeCookie] = useCookies(['token']);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios({
-        // Endpoint to send files
-      url: "https://furniture-dusky.vercel.app/projects",
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiaXBpbiIsImV4cCI6MTY3NjMwMDQxNH0.nM2VG_aRGkAig71uyuit_QQPK32iB1XutnY7X6Tm3FM`
-        },
-  
-      // Attaching the form data
-    })
-  
-      // Handle the response from backend here
-      .then((res) => { 
-        console.log(res.data);
+    // load projects on mount
+    console.log('token', cookie.token);
+    getProjects(cookie.token)
+      .then(res => {
+        // show projects
+        if (res.data.error) {
+          console.log(res.data.error);
+          if (res.data.error === 'Signature has expired.') {
+            removeCookie('token');
+            console.log('navigate login');
+            navigate('/login');
+          }
+        }
+        else {
+          // show projects
+          setProjects(res.data.data);
+        }
       })
-  
-      // Catch errors if any
-      .catch((err) => { 
-        console.log(err);
+      .catch(err => {
+        // error occured
       });
   }, []);
 
   let key = 0;
-
-  // const [showProjectModal, setShowProjectModal] = useState(false);
 
   const description =
     "Lorem ipsum dolor sit amet consectetur. In nunc nunc donec bibendum risus. Amet amet est viverra condimentum sed praesent. Velit quis lectus pulvinar elementum nulla. Et rhoncus id habitant augue neque. Elementum tempor amet bibendum consectetur sem mattis est elementum sed. Odio velit egestas elit nulla nunc consequat diam morbi nec. \
@@ -167,17 +169,15 @@ export default function ProjectsContainer(props) {
             </button>
           </div>
           <div className="flex flex-wrap justify-evenly items">
-            <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
-            <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
-            <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
-
-            <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
-            <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
-            <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
-
-            <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
-            <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
-            <ProjectItem key={key++} title="Project1" progress={60} showdetail={handleProjectDetailModalOpen} />
+            {
+              projects.map(project => (
+                <ProjectItem
+                  key={project._id.$oid}
+                  project={project}
+                  showdetail={handleProjectDetailModalOpen}
+                />
+              ))
+            }
           </div>
           <ModalProject
             currenttasks={currentTasks}
@@ -195,9 +195,9 @@ export default function ProjectsContainer(props) {
             tasks={currentTasks}
             open={showDetailModal}
             modalCloseFunc={handleProjectDetailModalClose} />
-          <ModalTask 
-            open={showTaskModal} 
-            taskModalClose={handleTaskModalClose} 
+          <ModalTask
+            open={showTaskModal}
+            taskModalClose={handleTaskModalClose}
             addTask={handleAddTask}
           />
         </div>

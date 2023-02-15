@@ -68,7 +68,7 @@ const ModalTask = (props) => {
         onChange={changeDescription}
       />
       <button className="block w-full p-2 mt-5" onClick={NewTaskAdd}>ADD</button>
-      <button className="cancel block w-full p-2 mt-5" onClick={handleClose}>CANCEL</button>
+      <button className="block w-full p-2 mt-5 cancel" onClick={handleClose}>CANCEL</button>
       {/* <div className="text-center mt-14">
         <FontAwesomeIcon icon={faChevronUp} />
       </div> */}

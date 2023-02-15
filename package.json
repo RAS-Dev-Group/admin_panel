@@ -29,6 +29,7 @@
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
     "react-calendar": "^4.0.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
     "react-dropdown": "^1.11.0",
     "react-feather": "^2.0.10",
@@ -41,6 +42,7 @@
     "reactstrap": "^9.1.5",
     "sass": "^1.58.0",
     "style-loader": "^3.3.1",
+    "sweetalert2": "^11.7.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

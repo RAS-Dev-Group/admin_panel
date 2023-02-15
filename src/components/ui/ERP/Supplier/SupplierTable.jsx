@@ -1,22 +1,63 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Swal from "sweetalert2";
 
 import TableSearch from "../../../ui/TableSearch/TableSearch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SupplierRow from "./SupplierRow";
+import SupplierModal from "./SupplierModal";
 
-import { Select } from "@mui/material";
+import { getSuppliers } from "../../../../utils/api";
+import { TokenContext } from "../../../../context/TokenContext";
 
-export default function SupplierTable(props) {
-  let rows = [];
+export default function SupplierTable({ }) {
+  const token = useContext(TokenContext);
+  const [modalState, setModalState] = useState({ item: {}, show: false });
+  const [suppliers, setSuppliers] = useState([]);
 
-  for (let i = 0; i < 20; i += 1) {
-    rows.push({
-      image: "/images/chair.png",
-      name: "Italian Relaxing Chair",
-      date: "5/01/2023",
-      supplier: "Supplier1",
-      quantity: "45",
-      status: "Received",
-    });
+  useEffect(() => {
+    getSuppliers(token)
+      .then(res => {
+        return;
+        setSuppliers(res.data.data);
+      })
+      .catch(err => {
+
+      });
+  }, []);
+
+  function handleItemDelete(itemId) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteInventory(token, itemId)
+          .then(res => {
+            if (res.status === 'success') {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              );
+              // TODO; remove from table
+            }
+          })
+          .catch(err => {
+            // alert error
+            Swal.fire(
+              'Error!',
+              err,
+              'error'
+            );
+          });
+      }
+    })
   }
 
   return (
@@ -39,7 +80,10 @@ export default function SupplierTable(props) {
         <select className="mr-2 filter" placeholder="More Filters">
           <option>More Filters</option>
         </select>
-        <button className="px-6 py-1 btn-add" onClick={props.openNewModal}>Add</button>
+        <button
+          className="px-6 py-1 btn-add"
+          onClick={() => setModalState({ item: {}, show: true })}>
+          Add</button>
       </div>
       <div className="pl-2 mt-3">
         <table className="table w-full text-center supplier-table">
@@ -54,30 +98,20 @@ export default function SupplierTable(props) {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, index) => (
-              <tr className="my-2" key={index}>
-                <td className="font-bold text-left">
-                  <img className="mt-2 mb-1" src={row.image} alt="img" />
-                  <label>{row.name}</label>
-                </td>
-                <td>{row.date}</td>
-                <td className="color1">{row.supplier}</td>
-                <td className="color1">{row.quantity}</td>
-                <td className="color2">{row.status}</td>
-                <td className="color1">
-                  <button className="ml-auto font-icon-wrapper" onClick={props.openEditModal}>
-                    <FontAwesomeIcon
-                      className="pr-1 fa-icon opacity-20"
-                      icon="trash"
-                    />
-                    Edit
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {suppliers.map((row, index) => <SupplierRow
+              key={index + 1}
+              item={row}
+              handleEdit={(item) => setModalState({ item: item, show: true })}
+              handleDelete={handleItemDelete}
+            />)}
           </tbody>
         </table>
       </div>
+      <SupplierModal
+        open={modalState.show}
+        item={modalState.item}
+        closeFunc={() => setModalState({ show: false })}
+      />
     </>
   );
 }

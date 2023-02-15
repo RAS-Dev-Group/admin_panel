@@ -1,22 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import SupplierTable from "./SupplierTable";
-import SupplierModal from "./Modals/SupplierModal";
+import SupplierModal from "./SupplierModal";
 
 import "./supplier.scss";
 
 export default function Supplier() {
-  const [open, setOpen] = React.useState(false);
-  const [type, setType] = React.useState(true);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  // modal
   const handleTypeNew = () => {
-    setType('ADD');
+    setEditItem({}); // new item
     setOpen(true);
   }
-  const handleTypeEdit = () => {
-    setType('UPDATE');
+  const handleTypeEdit = (item) => {
+    setEditItem(item);
     setOpen(true);
   }
+
   return (
     <>
       <div className="float-right text-center bg-white w-96 buttons">
@@ -29,7 +28,6 @@ export default function Supplier() {
         </div>
         <SupplierTable openNewModal={handleTypeNew} openEditModal={handleTypeEdit} />
       </div>
-      <SupplierModal open={open} editType={type} closeFunc={handleClose} />
     </>
   );
 }

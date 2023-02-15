@@ -1,16 +1,16 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function ProjectItem(props) {
-
+export default function ProjectItem({ project, showdetail }) {
+  const createdAt = new Date(project.created_at.$date);
   return (
     <div className="project-item">
       <div className="flex" style={{ marginBottom: "27px" }}>
-        <button className="btn-edit">Edit</button>
-        <label className="my-auto ml-auto label-check"  onClick={props.showdetail}>
+        <button className="btn-edit" onClick={showdetail}>Edit</button>
+        <label className="flex my-auto ml-auto label-check">
           Mark as complete
+          <input type="checkbox" />
         </label>
-        <input type="checkbox"/>
       </div>
       <div className="flex users-container">
         {
@@ -23,11 +23,11 @@ export default function ProjectItem(props) {
 
       </div>
       <div className="progress">
-        <label className="title">{props.data.title}</label>
+        <label className="title">{project.title}</label>
         <div className="flex w-full progress-container">
           <div
             className="progress-fill"
-            style={{ width: props.data.progress + "%" }}
+            style={{ width: project.progress + "%" }}
           ></div>
         </div>
       </div>
@@ -42,7 +42,7 @@ export default function ProjectItem(props) {
             src="/images/calendar-icon.png"
             alt=""
           />
-          <label className="label-date">10 Jan 2023</label>
+          <label className="label-date">{createdAt.toLocaleDateString()}</label>
         </div>
       </div>
       <div className="flex" style={{ marginTop: "8px", marginBottom: "10px" }}>

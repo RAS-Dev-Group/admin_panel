@@ -14,7 +14,7 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 export default function Login() {
   const [loginState, setLoginState] = useState(fieldsState);
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['token']);
+  const [cookie, setCookie] = useCookies(['token']);
 
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
@@ -31,11 +31,15 @@ export default function Login() {
       username: loginState['username'],
       password: loginState['password']
     };
-    const resp = await login(loginFields);
-    if (resp.status === 'success') {
-      setCookie('TOKEN', resp.access_token, { path: '/' });
+    alert('send');
+    login(loginFields)
+    .then(res => {
+      setCookie('token', res.data.access_token, { path: '/' });
       navigate('/erp');
-    }
+    })
+    .catch(err => {
+      console.log(err);
+    });
   };
 
   return (

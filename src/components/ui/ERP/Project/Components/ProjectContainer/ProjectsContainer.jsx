@@ -6,6 +6,8 @@ import
     useEffect, 
   }
 from "react";
+import { useCookies } from 'react-cookie';
+import { getProjects } from '../../../../../../utils/api';
 
 import ProjectItem from "./ProjectItem";
 // import ModalProject Component
@@ -26,33 +28,22 @@ export default function ProjectsContainer(props) {
     repos: null
   });
   const [project, setProject] = useState({});
+  const [cookie, setCookie] = useCookies(['token']);
 
   useEffect(() => {
-    axios({
-        // Endpoint to send files
-      url: "https://furniture-dusky.vercel.app/projects",
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiaXBpbiIsImV4cCI6MTY3NjMwMDQxNH0.nM2VG_aRGkAig71uyuit_QQPK32iB1XutnY7X6Tm3FM`
-        },
-  
-      // Attaching the form data
+    // load projects on mount
+    console.log('token', cookie.token);
+    getProjects(cookie.token)
+    .then(res => {
+      // show projects
+      console.log('projects', res);
     })
-  
-      // Handle the response from backend here
-      .then((res) => { 
-        console.log(res.data);
-      })
-  
-      // Catch errors if any
-      .catch((err) => { 
-        console.log(err);
-      });
+    .catch(err => {
+      // error occured
+    });
   }, []);
 
   let key = 0;
-
-  // const [showProjectModal, setShowProjectModal] = useState(false);
 
   const description =
     "Lorem ipsum dolor sit amet consectetur. In nunc nunc donec bibendum risus. Amet amet est viverra condimentum sed praesent. Velit quis lectus pulvinar elementum nulla. Et rhoncus id habitant augue neque. Elementum tempor amet bibendum consectetur sem mattis est elementum sed. Odio velit egestas elit nulla nunc consequat diam morbi nec. \

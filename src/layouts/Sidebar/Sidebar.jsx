@@ -3,9 +3,12 @@ import UserInfo from "./UserInfo";
 import MainButton from "./MainButton";
 import SecondButton from "./SecondButton";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 export default function Sidebar({ mode, submenu, onSubmenu }) {
   const navigate = useNavigate();
+  const [cookie, setCookie, removeCookie] = useCookies(['token']);
+  
   const menus = {
     erp: [
       {
@@ -60,14 +63,17 @@ export default function Sidebar({ mode, submenu, onSubmenu }) {
         ))}
       </div>
       <div className="absolute second-buttons">
-        <SecondButton icon="settings" text="Settings" 
+        <SecondButton icon="settings" text="Settings"
         // onClick={onSubmenu('setting')} 
         />
         <SecondButton
           icon="logout"
           text="Log Out"
           active={true}
-          onClick={() => { navigate("/"); }}
+          onClick={() => {
+            removeCookie('token');
+            navigate("/login");
+          }}
         />
       </div>
     </div>

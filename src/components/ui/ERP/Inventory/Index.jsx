@@ -1,61 +1,38 @@
 import React, { useState } from "react";
-import InventoryTable from "./InventoryTable";
+import InventoryTable from "./Item/InventoryTable";
 
 //  import Modals
-import ItemModal from './Modals/ItemModal';
-import CategoryModal from './Modals/CategoryModal';
 
 import "./inventory.scss";
 import CategoryList from "./Category/CategoryList";
 
-export default function Inventory() {
+import Swal from 'sweetalert2';
+import { deleteInventory, getInventories, getInventory, updateInventory, createInventory } from "../../../../utils/api";
 
-  const [showItemModal, setShowItemModal] = useState(false);
-  const [itemModalType, setItemModalType] = useState(true);
-  const [showCatModal, setShowCatModal] = useState(false);
-  const [catModalType, setCatModalType] = useState(true);
+export default function Inventory() {
   const [currentRole, setCurrentRole] = useState('ITEM');
 
-  //  handle Item modal
-  const handleItemOpen = () => setShowItemModal(true);
-  const handleItemClose = () => setShowItemModal(false);
-
-  const handleItemModalTypeNew = () => {
+  const handleNewItemModal = () => {
     if (currentRole === 'ITEM') {
-      setItemModalType('NEW');
-      handleItemOpen();
+      // open dialog --> call inventoryTable's func
     }
     else {
       setCurrentRole('ITEM');
     }
   };
-  const handleItemModalTypeEdit = () => {
-    setItemModalType('EDIT');
-    handleItemOpen();
-  };
 
-  //  handle Category modal
-  const handleCatOpen = () => setShowCatModal(true);
-  const handleCatClose = () => setShowCatModal(false);
-
-  const handleCatTypeNew = () => {
+  const handleNewCatModal = () => {
     setCatModalType('NEW');
     handleCatOpen();
   };
-  const handleCatTypeEdit = () => {
-    setCatModalType('EDIT');
-    handleCatOpen();
-  }
-
-  // page type
 
   return (
     <>
       <div className="float-right text-center bg-white w-96 buttons">
-        <button className="my-2 common-button" onClick={handleItemModalTypeNew}>New Item</button>
+        <button className="my-2 common-button" onClick={handleNewItemModal}>New Item</button>
         <button className="my-2 common-button">Export CSV</button>
         <button className="my-2 common-button">Import Items</button>
-        <button className="my-2 common-button" onClick={handleCatTypeNew}>Create Category</button>
+        <button className="my-2 common-button" onClick={handleNewCatModal}>Create Category</button>
         <button className="my-2 common-button" onClick={() => setCurrentRole('CATEGORY')}>Edit Category</button>
       </div>
       <div className="pr-2 mr-400">
@@ -64,13 +41,11 @@ export default function Inventory() {
           <label className="ml-auto mr-5 page-title">Orders</label>
         </div>
         {
-          currentRole === 'ITEM' ?
-            <InventoryTable editItem={handleItemModalTypeEdit} /> :
-            <CategoryList showCategoryModal={handleCatOpen} />
+          currentRole === 'ITEM' ? 
+            <InventoryTable /> :
+            <CategoryList />
         }
       </div>
-      <ItemModal open={showItemModal} editType={itemModalType} closeFunc={handleItemClose} />
-      <CategoryModal open={showCatModal} editType={catModalType} closeFunc={handleCatClose} />
     </>
   );
 }

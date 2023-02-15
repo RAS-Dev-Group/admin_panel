@@ -1,21 +1,24 @@
 import React from "react";
-import Modal from "../../../../ui/Modal/Modal";
+import Modal from "../../../Modal/Modal";
 
-const CategoryModal = ({ open, editType, closeFunc }) => {
+const CategoryModal = ({ open, category, closeFunc }) => {
   return (
     <Modal
       show={open}
       onClose={closeFunc}
     >
       <div className="text-center modal-header">
-        <label className="modal-title">{editType === 'NEW' ? "Create Category" : "Edit Category"}</label>
+        <label className="modal-title">
+          {category && category.id ? "Edit Category" : "Create Category"}
+        </label>
       </div>
       <div className="text-center modal-item">
         <input
           className="item"
           type="text"
           placeholder="Enter name of Category"
-        ></input>
+          value={category.name}
+        />
       </div>
       <div className="text-center modal-item">
         <input
@@ -23,11 +26,12 @@ const CategoryModal = ({ open, editType, closeFunc }) => {
           type="number"
           placeholder="Tax rate"
           min={0}
-        ></input>
+          value={category.tax_rate}
+        />
       </div>
       <div className="text-center modal-item">
         <button className="item button" onClick={closeFunc}>
-          {editType === 'NEW' ? "Create" : "Update"}
+          {category && category.id ? "Update" : "Create"}
         </button>
       </div>
     </Modal>

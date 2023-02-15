@@ -64,8 +64,8 @@ export default function ModalProjectDetail({
             <div className="flex">
               <label className="my-auto ml-auto check-label"  >
                 Mark as complete
+                <input type="checkbox" />
               </label>
-              <input type="checkbox" />
             </div>
             {/* <button className="px-3 my-auto btn-finish-task">Done</button> */}
           </div>

@@ -1,28 +1,87 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-import TableSearch from "../../../ui/TableSearch/TableSearch";
+import TableSearch from "../../../TableSearch/TableSearch";
+import ItemModal from './ItemModal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function InventoryTable({ description, editItem, deleteItem }) {
-  let rows = [];
+import Swal from "sweetalert2";
+import { getInventories } from "../../../../../utils/api";
+import { TokenContext } from "../../../../../context/TokenContext";
 
-  for (let i = 0; i < 20; i += 1) {
-    rows.push({
-      name: "Italian Relaxing Chair",
-      category: "Category 1",
-      image: "/images/chair.png",
-      tag: "Tag 1",
-      description: "input details",
-      quantity: 45,
-      sku: "SKU67",
-      vendor: "Vendor 1",
-    });
-  }
+export default function InventoryTable({ description }) {
+  const [inventories, setInventories] = useState([]);
+  const [modalState, setModalState] = useState({
+    item: {},
+    show: false
+  });
+  const token = useContext(TokenContext);
+
+  useEffect(() => {
+    getInventories(token)
+      .then(res => {
+        if (res.data.data) {
+          setInventories(res.data.data);
+        }
+      })
+      .catch(err => {
+
+      });
+  }, []);
 
   const options = [
     { value: "", label: "none" },
     { value: "input details", label: "input details" },
   ];
+
+  function handleNewEdit() {
+    setModalState({
+      item: {}, show: true
+    });
+  }
+
+  function handleItemDelete(itemId) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteInventory(token, itemId)
+          .then(res => {
+            if (res.status === 'success') {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              );
+              // TODO; remove from table
+            }
+          })
+          .catch(err => {
+            // alert error
+            Swal.fire(
+              'Error!',
+              err,
+              'error'
+            );
+          });
+      }
+    })
+  }
+
+  function handleSubmit(res) {
+    // res ; response from server
+    if (res.is_update) {
+      // setInventories(inventories);
+    }
+    else if (res.is_add) {
+      setInventories([...inventories, res.data]);
+    }
+  }
 
   return (
     <>
@@ -57,7 +116,7 @@ export default function InventoryTable({ description, editItem, deleteItem }) {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, index) => (
+            {inventories.map((row, index) => (
               <tr className="my-2" key={index}>
                 <td className="font-bold text-left">{row.name}</td>
                 <td>{row.category}</td>
@@ -78,13 +137,13 @@ export default function InventoryTable({ description, editItem, deleteItem }) {
                 <td>{row.vendor}</td>
                 <td className="color1">
                   <button className="ml-auto font-icon-wrapper"
-                    onClick={deleteItem}>
+                    onClick={() => { handleItemDelete(row.id) }}>
                     <FontAwesomeIcon
                       className="pr-1 fa-icon opacity-20"
                       icon="trash"
                     />
                   </button>
-                  <button onClick={editItem}>
+                  <button onClick={() => { setModalState({ item: row, show: true }) }}>
                     Edit
                   </button>
                 </td>
@@ -93,6 +152,12 @@ export default function InventoryTable({ description, editItem, deleteItem }) {
           </tbody>
         </table>
       </div>
+      <ItemModal
+        open={modalState.show}
+        item={modalState.item}
+        handleClose={() => { setModalState({ show: false }) }}
+        handleSubmit={handleSubmit}
+      />
     </>
   );
 }

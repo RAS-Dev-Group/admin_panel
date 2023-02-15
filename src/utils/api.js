@@ -26,10 +26,9 @@ function post(url, data = {}, token = '') {
   });
 }
 
-function get(url, token, data) {
-  console.log(authConfig(token));
+function get(url, token) {
   return new Promise((resolve, reject) => {
-    api.get(url, data, authConfig(token))
+    api.get(url, authConfig(token))
     .then(res => {
       resolve(res);
     })
@@ -51,9 +50,9 @@ function put(url, data, token) {
   });
 }
 
-function do_delete(url, token, data) {
+function do_delete(url, token) {
   return new Promise((resolve, reject) => {
-    api.delete(url, data, authConfig(token))
+    api.delete(url, authConfig(token))
     .then(res => {
       resolve(res);
     })
@@ -72,10 +71,10 @@ export const signUp = function (data) {
 }
 
 export const refresh = function (token) {
-  const resp = post('refresh');
+  return post('refresh', {}, token);
 }
 
-export const createProject = function (data) {
+export const createProject = function (token, data) {
   return post('project', data, token);
 }
 
@@ -99,7 +98,7 @@ export const assignTask = function (token, projectId, taskId, userId) {
   return put(`project/${projectId}/task/${taskId}`, { user_id: userId },  token);
 }
 
-export const updateTask = function (taskId, taskData) {
+export const updateTask = function (token, taskId, taskData) {
   return put(`task/${taskId}`, taskData, token);
 }
 

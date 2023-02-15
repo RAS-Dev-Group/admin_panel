@@ -35,15 +35,15 @@ export default function Sidebar({ mode, submenu, onSubmenu }) {
     crm: [],
     pos: [
       {
-        menu: "/pos/order",
+        menu: "order",
         title: "Order Management",
       },
       {
-        menu: "/pos/invoices",
+        menu: "invoice",
         title: "Invoices",
       },
       {
-        menu: "/pos/coupon",
+        menu: "coupon",
         title: "Coupon Management",
       },
     ],

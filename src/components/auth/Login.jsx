@@ -31,7 +31,6 @@ export default function Login() {
       username: loginState['username'],
       password: loginState['password']
     };
-    alert('send');
     login(loginFields)
     .then(res => {
       setCookie('token', res.data.access_token, { path: '/' });

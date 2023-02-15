@@ -1,52 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
 import HeaderDropDown from "./HeaderDropdown";
-import Search from "./Search";
+import HeaderSearch from "./HeaderSearch";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function Header() {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const curFinacePage =
-    location.pathname.indexOf("/erp/finance") >= 0
-      ? location.pathname.replace("/erp/finance", "")
-      : "";
-  const [financePage, setFinancePage] = useState(
-    curFinacePage === ""
-      ? "sales"
-      : curFinacePage.replace("/", "").toLowerCase()
-  );
-
-  useEffect(() => {
-    if (
-      location.pathname.indexOf("/erp/finance") >= 0 &&
-      location.pathname !== "/erp/finance/".financePage
-    ) {
-      // navigate("/erp/finance/".financePage);
-    }
-  });
-
+export default function Header({ isFinance, onFinanceType }) {
+  const [showType, setShowType] = useState('sales');
+  
   return (
     <div className="fixed admin-header">
-      {location.pathname.indexOf("/erp/finance") >= 0 ? (
+      {isFinance ?
         <select
           name="finance"
           className="float-right sel-finance"
-          value={financePage}
+          value={showType}
           onChange={(event) => {
-            setFinancePage(event.target.value);
+            setShowType(event.target.value);
+            onFinanceType(event.target.value);
           }}
         >
           <option value="sales">Sales</option>
           <option value="expenses">Expenses</option>
           <option value="profits">Profits</option>
         </select>
-      ) : (
-        ""
-      )}
+        : ""
+      }
       <div className="h-full px-4 bg-white header-bar mr-400">
         <div className="flex float-left h-full">
           <HeaderDropDown />
@@ -57,7 +36,7 @@ export default function Header() {
             <div className="notification-alert"></div>
           </button>
         </div>
-        <Search />
+        <HeaderSearch />
       </div>
     </div>
   );

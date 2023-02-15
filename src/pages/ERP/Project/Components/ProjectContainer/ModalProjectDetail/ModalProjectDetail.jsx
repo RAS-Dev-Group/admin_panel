@@ -3,19 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Modal from "../../../../../../components/ui/Modal/Modal";
 
-export default function ModalProjectDetail({
-  name,
-  description,
-  members,
-  tasks,
-  open,
-  modalCloseFunc,
-}) {
+export default function ModalProjectDetail(props) {
   return (
     <Modal
       contentClassName="modal-project-detail px-8 py-6 bg-white"
-      show={open}
-      onClose={modalCloseFunc}
+      show={props.open}
+      onClose={props.modalCloseFunc}
       hasCloseBtn={false}
       content={(
         <>
@@ -28,20 +21,20 @@ export default function ModalProjectDetail({
             <label>10 Jan 2023</label>
           </div>
           <div className="flex">
-            {members.map((member) => (
+            {props.data.users.map((member, index) => (
               <img
                 key={Math.random()}
                 className="member-avatar"
-                src={"/images/" + member.avatar}
-                alt={member.name}
+                src={"/images/avatar1.png"}
+                alt={member.full_name}
               />
             ))}
           </div>
           <label className="block mt-8 mb-4 text-lg font-semibold text-center black">
-            {name}
+            {props.data.title}
           </label>
           <div className="mx-16 mb-6 description-wrapper">
-            <textarea className="mt-6 mb-2 text-sm description font-sm mx-14" cols="66" defaultValue={description} rows={10} />
+            <textarea className="mt-6 mb-2 text-sm description font-sm mx-14" defaultValue={props.data.description} cols="66" rows={10} />
             <div className="text-right">
               <button className="px-8 py-2 mx-6 mb-4 btn-edit white">Edit</button>
             </div>
@@ -53,10 +46,10 @@ export default function ModalProjectDetail({
             <div className="mb-6">
               <label className="text-sm sub-title">Recent tasks</label>
             </div>
-            {tasks.map((task) => (
+            {props.data.tasks.map((task, index) => (
               <div className="flex task-item" key={Math.random()}>
                 <label className="my-auto text-base font-semibold black">
-                  {task.name}
+                  {task.title}
                 </label>
                 <input
                   className="px-3 mx-auto input-task"
@@ -69,14 +62,12 @@ export default function ModalProjectDetail({
                   </label>
                   <input type="checkbox" />
                 </div>
-                {/* <button className="px-3 my-auto btn-finish-task">Done</button> */}
               </div>
             ))}
-            {/* <button className="btn-show-all">View all tasks</button> */}
           </div>
           <hr />
           <div className="mt-5 text-center">
-            <button className="button-edit" onClick={modalCloseFunc}>Update</button>
+            <button className="button-edit" onClick={props.modalCloseFunc}>Update</button>
           </div>
         </>
       )}

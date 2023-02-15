@@ -15,6 +15,37 @@ import Modal from "../../../../../../components/ui/Modal/Modal";
 import './modal.css'
 import axios from "axios";
 
+axios.defaults.headers.common['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiaXBpbiIsImV4cCI6MTY3NjM5Njk3OH0.-rZzCHtmKYnHagC-tT7Aau1gCz_DncdjHWE9hrVJhq4';
+axios.defaults.headers.common['Content-Type'] = 'application/json';
+axios.defaults.headers.common['accept'] = 'application/json';
+
+const sampleformdata = {
+  "title": "string",
+  "description": "string",
+  "status": true,
+  "users": [
+    {
+      "username": "string",
+      "full_name": "string",
+      "role": "string",
+      "email": "string",
+      "password": "string",
+      "contact": 0,
+      "address": "string",
+      "created_at": "2023-02-14T06:54:34.526Z"
+    }
+  ],
+  "tasks": [
+    {
+      "title": "string",
+      "description": "string",
+      "status": true,
+      "due_date": "2023-02-14T06:54:34.526Z"
+    }
+  ],
+  "created_at": "2023-02-14T06:54:34.526Z"
+};
+
 const ModalProject = React.memo(({ 
   open, 
   modalCloseFunc, 
@@ -26,9 +57,6 @@ const ModalProject = React.memo(({
   addMember,
   setTasks,
 }) => {
-  useEffect(()=> {
-    console.log('updated');
-  }, [currentmembers])
   const [dueDate, setDueDate] = useState(new Date());
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -51,10 +79,9 @@ const ModalProject = React.memo(({
       return;
     }
 
-    alert('aaaaaaa');
     //  tasks check
-    if(currenttasks == []) {
-      alert('Tasks is nothing!');
+    if(JSON.stringify(currenttasks) == '[]') {
+      alert('Tasks is required!');
       return;
     } 
 
@@ -64,24 +91,19 @@ const ModalProject = React.memo(({
     }
 
 
-    let formdata = {
+    const formdata = {
       'title': title,
       'description': description,
       'ststus': true,
       'users': currentmembers,
       'tasks': currenttasks,
-      'created_at': new Date(),
+      'created_at': "2023-02-14T06:54:34.526Z",
     }
-
-    console.log(formdata);
 
     axios({
         url: 'https://furniture-dusky.vercel.app/project/',
-        header: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiaXBpbiIsImV4cCI6MTY3NjM3MjA0MX0.L2HqPs1Zp3Ls562ZogPVYseRbVJJNMj6ff3Lh_PmhwA',
-        },
         method: 'POST',
-        data: formdata,
+        data: sampleformdata,
     })
       // Handle the response from backend here
       .then((res) => { 
@@ -99,12 +121,6 @@ const ModalProject = React.memo(({
     setTasks(tasks.splice(index, 1));
   }
 
-  // const handleAddMember = (e) => {
-  //   console.log(e.target.value - 1);
-  //   addMember(memberlist[e.target.value-1]);
-  //   console.log(currentmembers);
-  // };
-
   return (
     <Modal
       show={open}
@@ -119,7 +135,7 @@ const ModalProject = React.memo(({
             <div className="flex mb-2.5">
               <div className="mx-auto">
                 {currentmembers.map((member, index) => (
-                  <span key={index}>{member.id}</span>
+                  <img key={index} className='member-avatar' src="/images/avatar1.png" alt="avatar" />
                 ))}
               </div>
             </div>

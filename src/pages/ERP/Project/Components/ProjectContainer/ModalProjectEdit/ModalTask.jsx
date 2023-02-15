@@ -7,7 +7,7 @@ const ModalTask = (props) => {
   
   const [title,  setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [dueTime, setDueTime] = useState(new Date());
+  const [dueTime, setDueTime] = useState("2023-02-14T06:54:34.526Z");
 
   const NewTaskAdd = () => {
     if (title  == '') {
@@ -38,15 +38,17 @@ const ModalTask = (props) => {
   const handleClose = () => {
     setTitle('');
     setDescription('');
-    setDueTime(new Date());
+    setDueTime("2023-02-14T06:54:34.526Z");
     props.taskModalClose();
   }
 
-  // useEffect(() => {
-  //   setTitle('');
-  //   setDescription('');
-  //   setDueTime(new Date());
-  // }, [NewTaskAdd]);
+  const changeTitle = (e) => {
+    setTitle(e.target.value);
+  }
+
+  const changeDescription = (e) => {
+    setDescription(e.target.value);
+  }
 
   return (
     <div className="more-modal" style={{display: props.open? 'block' : 'none'}}>
@@ -56,14 +58,14 @@ const ModalTask = (props) => {
         className="block text-center w-full mt-8 p-2.5"
         placeholder="input task name"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={changeTitle}
       />
       <textarea
         className="block w-full p-3 mt-5 text-center"
         placeholder="input description here"
         rows={5}
-        onChange={(e) => setDescription(e.target.value)}
         value={description}
+        onChange={changeDescription}
       />
       <button className="block w-full p-2 mt-5" onClick={NewTaskAdd}>ADD</button>
       <button className="cancel block w-full p-2 mt-5" onClick={handleClose}>CANCEL</button>

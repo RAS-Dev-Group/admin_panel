@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ProjectItem(props) {
+
   return (
     <div className="project-item">
       <div className="flex" style={{ marginBottom: "27px" }}>
@@ -12,17 +13,21 @@ export default function ProjectItem(props) {
         <input type="checkbox"/>
       </div>
       <div className="flex users-container">
-        <img className="avatar" src="/images/avatar1.png" alt="avatar" />
-        <img className="avatar" src="/images/avatar2.png" alt="avatar" />
-        <img className="avatar" src="/images/avatar1.png" alt="avatar" />
-        <img className="avatar" src="/images/avatar2.png" alt="avatar" />
+        {
+          props.data.users? 
+          props.data.users.map((user, index) => (
+            <img key={index} className="member-avatar" src="/images/avatar1.png" alt="avatar" />
+          )):
+          <img className="member-avatar" src="/images/avatar1.png" alt="avatar" />
+        }
+
       </div>
       <div className="progress">
-        <label className="title">{props.title}</label>
+        <label className="title">{props.data.title}</label>
         <div className="flex w-full progress-container">
           <div
             className="progress-fill"
-            style={{ width: props.progress + "%" }}
+            style={{ width: props.data.progress + "%" }}
           ></div>
         </div>
       </div>

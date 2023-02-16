@@ -14,27 +14,26 @@ export default function AdminLayout({ mode, submenu, onSubmenu, children, onFina
   const token = useContext(TokenContext);
   const navigate = useNavigate();
 
+  // for resize
   useEffect(() => {
-    // i cannot call this every time... so i have to change something ...
-    if (!token) {
-      // no token
-      // navigate('/login');
-      return;
-    }
-    
     function handleResize() {
+      console.log('resize', window.innerHeight)
       setContentHeight(window.innerHeight);
     }
 
     window.addEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    console.log('useEffect -> token', token);
+  }, [token]);
+
   return (
     <>
       <Sidebar mode={mode} submenu={submenu} onSubmenu={onSubmenu} />
       <div className="p-5 admin-wrapper">
         <Header isFinance={submenu === 'finance' } onFinanceType={onFinanceType} />
-        <div className="content-wrapper" style={{height: (contentHeight - 122) + 'px'}}>
+        <div className="content-wrapper" style={{height: contentHeight - 114 + 'px'}}>
           {children}
         </div>
       </div>

@@ -50,19 +50,20 @@ export default function Sidebar({ mode, submenu, onSubmenu }) {
   };
 
   return (
-    <div className="fixed h-screen px-5 mt-4 sidebar bg-white/40">
-      <UserInfo />
-      <div>
-        {menus[mode].map(menu => (
-          <MainButton
-            key={menu.menu}
-            onClick={() => { onSubmenu(menu.menu) }}
-            name={menu.title}
-            active={submenu === menu.menu}
-          />
-        ))}
-      </div>
-      <div className="absolute second-buttons">
+    <div className="fixed h-screen ">
+      <div className="h-full px-5 mt-4 sidebar bg-white/40">
+        <UserInfo />
+        <div>
+          {menus[mode].map(menu => (
+            <MainButton
+              key={menu.menu}
+              onClick={() => { onSubmenu(menu.menu) }}
+              name={menu.title}
+              active={submenu === menu.menu}
+            />
+          ))}
+        </div>
+        <div className="absolute second-buttons">
           <SecondButton icon="settings" text="Settings"
           // onClick={onSubmenu('setting')} 
           />
@@ -75,6 +76,7 @@ export default function Sidebar({ mode, submenu, onSubmenu }) {
               navigate("/login");
             }}
           />
+        </div>
       </div>
     </div>
   );

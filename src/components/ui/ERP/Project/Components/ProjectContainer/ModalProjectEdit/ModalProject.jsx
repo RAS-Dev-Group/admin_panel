@@ -19,8 +19,8 @@ const ModalProjectEdit = ({
   modalCloseFunc,
   taskModalOpen,
   taskModalClose,
-  currenttasks,
-  currentmembers,
+  currentTasks,
+  currentMembers,
   memberlist,
   addMember,
   project,
@@ -90,7 +90,7 @@ const ModalProjectEdit = ({
       <div>
         <div className="flex mb-2.5">
           <div className="mx-auto">
-            {currentmembers.map((member, index) => (
+            {currentMembers.map((member, index) => (
               <img key={index} className="inline member-avatar" src={'/images/' + member.avatar} alt='avatar' />
             ))}
           </div>
@@ -137,7 +137,11 @@ const ModalProjectEdit = ({
       </div>
       <div>
         <label className="sub-title">Tasks</label>
-        {currenttasks.map((task) => <TaskItem key={task.id} task={task} deleteFunc={handleDeleteTask} />)}
+        {
+          currentTasks.length > 0 ?
+            currentTasks.map((task) => <TaskItem key={task.id} task={task} deleteFunc={handleDeleteTask} />) :
+            <TaskItem key={0} task={{}} />
+        }
         <div>
           <button className="btn-add-task" onClick={taskModalOpen}>Add more tasks</button>
         </div>

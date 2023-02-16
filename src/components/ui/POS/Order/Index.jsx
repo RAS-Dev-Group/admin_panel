@@ -12,9 +12,7 @@ export default function Order() {
         </div>
         <div className="w-2/5 pr-5 text-right">
           <button className="common-button">Email Receipt</button>
-          <button className="ml-5 common-button active">
-            Print PDF Receipt
-          </button>
+          <button className="ml-5 common-button active">Print PDF Receipt</button>
         </div>
       </div>
       <div>

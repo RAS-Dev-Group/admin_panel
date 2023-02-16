@@ -1,4 +1,4 @@
-import { createContext, useCookie, useEffect } from "react";
+import { createContext, useContext, useCookie, useEffect, useReducer } from "react";
 
 export const TokenContext = createContext(null); // token -> default empty (not logged in)
 export const TokenDispatchContext = createContext(null);
@@ -29,7 +29,7 @@ const TokenContextProvider = ({ children }) => {
       }
     }
   });
-  
+
   // using cookie ?
   if (false) {
     const [cookie, setCookie, removeCookie] = useCookie('token');

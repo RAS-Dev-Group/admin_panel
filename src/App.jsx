@@ -1,5 +1,5 @@
 import "./common.scss";
-import React, { useEffect, useReducer } from "react";
+import React, { createRef, useEffect } from "react";
 import { createBrowserRouter, BrowserRouter, redirect, RouterProvider } from "react-router-dom";
 
 import PageSpinner from "./components/ui/PageSpinner";
@@ -14,7 +14,7 @@ import POS from "./pages/POS";
 import CRM from "./pages/CRM";
 import NotFound from "./pages/NotFound";
 
-import { TokenContext, TokenDispatchContext } from './context/TokenContext';
+import { TokenContextProvider, useTokenContext, useTokenDispatch } from './context/TokenContext';
 import { refresh } from "./utils/api";
 
 const router = createBrowserRouter([
@@ -28,7 +28,6 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <ERP />
   },
   {
     path: '/erp',
@@ -48,64 +47,45 @@ const router = createBrowserRouter([
   }
 ])
 
-function tokenReducer(token, action) {
-  console.log('dispatch', action, token);
-  switch (action.type) {
-    case 'set': {
-      return action.token
-    }
-    case 'clear': {
-      return null
-    }
-    case 'refresh': {
-      token = refresh(token)
-        .then(res => {
-          return res.data.access_token;
-        })
-        .catch(err => {
-          token = null; // refresh failed
-          throw Error('Refresh error: ', + err);
-        });
-      return token;
-    }
-    default: {
-      throw Error('Unknown action: ' + action.type);
-    }
-  }
-}
 
 export default function App() {
-  const [token, dispatch] = useReducer(tokenReducer, '');
+  const refIntervalID = createRef(0);
+  const token = useTokenContext();
+  const dispatch = useTokenDispatch();
 
-  // if logged in, update token every 5 minutes
   useEffect(() => {
-    setInterval(() => {
-      if (!token) return; // no token ...
-      refresh(token)
-        .then(res => {
-          console.log('refresh resp', res);
-          if (res.data.access_token) {
+    console.log('token changed', token, refIntervalID.current);
+    if (!token) { // not logged in --> stop refresh
+      clearInterval(refIntervalID.current);
+    }
+    else {
+      // is logged in --> refresh every 5 minutes
+      refIntervalID.current = setInterval(() => {
+        if (!token) return; // no token ...
+        refresh(token)
+          .then(res => {
+            console.log('refresh resp', res);
+            if (res.data.access_token) {
+              dispatch({
+                type: 'set',
+                token: token
+              });
+            }
+          })
+          .catch(err => {
+            // something wrong
+            console.log('refresh error', err);
             dispatch({
-              type: 'set',
-              token: token
+              type: 'clear'
             });
-          }
-        })
-        .catch(err => {
-          // something wrong
-          console.log('refresh error', err);
-          dispatch({
-            type: 'clear'
           });
-        });
-    }, 300000); // every 5 minutes
-  }, []);
+      }, 300000);
+    }
+  }, [token]);
 
   return (
-    <TokenContext.Provider value={token}>
-      <TokenDispatchContext.Provider value={dispatch}>
-        <RouterProvider router={router} />
-      </TokenDispatchContext.Provider>
-    </TokenContext.Provider>
+    <TokenContextProvider>
+      <RouterProvider router={router} />
+    </TokenContextProvider>
   )
 }

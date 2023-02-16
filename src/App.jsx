@@ -28,6 +28,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
+    element: <AuthLayout><Login /></AuthLayout>
   },
   {
     path: '/erp',

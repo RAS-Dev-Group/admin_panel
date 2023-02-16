@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -15,6 +12,7 @@ import Modal from "../../../../../../ui/Modal/Modal";
 import './modal.css'
 import axios from "axios";
 import TaskItem from "./TaskItem";
+import { createProject } from "../../../../../../../utils/api";
 
 const ModalProjectEdit = ({
   open,
@@ -25,61 +23,51 @@ const ModalProjectEdit = ({
   currentmembers,
   memberlist,
   addMember,
+  project,
 }) => {
-  const [dueDate, setDueDate] = useState(new Date());
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [projectData, setProjectData] = useState({
+    ...project,
+    due_date: new Date,
+  });
   const [tasks, setTasks] = useState([]);
   const [users, setUsers] = useState([]);
 
+  function handleChange(e) {
+    setProjectData({ ...projectData, [e.target.name]: e.target.value });
+  }
 
   //  handle Add Project
   function handleSubmit(e) {
     e.preventDefault();
-    const formdata = new FormData();
 
-    //  title check
-    if (title != '') {
-      formdata.append('title', title);
-    } else {
+    // check inputs
+    let emptyField = Object.keys(projectData).find(key => !projectData[key]);
+    if (emptyField) {
+      alert('Please input ' + emptyField);
       return;
     }
 
-    //  description check
-    if (description != '') {
-      formdata.append('description', description);
-    } else {
-      return;
-    }
-
-    formdata.append('status', true);
-
-    //  tasks check
-    if (tasks == []) {
+    if (!tasks || tasks.length == 0) {
       alert('Tasks is nothing!');
       return;
-    } else {
-      formdata.append('tasks', tasks);
     }
 
-    if (users == []) {
+    if (!users || users.length == 0) {
       alert('Members is nothing!');
       return;
-    } else {
-      formdata.append('users', users);
     }
 
-    formdata.append('created_at', new Date());
-
-    axios({
-      url: 'https://furniture-dusky.vercel.app/project/',
-      header: {
-        Authorization: '',
-      },
-      method: 'POST',
-      data: formdata,
+    createProject(token, {
+      ...projectData,
+      tasks, users,
+      created_at: new Date,
+      status: true
+    }).then(res => {
+      console.log('createProject - resp : ', res);
     })
-      .then((res) => res.json());
+      .catch(err => {
+        console.log('createProject - err : ', err);
+      });
   };
 
   function handleAddMember(e) {
@@ -103,7 +91,7 @@ const ModalProjectEdit = ({
         <div className="flex mb-2.5">
           <div className="mx-auto">
             {currentmembers.map((member, index) => (
-              <img key={index} className="inline member-avatar" src={'/images/avatar1.png'} alt='avatar' />
+              <img key={index} className="inline member-avatar" src={'/images/' + member.avatar} alt='avatar' />
             ))}
           </div>
         </div>
@@ -115,9 +103,10 @@ const ModalProjectEdit = ({
         <input
           className="sel-project-title"
           placeholder="Input project title"
-          value={title}
+          value={projectData.title}
           required={true}
-          onChange={(e) => { setTitle(e.target.value) }} />
+          name="title"
+          onChange={handleChange} />
         <button className="ml-2 admin-primary-button">Add</button>
       </div>
       <div className="mb-9">
@@ -125,8 +114,9 @@ const ModalProjectEdit = ({
           className="w-full"
           placeholder="Type your project details here"
           required={true}
-          value={description}
-          onChange={(e) => { setDescription(e.target.value) }}
+          name="description"
+          value={projectData.description}
+          onChange={handleChange}
         />
       </div>
       <div className="mb-9">
@@ -136,8 +126,8 @@ const ModalProjectEdit = ({
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Stack spacing={3}>
                 <DatePicker
-                  value={dueDate}
-                  onChange={(newValue) => setDueDate(newValue)}
+                  value={projectData.due_date}
+                  onChange={(newVal) => setProjectData({ ...projectData, due_date: newVal })}
                   renderInput={(params) => <TextField {...params} helperText={null} />}
                 />
               </Stack>

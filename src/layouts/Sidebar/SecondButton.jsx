@@ -5,7 +5,7 @@ export default function SecondButton({ text, onClick, active, icon }) {
   return (
     <button
       onClick={onClick}
-      className={"second-button " + (active ? 'active' : '')}
+      className={"second-button w-full block text-left p-3 pl-12" + (active ? ' active' : '')}
     >
       {icon === 'logout' ? <LogOut /> : <Settings />}
       {text}

@@ -33,6 +33,36 @@ const signupFields = [
     placeholder: "Username",
   },
   {
+    labelText: 'Full name',
+    labelFor: 'full_name',
+    id: 'full_name',
+    name: 'full_name',
+    type: 'text',
+    autoComplete: 'full_name',
+    isRequired: true,
+    placeholder: 'Full name'
+  },
+  {
+    labelText: 'email',
+    labelFor: 'email',
+    id: 'email',
+    name: 'email',
+    type: 'email',
+    autoComplete: 'email',
+    isRequired: true,
+    placeholder: 'Email'
+  },
+  {
+    labelText: 'Address',
+    labelFor: 'address',
+    id: 'address',
+    name: 'address',
+    type: 'text',
+    autoComplete: 'address',
+    isRequired: true,
+    placeholder: 'Address'
+  },
+  {
     labelText: "Password",
     labelFor: "password",
     id: "password",

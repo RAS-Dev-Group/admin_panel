@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { signupFields } from "../../data/formFields";
+import { signUp } from "../../utils/api";
 import FormAction from "./FormAction";
 import Input from "./Input";
 
 const fields = signupFields;
 let fieldsState = {};
 
-fields.forEach((field) => (fieldsState[field.id] = ""));
+fields.forEach((field) => (fieldsState[field.name] = ""));
 
 export default function Signup() {
   const [signupState, setSignupState] = useState(fieldsState);
 
   const handleChange = (e) =>
-    setSignupState({ ...signupState, [e.target.id]: e.target.value });
+    setSignupState({ ...signupState, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +22,14 @@ export default function Signup() {
   };
 
   //handle Signup API Integration here
-  const createAccount = () => {};
+  const createAccount = () => {
+    signUp(signupState)
+      .then(res => {
+      })
+      .catch(err => {
+
+      });
+  };
 
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

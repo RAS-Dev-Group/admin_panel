@@ -33,34 +33,35 @@ export default function ProjectsContainer(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    return;
     // load users(members)
     // load projects on mount
     setAppState({ loading: true }); // show spinner
     console.log('token', token);
 
-    getProjects(token)
-      .then(res => {
-        setAppState({ loading: false }); // hide spinner, show contents
-        // show projects
-        if (res.data.error) {
-          console.log(res.data.error);
-          dispatch({
-            type: 'clear'
-          });
-          navigate('/login');
-          if (res.data.error === 'Signature has expired.') {
-          }
-        }
-        else {
+    if (token) {
+      getProjects(token)
+        .then(res => {
+          setAppState({ loading: false }); // hide spinner, show contents
           // show projects
-          setProjects(res.data.data);
-        }
-      })
-      .catch(err => {
-        // error occured
-        setAppState({ loading: false }); // hide spinner, show contents
-      });
+          if (res.data.error) {
+            console.log(res.data.error);
+            dispatch({
+              type: 'clear'
+            });
+            navigate('/login');
+            if (res.data.error === 'Signature has expired.') {
+            }
+          }
+          else {
+            // show projects
+            setProjects(res.data.data);
+          }
+        })
+        .catch(err => {
+          // error occured
+          setAppState({ loading: false }); // hide spinner, show contents
+        });
+    }
   }, []);
 
   const description =
@@ -116,32 +117,17 @@ export default function ProjectsContainer(props) {
       avatar: 'avatar1.png'
     },
   ];
-  const tasks = [
-    { name: "Task 1", description: 'This is the first Task' },
-    { name: "Task 2", description: 'This is the seconde Task' },
-    { name: "Task 3", description: 'This is the three Task' },
-  ];
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [showTaskModal, setShowTaskModal] = useState(false);
 
-  const [currentTasks, setCurrentTask] = useState([{}]);
+  const [currentTasks, setCurrentTask] = useState([]);
 
   const [currentMembers, setCurrentMembers] = useState([{}]);
 
   const handleAddTask = (task) => {
-    let tasklist = currentTasks;
-
-    if (JSON.stringify(tasklist[0]) === '{}') {
-      tasklist = [task];
-    } else {
-      tasklist.push(task);
-    }
-
-    setCurrentTask(tasklist);
+    setCurrentTask([...currentTasks, task]);
   }
-
-  const handleTasksEmpty = () => setCurrentTask([{}]);
 
   const handleAddMember = (member) => {
     let memberlist = currentMembers;
@@ -189,8 +175,8 @@ export default function ProjectsContainer(props) {
             }
           </div>
           <ModalProject
-            currenttasks={currentTasks}
-            currentmembers={currentMembers}
+            currentTasks={currentTasks}
+            currentMembers={currentMembers}
             open={showProjectModal}
             modalCloseFunc={handleProjectModalClose}
             taskModalOpen={handleTaskModalOpen}

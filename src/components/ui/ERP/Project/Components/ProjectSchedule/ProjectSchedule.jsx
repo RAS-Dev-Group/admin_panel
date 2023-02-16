@@ -63,7 +63,7 @@ export default function ProjectSchedule({}) {
 
   return (
     <div className="project-schedule">
-      <div className="text-right" style={{ marginBottom: '15px', marginTop: '-2px' }}>
+      <div className="text-right" style={{ marginBottom: '15px', marginTop: '-6px' }}>
         <select
           className="calendar-select"
           value={selectedMonth}

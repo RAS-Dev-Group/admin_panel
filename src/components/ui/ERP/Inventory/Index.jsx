@@ -28,12 +28,14 @@ export default function Inventory() {
 
   return (
     <>
-      <div className="float-right text-center bg-white w-96 buttons">
-        <button className="my-2 common-button" onClick={handleNewItemModal}>New Item</button>
-        <button className="my-2 common-button">Export CSV</button>
-        <button className="my-2 common-button">Import Items</button>
-        <button className="my-2 common-button" onClick={handleNewCatModal}>Create Category</button>
-        <button className="my-2 common-button" onClick={() => setCurrentRole('CATEGORY')}>Edit Category</button>
+      <div className="flex float-right w-480">
+        <div className="mx-auto text-center bg-white w-96 buttons">
+          <button className="common-button" onClick={handleNewItemModal}>New Item</button>
+          <button className="common-button">Export CSV</button>
+          <button className="common-button">Import Items</button>
+          <button className="common-button" onClick={handleNewCatModal}>Create Category</button>
+          <button className="common-button" onClick={() => setCurrentRole('CATEGORY')}>Edit Category</button>
+        </div>
       </div>
       <div className="pr-2 mr-500">
         <div className="flex mb-5">
@@ -41,7 +43,7 @@ export default function Inventory() {
           <label className="ml-auto mr-5 page-title">Orders</label>
         </div>
         {
-          currentRole === 'ITEM' ? 
+          currentRole === 'ITEM' ?
             <InventoryTable /> :
             <CategoryList />
         }

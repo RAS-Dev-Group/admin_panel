@@ -11,7 +11,7 @@ const WarehouseModal = ({ open, data, closeFunc, submitFunc }) => {
           {item && item.id ? "Edit Warehouse" : "New Warehouse"}
         </label>
       </div>
-      <input type="hidden" name="id" value={item.id} />
+      <input type="hidden" name="id" value={item.id} readOnly={true} />
       <div className="text-center modal-item">
         <input
           className="item"

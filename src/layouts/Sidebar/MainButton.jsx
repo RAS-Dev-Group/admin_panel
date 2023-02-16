@@ -4,7 +4,7 @@ export default function MainButton(props) {
   return (
     <button
       onClick={props.onClick}
-      className={"main-button py-4 " + (props.active ? " active" : "")}
+      className={"main-button text-left pl-14 py-3.5 " + (props.active ? " active" : "")}
     >
       {props.name}
     </button>

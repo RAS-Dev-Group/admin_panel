@@ -1,7 +1,7 @@
-import 
-  React, 
-  { useState } 
-from "react";
+import
+React,
+{ useState }
+  from "react";
 import ProjectSchedule from "./Components/ProjectSchedule/ProjectSchedule";
 import ProjectsContainer from "./Components/ProjectContainer/ProjectsContainer";
 import TaskContainer from "./Components/TaskContainer/TaskContainer";
@@ -12,10 +12,13 @@ export default function Project() {
 
   return (
     <>
-      <div className="float-right">
-        <ProjectSchedule />
+      <div className="flex float-right w-480">
+        <div className="mx-auto">
+
+          <ProjectSchedule />
+        </div>
       </div>
-      <div className="mr-400">
+      <div className="mr-500">
         {page === "project" ? <ProjectsContainer /> : <TaskContainer />}
       </div>
     </>

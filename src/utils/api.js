@@ -12,6 +12,8 @@ function authConfig(token) {
 
 function post(url, data = {}, token = '') {
   return new Promise((resolve, reject) => {
+    console.log('new Post', url, data, token);
+    
     const formData = new FormData;
     Object.keys(data).forEach(key => {
       formData.append(key, data[key])
@@ -63,15 +65,19 @@ function do_delete(url, token) {
 }
 
 export const login = function (data) {
-  return post('token', data);
+  return post('/token', data);
 }
 
 export const signUp = function (data) {
-  return post('create-user', data);
+  return post('/create-user', data);
+}
+
+export const getUsers = function () {
+  return get('/get-users');
 }
 
 export const refresh = function (token) {
-  return post('refresh', {}, token);
+  return post('/refresh', {}, token);
 }
 
 export const createProject = function (token, data) {

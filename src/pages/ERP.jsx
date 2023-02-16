@@ -21,13 +21,8 @@ export default function ERP() {
     if (subPage === 'setting') return <Setting />;
   }
 
-  function onSubmenu(submenu) {
-    if (submenu === subPage) return;
-    setSubPage(submenu);
-  }
-
   return (
-    <AdminLayout mode="erp" submenu={subPage} onSubmenu={onSubmenu} onFinanceType={setFinanceType}>
+    <AdminLayout mode="erp" submenu={subPage} onSubmenu={setSubPage} onFinanceType={setFinanceType}>
       {content()}
     </AdminLayout>
   );

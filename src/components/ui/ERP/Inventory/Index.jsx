@@ -35,7 +35,7 @@ export default function Inventory() {
         <button className="my-2 common-button" onClick={handleNewCatModal}>Create Category</button>
         <button className="my-2 common-button" onClick={() => setCurrentRole('CATEGORY')}>Edit Category</button>
       </div>
-      <div className="pr-2 mr-400">
+      <div className="pr-2 mr-500">
         <div className="flex mb-5">
           <label className="page-title">Inventory Management</label>
           <label className="ml-auto mr-5 page-title">Orders</label>

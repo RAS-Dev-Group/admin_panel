@@ -9,7 +9,7 @@ export default function Header({ isFinance, onFinanceType }) {
   const [showType, setShowType] = useState('sales');
   
   return (
-    <div className="fixed admin-header">
+    <div className="admin-header">
       {isFinance ?
         <select
           name="finance"
@@ -26,7 +26,7 @@ export default function Header({ isFinance, onFinanceType }) {
         </select>
         : ""
       }
-      <div className="h-full px-4 bg-white header-bar mr-400">
+      <div className="h-full px-4 bg-white header-bar mr-500">
         <div className="flex float-left h-full">
           <HeaderDropDown />
         </div>

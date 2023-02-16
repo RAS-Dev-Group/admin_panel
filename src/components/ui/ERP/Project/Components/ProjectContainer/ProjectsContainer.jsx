@@ -2,11 +2,10 @@ import
 React,
 {
   useState,
-  createContext,
+  useContext,
   useEffect,
 }
   from "react";
-import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router";
 import { getProjects } from '../../../../../../utils/api';
 
@@ -17,32 +16,40 @@ import ModalTask from './ModalProjectEdit/ModalTask';
 
 //  import ModalDetailProejct Component
 import ModalProjectDetail from './ModalProjectDetail/ModalProjectDetail';
+import { TokenContext, TokenDispatchContext } from "../../../../../../context/TokenContext";
 
-
-const ProjectContext = createContext();
 
 export default function ProjectsContainer(props) {
+  const token = useContext(TokenContext);
+  const dispatch = useContext(TokenDispatchContext)
   const [appState, setAppState] = useState({
     loading: false,
     repos: null
   });
+  const [projectModalState, setProjectModalState] = useState({
+    show: false, project: null
+  });
   const [projects, setProjects] = useState([]);
-  const [cookie, _, removeCookie] = useCookies(['token']);
   const navigate = useNavigate();
 
   useEffect(() => {
+    return;
+    // load users(members)
     // load projects on mount
     setAppState({ loading: true }); // show spinner
-    getProjects(cookie.token)
+    console.log('token', token);
+
+    getProjects(token)
       .then(res => {
         setAppState({ loading: false }); // hide spinner, show contents
         // show projects
         if (res.data.error) {
           console.log(res.data.error);
+          dispatch({
+            type: 'clear'
+          });
+          navigate('/login');
           if (res.data.error === 'Signature has expired.') {
-            removeCookie('token');
-            console.log('navigate login');
-            navigate('/login');
           }
         }
         else {
@@ -70,6 +77,7 @@ export default function ProjectsContainer(props) {
       contact: 0,
       address: "Address 1",
       created_at: new Date(),
+      avatar: 'avatar1.png'
     },
     {
       id: 2,
@@ -81,6 +89,7 @@ export default function ProjectsContainer(props) {
       contact: 0,
       address: "Address 2",
       created_at: new Date(),
+      avatar: 'avatar1.png'
     },
     {
       id: 3,
@@ -92,6 +101,7 @@ export default function ProjectsContainer(props) {
       contact: 0,
       address: "Address 3",
       created_at: new Date(),
+      avatar: 'avatar1.png'
     },
     {
       id: 4,
@@ -103,6 +113,7 @@ export default function ProjectsContainer(props) {
       contact: 0,
       address: "Address 4",
       created_at: new Date(),
+      avatar: 'avatar1.png'
     },
   ];
   const tasks = [
@@ -146,11 +157,9 @@ export default function ProjectsContainer(props) {
   const handleMembersEmpty = () => setCurrentMembers([{}]);
 
   //  Project Modal Handles
-  const handleProjectModalOpen = () => setShowProjectModal(true);
   const handleProjectModalClose = () => setShowProjectModal(false);
 
   //  Project Detail Modal Handles
-  const handleProjectDetailModalOpen = () => setShowDetailModal(true);
   const handleProjectDetailModalClose = () => setShowDetailModal(false);
 
   const handleTaskModalOpen = () => setShowTaskModal(true);
@@ -164,7 +173,7 @@ export default function ProjectsContainer(props) {
           <div className="flex">
             <label className="container-title">Ongoing Projects</label>
             <div></div>
-            <button className="px-4 py-2 ml-auto btn-add-project" onClick={handleProjectModalOpen}>
+            <button className="px-4 py-2 ml-auto btn-add-project" onClick={() => setShowProjectModal(true)}>
               + Add a Project
             </button>
           </div>
@@ -174,7 +183,7 @@ export default function ProjectsContainer(props) {
                 <ProjectItem
                   key={project._id.$oid}
                   project={project}
-                  showdetail={handleProjectDetailModalOpen}
+                  showdetail={() => setShowDetailModal(true)}
                 />
               ))
             }

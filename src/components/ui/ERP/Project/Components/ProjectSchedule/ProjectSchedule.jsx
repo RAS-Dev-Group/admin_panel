@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 
 //  import default calender
 import ScheduleItem from "./ScheduleItem";
@@ -6,19 +6,11 @@ import ScheduleItem from "./ScheduleItem";
 import Calendar from "react-calendar";
 import "./calendar.css";
 
-const getYearsList = (currentYear) => {
-  let years = [];
-  let j = 0;
-  for (let i = currentYear - 10; i <= currentYear + 10; i++, j++) years[0] = i;
-
-  return years;
-};
-
-export default function ProjectSchedule(props) {
+export default function ProjectSchedule({}) {
   const [dateState, setDateState] = useState(new Date());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  
+
   const changeDate = (e) => {
     setDateState(e);
     setSelectedYear(e.getFullYear());
@@ -71,7 +63,7 @@ export default function ProjectSchedule(props) {
 
   return (
     <div className="project-schedule">
-      <div className="text-right" style={{marginBottom: '15px', marginTop: '2px'}}>
+      <div className="text-right" style={{ marginBottom: '15px', marginTop: '-2px' }}>
         <select
           className="calendar-select"
           value={selectedMonth}
@@ -119,8 +111,8 @@ export default function ProjectSchedule(props) {
         </select>
       </div>
       <Calendar value={dateState} onChange={changeDate} />
-      <div style={{ padding: "20px 0 20px 50px" }}>
-        <div style={{ marginBottom: "15px" }}>
+      <div className="mt-10 ml-14">
+        <div className="mb-5">
           <label className="label-date">08 Jan 2023</label>
         </div>
         <div className="schedule-items">

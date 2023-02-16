@@ -1,20 +1,24 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { loginFields } from "../../data/formFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
 import { login } from '../../utils/api';
 import { useNavigate } from "react-router-dom";
-import { useCookies } from 'react-cookie';
+import { TokenContext, TokenDispatchContext } from "../../context/TokenContext";
 
 const fields = loginFields;
 let fieldsState = {};
 fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Login() {
+  const dispatch = useContext(TokenDispatchContext);
   const [loginState, setLoginState] = useState(fieldsState);
   const navigate = useNavigate();
-  const [cookie, setCookie] = useCookies(['token']);
+
+  useEffect(() => {
+    // check cookie first
+  }, []);
 
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
@@ -32,13 +36,16 @@ export default function Login() {
       password: loginState['password']
     };
     login(loginFields)
-    .then(res => {
-      setCookie('token', res.data.access_token, { path: '/' });
-      navigate('/erp');
-    })
-    .catch(err => {
-      console.log(err);
-    });
+      .then(res => {
+        dispatch({
+          type: 'set',
+          token: res.data.access_token
+        });
+        navigate('/erp');
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (

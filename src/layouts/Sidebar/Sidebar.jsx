@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 export default function Sidebar({ mode, submenu, onSubmenu }) {
   const navigate = useNavigate();
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
-  
+
   const menus = {
     erp: [
       {
@@ -50,7 +50,7 @@ export default function Sidebar({ mode, submenu, onSubmenu }) {
   };
 
   return (
-    <div className="fixed h-screen px-4 mt-4 sidebar bg-white/40">
+    <div className="fixed h-screen px-5 mt-4 sidebar bg-white/40">
       <UserInfo />
       <div>
         {menus[mode].map(menu => (
@@ -63,18 +63,18 @@ export default function Sidebar({ mode, submenu, onSubmenu }) {
         ))}
       </div>
       <div className="absolute second-buttons">
-        <SecondButton icon="settings" text="Settings"
-        // onClick={onSubmenu('setting')} 
-        />
-        <SecondButton
-          icon="logout"
-          text="Log Out"
-          active={true}
-          onClick={() => {
-            removeCookie('token');
-            navigate("/login");
-          }}
-        />
+          <SecondButton icon="settings" text="Settings"
+          // onClick={onSubmenu('setting')} 
+          />
+          <SecondButton
+            icon="logout"
+            text="Log Out"
+            active={true}
+            onClick={() => {
+              removeCookie('token');
+              navigate("/login");
+            }}
+          />
       </div>
     </div>
   );

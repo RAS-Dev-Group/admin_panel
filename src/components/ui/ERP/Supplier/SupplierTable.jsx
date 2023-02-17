@@ -9,22 +9,24 @@ import SupplierModal from "./SupplierModal";
 import { TokenContext } from "../../../../context/TokenContext";
 import { getSuppliers, createSupplier, updateSupplier, deleteSupplier } from "../../../../utils/api";
 
-export default function SupplierTable({  }) {
+export default function SupplierTable({ }) {
   const token = useContext(TokenContext);
   const [loadingState, setLoadingState] = useState(false);
   const [modalState, setModalState] = useState({ item: {}, show: false });
   const [suppliers, setSuppliers] = useState([]);
 
   useEffect(() => {
-    setLoadingState(true);
-    getSuppliers(token)
-      .then(res => {
-        setSuppliers(res.data.data);
-        setLoadingState(false);
-      })
-      .catch(err => {
-        setLoadingState(false);
-      });
+    if (token) {
+      setLoadingState(true);
+      getSuppliers(token)
+        .then(res => {
+          setSuppliers(res.data);
+          setLoadingState(false);
+        })
+        .catch(err => {
+          setLoadingState(false);
+        });
+    }
   }, []);
 
 

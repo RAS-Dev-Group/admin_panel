@@ -19,9 +19,7 @@ export default function InventoryTable({ description }) {
   useEffect(() => {
     getInventories(token)
       .then(res => {
-        if (res.data.data) {
-          setInventories(res.data.data);
-        }
+        setInventories(res.data);
       })
       .catch(err => {
 

@@ -10,15 +10,13 @@ import Modal from "../../../../../../ui/Modal/Modal";
 //  Task modal import
 
 import './modal.css'
-import axios from "axios";
 import TaskItem from "./TaskItem";
 import { createProject } from "../../../../../../../utils/api";
 
 const ModalProjectEdit = ({
   open,
-  modalCloseFunc,
-  taskModalOpen,
-  taskModalClose,
+  handleClose,
+  handleTaskModal,
   currentTasks,
   currentMembers,
   memberlist,
@@ -81,7 +79,7 @@ const ModalProjectEdit = ({
   return (
     <Modal
       show={open}
-      onClose={modalCloseFunc}
+      onClose={handleClose}
       contentClassName="modal-project"
     >
       <div className="mb-3 text-center">
@@ -143,7 +141,7 @@ const ModalProjectEdit = ({
             <TaskItem key={0} task={{}} />
         }
         <div>
-          <button className="btn-add-task" onClick={taskModalOpen}>Add more tasks</button>
+          <button className="btn-add-task" onClick={() => handleTaskModal({})}>Add more tasks</button>
         </div>
       </div>
       <div className="mt-4">
@@ -152,7 +150,7 @@ const ModalProjectEdit = ({
           <select className="p-1 sel-member" placeholder="Add team member here" onChange={handleAddMember}>
             {memberlist.map((member) => <option key={member.id} value={member.id}>{member.full_name}</option>)}
           </select>
-          <button className="ml-auto admin-secondary-button" onClick={modalCloseFunc}>Back</button>
+          <button className="ml-auto admin-secondary-button" onClick={handleClose}>Back</button>
           <button className="ml-7 admin-primary-button" onClick={handleSubmit}>Create</button>
         </div>
       </div>

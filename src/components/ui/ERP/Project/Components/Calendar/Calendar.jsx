@@ -51,11 +51,11 @@ export default function Calendar({ handleDateChange }) {
     );
   }
 
-  let d = daysInMonth;
+  let d = daysInMonth + 1 * firstDayOfMonth;
   do {
     d += 1;
-    days.push(<div key={d} className='calendar-day empty'><span>{d - daysInMonth}</span></div>);
-  } while (d % 7 != 0);
+    days.push(<div key={d} className='calendar-day empty'><span>{d - daysInMonth - firstDayOfMonth}</span></div>);
+  } while (d % 7 !== 0);
 
   let rows = [];
   let cells = [];
@@ -69,6 +69,7 @@ export default function Calendar({ handleDateChange }) {
       cells.push(row);
     }
   });
+  if (cells.length > 0) rows.push(cells);
 
   return (
     <div className="elvis-calendar">

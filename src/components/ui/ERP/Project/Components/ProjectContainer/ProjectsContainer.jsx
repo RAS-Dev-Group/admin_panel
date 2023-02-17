@@ -19,54 +19,26 @@ import ModalProjectDetail from './ModalProjectDetail/ModalProjectDetail';
 import { TokenContext, TokenDispatchContext } from "../../../../../../context/TokenContext";
 
 
-export default function ProjectsContainer(props) {
+export default function ProjectsContainer({}) {
   const token = useContext(TokenContext);
   const dispatch = useContext(TokenDispatchContext)
   const [appState, setAppState] = useState({
     loading: false,
     repos: null
   });
-  const [projectModalState, setProjectModalState] = useState({
-    show: false, project: null
+  const [editModalState, setEditModalState] = useState({
+    show: false, data: {}
   });
+  const [detailModalState, setDetailModalState] = useState({
+    show: false, data: {}
+  });
+  const [taskModalState, setTaskModalState] = useState({
+    show: false, data: {}
+  });
+
   const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // load users(members)
-    // load projects on mount
-    setAppState({ loading: true }); // show spinner
-    console.log('token', token);
-
-    if (token) {
-      getProjects(token)
-        .then(res => {
-          setAppState({ loading: false }); // hide spinner, show contents
-          // show projects
-          if (res.data.error) {
-            console.log(res.data.error);
-            dispatch({
-              type: 'clear'
-            });
-            navigate('/login');
-            if (res.data.error === 'Signature has expired.') {
-            }
-          }
-          else {
-            // show projects
-            setProjects(res.data.data);
-          }
-        })
-        .catch(err => {
-          // error occured
-          setAppState({ loading: false }); // hide spinner, show contents
-        });
-    }
-  }, []);
-
-  const description =
-    "Lorem ipsum dolor sit amet consectetur. In nunc nunc donec bibendum risus. Amet amet est viverra condimentum sed praesent. Velit quis lectus pulvinar elementum nulla. Et rhoncus id habitant augue neque. Elementum tempor amet bibendum consectetur sem mattis est elementum sed. Odio velit egestas elit nulla nunc consequat diam morbi nec. \
-  Nec arcu sagittis orci fames gravida sed etiam. Feugiat maecenas pellentesque massa tempor. Fermentum placerat dictum vivamus et accumsan consequat mauris lorem feugiat. Nisi lorem pellentesque proin lacus convallis at. Luctus massa vitae diam volutpat ipsum eget.";
   const members = [
     {
       id: 1,
@@ -117,17 +89,9 @@ export default function ProjectsContainer(props) {
       avatar: 'avatar1.png'
     },
   ];
-  const [showProjectModal, setShowProjectModal] = useState(false);
-  const [showDetailModal, setShowDetailModal] = useState(false);
-  const [showTaskModal, setShowTaskModal] = useState(false);
 
   const [currentTasks, setCurrentTask] = useState([]);
-
-  const [currentMembers, setCurrentMembers] = useState([{}]);
-
-  const handleAddTask = (task) => {
-    setCurrentTask([...currentTasks, task]);
-  }
+  const [currentMembers, setCurrentMembers] = useState([]);
 
   const handleAddMember = (member) => {
     let memberlist = currentMembers;
@@ -140,16 +104,41 @@ export default function ProjectsContainer(props) {
     setCurrentMembers(memberlist)
   }
 
-  const handleMembersEmpty = () => setCurrentMembers([{}]);
+  useEffect(() => {
+    // load users(members)
+    // load projects on mount
+    console.log('projectContainer-effect -> token', token);
 
-  //  Project Modal Handles
-  const handleProjectModalClose = () => setShowProjectModal(false);
-
-  //  Project Detail Modal Handles
-  const handleProjectDetailModalClose = () => setShowDetailModal(false);
-
-  const handleTaskModalOpen = () => setShowTaskModal(true);
-  const handleTaskModalClose = () => setShowTaskModal(false);
+    if (token) {
+      setAppState({ loading: true }); // show spinner
+      getProjects(token)
+        .then(res => {
+          setAppState({ loading: false }); // hide spinner, show contents
+          // show projects
+          if (res.data.error) {
+            console.log(res.data.error);
+            dispatch({
+              type: 'clear'
+            });
+            // navigate('/login');
+            if (res.data.error === 'Signature has expired.') {
+            }
+          }
+          else {
+            // show projects
+            setProjects(res.data.data);
+          }
+        })
+        .catch(err => {
+          // error occured
+          setAppState({ loading: false }); // hide spinner, show contents
+        });
+    }
+    else {
+      // not logged in
+      // navigate('/login');
+    }
+  }, []);
 
   return (
     <>
@@ -159,9 +148,10 @@ export default function ProjectsContainer(props) {
           <div className="flex">
             <label className="container-title">Ongoing Projects</label>
             <div></div>
-            <button className="px-4 py-2 ml-auto btn-add-project" onClick={() => setShowProjectModal(true)}>
+            <button className="px-4 py-2 ml-auto mr-4 btn-add-project" onClick={() => setEditModalState({ show: true, data: {} })}>
               + Add a Project
             </button>
+            <button className="px-4 py-2 text-gray-500 btn-view-all bg-gray-50">View All</button>
           </div>
           <div className="flex flex-wrap justify-evenly items">
             {
@@ -169,7 +159,7 @@ export default function ProjectsContainer(props) {
                 <ProjectItem
                   key={project._id.$oid}
                   project={project}
-                  showdetail={() => setShowDetailModal(true)}
+                  showdetail={() => setDetailModalState({ show: true, data: project })}
                 />
               ))
             }
@@ -177,23 +167,23 @@ export default function ProjectsContainer(props) {
           <ModalProject
             currentTasks={currentTasks}
             currentMembers={currentMembers}
-            open={showProjectModal}
-            modalCloseFunc={handleProjectModalClose}
-            taskModalOpen={handleTaskModalOpen}
+            handleTaskModal={(task) => setTaskModalState({ show: true, data: task })}
             addMember={handleAddMember}
             memberlist={members}
+            project={editModalState.data}
+            open={editModalState.show}
+            handleClose={() => setEditModalState({ show: false, data: {} })}
           />
           <ModalProjectDetail
-            name="Sample Project"
-            description={description}
             members={members}
-            tasks={currentTasks}
-            open={showDetailModal}
-            modalCloseFunc={handleProjectDetailModalClose} />
+            initialTasks={currentTasks}
+            open={detailModalState.show}
+            project={detailModalState.data}
+            modalCloseFunc={() => setDetailModalState({ show: false, data: {} })} />
           <ModalTask
-            open={showTaskModal}
-            taskModalClose={handleTaskModalClose}
-            addTask={handleAddTask}
+            open={taskModalState.show}
+            taskModalClose={() => setTaskModalState({ show: false, data: {} })}
+            addTask={(task) => setCurrentTask([...currentTasks, task])}
           />
         </div>
       </div>

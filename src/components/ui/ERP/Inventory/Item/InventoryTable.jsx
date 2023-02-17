@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2";
 import { getInventories } from "../../../../../utils/api";
 import { TokenContext } from "../../../../../context/TokenContext";
+import { useNavigate } from "react-router-dom";
 
 export default function InventoryTable({ description }) {
   const [inventories, setInventories] = useState([]);
@@ -16,16 +17,21 @@ export default function InventoryTable({ description }) {
   });
   const token = useContext(TokenContext);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    getInventories(token)
+    if (token) {
+      getInventories(token)
       .then(res => {
-        if (res.data.data) {
-          setInventories(res.data.data);
-        }
+        setInventories(res.data);
       })
       .catch(err => {
 
       });
+    }
+    else {
+      navigate('/login');
+    }
   }, []);
 
   const options = [

@@ -1,5 +1,5 @@
 import "./common.scss";
-import React, { createRef, useEffect } from "react";
+import React, { createRef, useEffect, Suspense } from "react";
 import { createBrowserRouter, BrowserRouter, redirect, RouterProvider } from "react-router-dom";
 
 import PageSpinner from "./components/ui/PageSpinner";
@@ -9,9 +9,12 @@ import AuthLayout from './layouts/AuthLayout';
 import Login from './pages/Auth/Login';
 import Signup from './pages/Auth/Signup';
 
-import ERP from "./pages/ERP";
-import POS from "./pages/POS";
-import CRM from "./pages/CRM";
+// import ERP from "./pages/ERP";
+// import POS from "./pages/POS";
+// import CRM from "./pages/CRM";
+const ERP = React.lazy(() => import("./pages/ERP"));
+const POS = React.lazy(() => import("./pages/POS"));
+const CRM = React.lazy(() => import("./pages/CRM"));
 import NotFound from "./pages/NotFound";
 
 import { TokenContextProvider, useTokenContext, useTokenDispatch } from './context/TokenContext';
@@ -32,15 +35,15 @@ const router = createBrowserRouter([
   },
   {
     path: '/erp',
-    element: <ERP />
+    element: <Suspense fallback={<PageSpinner />} ><ERP /></Suspense>
   },
   {
     path: '/pos',
-    element: <POS />
+    element: <Suspense fallback={<PageSpinner />} ><POS /></Suspense>
   },
   {
     path: '/crm',
-    element: <CRM />
+    element: <Suspense fallback={<PageSpinner />} ><CRM /></Suspense>
   },
   {
     path: '/*',
@@ -57,9 +60,15 @@ export default function App() {
   useEffect(() => {
     console.log('token changed', token, refIntervalID.current);
     if (!token) { // not logged in --> stop refresh
-      clearInterval(refIntervalID.current);
+      if (refIntervalID.current) {
+        clearInterval(refIntervalID.current);
+        refIntervalID.current = 0;
+      }
     }
     else {
+      if (refIntervalID.current) {
+        clearInterval(refIntervalID.current);
+      }
       // is logged in --> refresh every 5 minutes
       refIntervalID.current = setInterval(() => {
         if (!token) return; // no token ...

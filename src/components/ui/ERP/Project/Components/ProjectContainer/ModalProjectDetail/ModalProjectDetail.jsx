@@ -1,16 +1,29 @@
+import { useState } from "react";
 import { faCalendarCheck } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import TaskItem from "./TaskItem";
 import Modal from "../../../../../../ui/Modal/Modal";
 
 export default function ModalProjectDetail({
-  name,
-  description,
   members,
-  tasks,
+  initialTasks,
   open,
+  project,
   modalCloseFunc,
 }) {
+  const [tasks, setTasks] = useState(initialTasks);
+
+  function handleTaskComplete(taskId) {
+    setTasks(tasks.map(task => {
+      if (task.id === taskId) {
+        task.completed = !task.completed; // toggle completed
+      }
+      return task;
+    }));
+  }
+
+  console.log('project detail -> name', project.name);
+
   return (
     <Modal
       contentClassName="modal-project-detail px-8 py-6 bg-white"
@@ -35,13 +48,11 @@ export default function ModalProjectDetail({
           />
         ))}
       </div>
-      <label className="block mt-8 mb-4 text-lg font-semibold text-center black">
-        {name}
-      </label>
+      <label className="block mt-8 mb-4 text-lg font-semibold text-center black">{project.name}</label>
       <div className="mx-16 mb-6 description-wrapper">
-        <textarea className="mt-6 mb-2 text-sm description font-sm mx-14" cols="66" defaultValue={description} rows={10} />
+        <textarea className="mt-6 mb-2 text-sm description font-sm mx-14" cols="66" value={project.description} rows={10} readOnly />
         <div className="text-right">
-          <button className="px-8 py-2 mx-6 mb-4 btn-edit white">Edit</button>
+          <button className="px-8 py-2 mx-6 mb-4 text-white btn-edit">Edit</button>
         </div>
       </div>
       <div className="progress-wrapper mb-7">
@@ -51,31 +62,12 @@ export default function ModalProjectDetail({
         <div className="mb-6">
           <label className="text-sm sub-title">Recent tasks</label>
         </div>
-        {tasks.map((task) => (
-          <div className="flex task-item" key={Math.random()}>
-            <label className="my-auto text-base font-semibold black">
-              {task.name}
-            </label>
-            <input
-              className="px-3 mx-auto input-task"
-              placeholder="input task here"
-              defaultValue={task.description}
-            />
-            <div className="flex">
-              <label className="my-auto ml-auto check-label"  >
-                Mark as complete
-                <input type="checkbox" />
-              </label>
-            </div>
-            {/* <button className="px-3 my-auto btn-finish-task">Done</button> */}
-          </div>
-        ))}
-        {/* <button className="btn-show-all">View all tasks</button> */}
+        {tasks.map((task) => <TaskItem key={task.id} {...task} handleComplete={handleTaskComplete} />)}
       </div>
       <hr />
       <div className="mt-5 text-center">
         <button className="button-edit" onClick={modalCloseFunc}>Update</button>
       </div>
     </Modal>
-    );
+  );
 }

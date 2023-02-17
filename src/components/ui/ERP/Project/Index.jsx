@@ -14,7 +14,6 @@ export default function Project() {
     <>
       <div className="flex float-right w-480">
         <div className="mx-auto">
-
           <ProjectSchedule />
         </div>
       </div>

@@ -60,9 +60,15 @@ export default function App() {
   useEffect(() => {
     console.log('token changed', token, refIntervalID.current);
     if (!token) { // not logged in --> stop refresh
-      clearInterval(refIntervalID.current);
+      if (refIntervalID.current) {
+        clearInterval(refIntervalID.current);
+        refIntervalID.current = 0;
+      }
     }
     else {
+      if (refIntervalID.current) {
+        clearInterval(refIntervalID.current);
+      }
       // is logged in --> refresh every 5 minutes
       refIntervalID.current = setInterval(() => {
         if (!token) return; // no token ...

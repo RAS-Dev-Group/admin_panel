@@ -120,7 +120,7 @@ export default function ProjectsContainer({}) {
             dispatch({
               type: 'clear'
             });
-            navigate('/login');
+            // navigate('/login');
             if (res.data.error === 'Signature has expired.') {
             }
           }
@@ -133,6 +133,10 @@ export default function ProjectsContainer({}) {
           // error occured
           setAppState({ loading: false }); // hide spinner, show contents
         });
+    }
+    else {
+      // not logged in
+      // navigate('/login');
     }
   }, []);
 

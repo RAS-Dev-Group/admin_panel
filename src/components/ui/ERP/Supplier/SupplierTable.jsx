@@ -8,6 +8,7 @@ import SupplierModal from "./SupplierModal";
 
 import { TokenContext } from "../../../../context/TokenContext";
 import { getSuppliers, createSupplier, updateSupplier, deleteSupplier } from "../../../../utils/api";
+import { useNavigate } from "react-router-dom";
 
 export default function SupplierTable({ }) {
   const token = useContext(TokenContext);
@@ -15,17 +16,24 @@ export default function SupplierTable({ }) {
   const [modalState, setModalState] = useState({ item: {}, show: false });
   const [suppliers, setSuppliers] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (token) {
       setLoadingState(true);
       getSuppliers(token)
         .then(res => {
+          console.log('supplier resp', res, res.data);
           setSuppliers(res.data);
           setLoadingState(false);
         })
         .catch(err => {
+          console.log('get suppliers error', err);
           setLoadingState(false);
         });
+    }
+    else {
+      navigate('/login');
     }
   }, []);
 

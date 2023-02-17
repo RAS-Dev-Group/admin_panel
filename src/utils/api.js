@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL = 'https://furniture-dusky.vercel.app/';
 
 export const api = axios.create({
-  baseURL: BASE_URL
+  baseURL: BASE_URL,
 });
 
 function authConfig(token) {
@@ -29,6 +29,7 @@ function post(url, data = {}, token = '') {
 }
 
 function get(url, token) {
+  console.log('get', url);
   return new Promise((resolve, reject) => {
     api.get(url, authConfig(token))
     .then(res => {
@@ -170,4 +171,8 @@ export const deleteSupplier = function (token, id) {
 
 export const exportSuppliers = function (token) {
   return get(`suppliers/export`, token);
+}
+
+export const getSchedule = function (token, date) {
+  return get(`projects/schedule?date=${date}`, token);
 }

@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import Modal from "../../../ui/Modal/Modal";
 
-const WarehouseModal = ({ open, data, closeFunc, submitFunc }) => {
-  const [item, setItem] = useState(data);
+const WarehouseModal = ({ open, initialData, closeFunc, submitFunc }) => {
+  const [item, setItem] = useState(initialData ? initialData : {
+    name: '',
+    location: '',
+  });
+
+  function handleChange(e) {
+    setItem({ ...item, [e.target.name]: e.target.value });
+  }
 
   return (
     <Modal show={open} onClose={closeFunc}>
@@ -17,7 +24,7 @@ const WarehouseModal = ({ open, data, closeFunc, submitFunc }) => {
           className="item"
           name="name"
           value={item.name}
-          onChange={(e) => { setItem({ ...item, name: e.target.value }) }}
+          onChange={handleChange}
           type="text"
           placeholder="Input WareHouse name"
         />
@@ -26,8 +33,9 @@ const WarehouseModal = ({ open, data, closeFunc, submitFunc }) => {
         <input
           className="item"
           type="text"
+          name="location"
           value={item.location}
-          onChange={(e) => { setItem({ ...item, location: e.target.value }) }}
+          onChange={handleChange}
           placeholder="Input Location"
         />
       </div>

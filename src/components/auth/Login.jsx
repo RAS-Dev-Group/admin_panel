@@ -5,6 +5,7 @@ import Input from "./Input";
 import { login } from '../../utils/api';
 import { useNavigate } from "react-router-dom";
 import { TokenDispatchContext } from "../../context/TokenContext";
+import Swal from "sweetalert2";
 
 const fields = loginFields;
 let fieldsState = {};
@@ -49,6 +50,11 @@ export default function Login() {
         setIsWaiting(false);
         // notify user that login failed
         console.log(err);
+        Swal.fire(
+          'Error',
+          err.message,
+          'error'
+        );
       });
   };
 

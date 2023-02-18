@@ -26,7 +26,7 @@ export default function InventoryTable({ description }) {
       setLoadingState(true);
       getInventories(token)
         .then(res => {
-          setInventories(res.data);
+          setInventories(JSON.parse(res.data));
           setLoadingState(false);
         })
         .catch(err => {

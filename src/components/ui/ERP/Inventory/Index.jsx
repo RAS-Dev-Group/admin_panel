@@ -12,19 +12,18 @@ import { deleteInventory, getInventories, getInventory, updateInventory, createI
 export default function Inventory() {
   const [currentRole, setCurrentRole] = useState('ITEM');
 
-  const handleNewItemModal = () => {
+  function handleNewItemModal() {
     if (currentRole === 'ITEM') {
       // open dialog --> call inventoryTable's func
     }
     else {
       setCurrentRole('ITEM');
     }
-  };
+  }
 
-  const handleNewCatModal = () => {
-    setCatModalType('NEW');
-    handleCatOpen();
-  };
+  function handleNewCatModal() {
+
+  }
 
   return (
     <>

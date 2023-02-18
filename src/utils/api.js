@@ -153,6 +153,10 @@ export const getInventories = function (token) {
   return get('inventories', token);
 }
 
+export const getCategories = function (token) {
+  return get('categories', token);
+}
+
 export const getSuppliers = function (token) {
   return get('suppliers', token);
 }

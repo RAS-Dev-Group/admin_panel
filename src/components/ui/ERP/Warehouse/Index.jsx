@@ -21,7 +21,7 @@ export default function Warehouse(props) {
     setLoadingState(true);
     getWarehouses(token)
       .then(res => {
-        setWarehouseList(res.data.data);
+        setWarehouseList(JSON.parse(res.data));
         setLoadingState(false);
       })
       .catch(err => {
@@ -119,7 +119,7 @@ export default function Warehouse(props) {
       </div>
       <WarehouseModal
         open={modalState.show}
-        data={modalState.item}
+        initialData={modalState.item}
         submitFunc={handleSubmit}
         closeFunc={() => setModalState({ ...modalState, show: false })}
       />

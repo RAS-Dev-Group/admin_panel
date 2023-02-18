@@ -19,13 +19,10 @@ import ModalProjectDetail from './ModalProjectDetail/ModalProjectDetail';
 import { TokenContext, TokenDispatchContext } from "../../../../../../context/TokenContext";
 
 
-export default function ProjectsContainer({}) {
+export default function ProjectsContainer({ }) {
   const token = useContext(TokenContext);
   const dispatch = useContext(TokenDispatchContext)
-  const [appState, setAppState] = useState({
-    loading: false,
-    repos: null
-  });
+  const [loadingState, setLoadingState] = useState(false);
   const [editModalState, setEditModalState] = useState({
     show: false, data: {}
   });
@@ -110,10 +107,10 @@ export default function ProjectsContainer({}) {
     console.log('projectContainer-effect -> token', token);
 
     if (token) {
-      setAppState({ loading: true }); // show spinner
+      setLoadingState(true);
       getProjects(token)
         .then(res => {
-          setAppState({ loading: false }); // hide spinner, show contents
+          setLoadingState(false);
           // show projects
           if (res.data.error) {
             console.log(res.data.error);
@@ -131,7 +128,7 @@ export default function ProjectsContainer({}) {
         })
         .catch(err => {
           // error occured
-          setAppState({ loading: false }); // hide spinner, show contents
+          setLoadingState(false);
         });
     }
     else {
@@ -155,13 +152,15 @@ export default function ProjectsContainer({}) {
           </div>
           <div className="flex flex-wrap justify-evenly items">
             {
-              projects.map(project => (
-                <ProjectItem
-                  key={project._id.$oid}
-                  project={project}
-                  showdetail={() => setDetailModalState({ show: true, data: project })}
-                />
-              ))
+              loadingState ?
+                <div className="text-center">Loading Projects ... </div> :
+                projects.map(project => (
+                  <ProjectItem
+                    key={project._id.$oid}
+                    project={project}
+                    showdetail={() => setDetailModalState({ show: true, data: project })}
+                  />
+                ))
             }
           </div>
           <ModalProject

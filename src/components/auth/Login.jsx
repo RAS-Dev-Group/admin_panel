@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { loginFields } from "../../data/formFields";
 import FormAction from "./FormAction";
-import FormExtra from "./FormExtra";
 import Input from "./Input";
 import { login } from '../../utils/api';
 import { useNavigate } from "react-router-dom";
-import { TokenContext, TokenDispatchContext } from "../../context/TokenContext";
+import { TokenDispatchContext } from "../../context/TokenContext";
 
 const fields = loginFields;
 let fieldsState = {};
@@ -14,6 +13,7 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 export default function Login() {
   const dispatch = useContext(TokenDispatchContext);
   const [loginState, setLoginState] = useState(fieldsState);
+  const [isWaiting, setIsWaiting] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,8 +35,10 @@ export default function Login() {
       username: loginState['username'],
       password: loginState['password']
     };
+    setIsWaiting(true);
     login(loginFields)
       .then(res => {
+        setIsWaiting(false);
         dispatch({
           type: 'set',
           token: res.data.access_token
@@ -44,6 +46,8 @@ export default function Login() {
         navigate('/erp');
       })
       .catch(err => {
+        setIsWaiting(false);
+        // notify user that login failed
         console.log(err);
       });
   };
@@ -67,8 +71,8 @@ export default function Login() {
         ))}
       </div>
 
-      <FormExtra />
-      <FormAction handleSubmit={handleSubmit} text="Login" />
+      {/*<FormExtra />*/}
+      {isWaiting ? <div className="text-center">Signing in ...</div> : <FormAction handleSubmit={handleSubmit} text="Login" />}
     </form>
   );
 }

@@ -42,19 +42,15 @@ export default function SupplierTable({ }) {
     if (supplier.id) {
       updateSupplier(token, supplier.id, supplier)
         .then(res => {
-          setLoadingState(false);
         })
         .catch(err => {
-          setLoadingState(false);
         });
     }
     else {
       createSupplier(token, supplier)
         .then(res => {
-          setLoadingState(false);
         })
         .catch(err => {
-          setLoadingState(false);
         });
     }
   }
@@ -120,7 +116,7 @@ export default function SupplierTable({ }) {
       </div>
       <div className="pl-2 mt-3">
         {loadingState ?
-          'Loading ...' :
+          <div className="text-center">Loading Suppliers ...</div> :
           <table className="table w-full text-center supplier-table">
             <thead>
               <tr>

@@ -16,10 +16,12 @@ const ModalTask = (props) => {
     }
     if (description == '') {
       alert('Description is required');
+      return;
     }
 
     if (dueTime == '') {
       alert('Due Time is required.');
+      return;
     }
 
     const newtask = {

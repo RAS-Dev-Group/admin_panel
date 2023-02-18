@@ -180,10 +180,9 @@
   }
 
   .sel-project-title {
-    padding: 6px 15px;
+    padding: 8px 15px;
     border: solid 0.5px #8B5E83;
-    border-radius: 10px;
-    width: 454px;
+    border-radius: 7px;
   }
 
   textarea {
@@ -461,4 +460,8 @@
   .task-item:last-child {
     margin-bottom: 0;
   }
+}
+
+.MuiPickersDay-root {
+  line-height: 36px !important;
 }

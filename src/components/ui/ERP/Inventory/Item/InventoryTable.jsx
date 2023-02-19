@@ -9,7 +9,7 @@ import { getInventories } from "../../../../../utils/api";
 import { TokenContext } from "../../../../../context/TokenContext";
 import { useNavigate } from "react-router-dom";
 
-export default function InventoryTable({ description }) {
+export default function InventoryTable(props) {
   const [inventories, setInventories] = useState([]);
   const [loadingState, setLoadingState] = useState(false);
   const [filter, setFilter] = useState({});
@@ -36,7 +36,10 @@ export default function InventoryTable({ description }) {
     else {
       navigate('/login');
     }
-  }, []);
+    if(props.isOpenModal) {
+      setModalState({ item: {}, show: true });
+    }
+  }, [props.isOpenModal]);
 
   const options = [
     { value: "", label: "none" },
@@ -139,7 +142,7 @@ export default function InventoryTable({ description }) {
                       className="filter"
                       options={options}
                       placeholder="input details"
-                      value={description}
+                      value={props.description}
                     />
                   </td>
                   <td className="color1">{row.quantity}</td>

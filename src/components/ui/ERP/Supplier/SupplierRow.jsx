@@ -8,16 +8,16 @@ export default function SupplierRow({ supplier, handleDelete, handleEdit }) {
         <label>{supplier.name}</label>
       </td>
       <td>{supplier.date}</td>
-      <td className="color1">{supplier.supplier}</td>
-      <td className="color1">{supplier.quantity}</td>
-      <td className="color2">{supplier.status ? 'X' : ''}</td>
-      <td className="color1">
+      <td className="color-p">{supplier.supplier}</td>
+      <td className="color-p">{supplier.quantity}</td>
+      <td className="color-g">{supplier.status ? 'X' : ''}</td>
+      <td className="color-p">
         <button
           className="ml-auto font-icon-wrapper"
           onClick={() => handleDelete(supplier.id)}
         >
           <FontAwesomeIcon
-            className="pr-1 fa-icon opacity-20"
+            className="pr-1 fa-icon color-delete opacity-20"
             icon="trash"
           />
         </button>

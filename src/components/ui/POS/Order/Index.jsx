@@ -5,14 +5,12 @@ import "./order.scss";
 
 export default function Order() {
   return (
-    <>
-      <div className="flex">
-        <div className="w-3/5">
-          <label className="page-title">Order Management</label>
-        </div>
-        <div className="w-2/5 pr-5 text-right">
+    <div className="pr-24">
+      <div className="flex mb-10">
+        <label className="page-title">Order Management</label>
+        <div className="pr-5 ml-auto">
           <button className="common-button">Email Receipt</button>
-          <button className="ml-5 common-button active">Print PDF Receipt</button>
+          <button className="ml-5 common-button">Print PDF Receipt</button>
         </div>
       </div>
       <div>
@@ -20,6 +18,6 @@ export default function Order() {
           <OrderTable />
         </div>
       </div>
-    </>
+    </div>
   );
 }

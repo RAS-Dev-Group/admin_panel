@@ -12,7 +12,7 @@ export default function InventoryItem({ item, handleEdit, handleDelete }) {
       <td>
         <img className="mx-auto mt-2" src={item.image} alt="img" />
       </td>
-      <td className="color1">{item.tag}</td>
+      <td className="color-p">{item.tag}</td>
       <td>
         <select
           className="filter"
@@ -22,14 +22,14 @@ export default function InventoryItem({ item, handleEdit, handleDelete }) {
           readOnly={true}
         />
       </td>
-      <td className="color1">{item.quantity}</td>
-      <td className="color1">{item.sku}</td>
+      <td className="color-p">{item.quantity}</td>
+      <td className="color-p">{item.sku}</td>
       <td>{item.vendor}</td>
-      <td className="color1">
+      <td className="color-p">
         <button className="ml-auto font-icon-wrapper"
           onClick={() => { handleDelete(item.id) }}>
           <FontAwesomeIcon
-            className="pr-1 fa-icon opacity-20"
+            className="pr-1 fa-icon color-delete opacity-20"
             icon="trash"
           />
         </button>

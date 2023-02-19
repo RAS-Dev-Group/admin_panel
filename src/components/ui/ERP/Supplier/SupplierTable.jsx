@@ -20,41 +20,45 @@ export default function SupplierTable({ }) {
 
   useEffect(() => {
     if (token) {
-      setLoadingState(true);
-      getSuppliers(token)
-        .then(res => {
-          console.log('supplier resp', res, res.data);
-          setSuppliers(res.data);
-          setLoadingState(false);
-        })
-        .catch(err => {
-          console.log('get suppliers error', err);
-          setLoadingState(false);
-        });
+      loadSuppliers();
     }
     else {
       navigate('/login');
     }
   }, []);
 
+  function loadSuppliers() {
+    if (!token) return;
+
+    setLoadingState(true);
+    getSuppliers(token)
+      .then(res => {
+        // for debug
+        setSuppliers(JSON.parse(res.data));
+        setLoadingState(false);
+      })
+      .catch(err => {
+        console.log('get suppliers error', err);
+        setLoadingState(false);
+      });
+  }
+
 
   function handleSubmit(supplier) {
     if (supplier.id) {
       updateSupplier(token, supplier.id, supplier)
         .then(res => {
-          setLoadingState(false);
+          loadSuppliers();
         })
         .catch(err => {
-          setLoadingState(false);
         });
     }
     else {
       createSupplier(token, supplier)
         .then(res => {
-          setLoadingState(false);
+          loadSuppliers();
         })
         .catch(err => {
-          setLoadingState(false);
         });
     }
   }
@@ -120,7 +124,7 @@ export default function SupplierTable({ }) {
       </div>
       <div className="pl-2 mt-3">
         {loadingState ?
-          'Loading ...' :
+          <div className="text-center">Loading Suppliers ...</div> :
           <table className="table w-full text-center supplier-table">
             <thead>
               <tr>
@@ -145,7 +149,7 @@ export default function SupplierTable({ }) {
       </div>
       <SupplierModal
         open={modalState.show}
-        data={modalState.item}
+        initialData={modalState.item}
         submitFunc={handleSubmit}
         closeFunc={() => setModalState({ ...modalState, show: false })}
       />

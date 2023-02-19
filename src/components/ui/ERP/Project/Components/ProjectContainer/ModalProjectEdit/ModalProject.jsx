@@ -45,15 +45,17 @@ const ModalProjectEdit = ({
       return;
     }
 
-    if (!tasks || tasks.length == 0) {
-      alert('Tasks is nothing!');
-      return;
-    }
+    // if (!tasks || tasks.length == 0) {
+    //   alert('Tasks is nothing!');
+    //   return;
+    // }
 
     if (!users || users.length == 0) {
       alert('Members is nothing!');
       return;
     }
+
+    console.log('createProject', projectData);
 
     createProject(token, {
       ...projectData,
@@ -93,19 +95,15 @@ const ModalProjectEdit = ({
             ))}
           </div>
         </div>
-        <div className="text-center">
-          <label className="label-members">Team members</label>
-        </div>
       </div>
       <div className="mb-3 mt-7">
         <input
-          className="sel-project-title"
+          className="block w-full sel-project-title"
           placeholder="Input project title"
           value={projectData.title}
           required={true}
           name="title"
           onChange={handleChange} />
-        <button className="ml-2 admin-primary-button">Add</button>
       </div>
       <div className="mb-9">
         <textarea

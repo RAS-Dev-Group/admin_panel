@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function WarehouseItem({ item, editmodal, handleDelete }) {
   return (
-    <li className="flex flex-wrap warehouse-item">
+    <div className="flex flex-wrap warehouse-item">
       <div className="name-container">
         <img className="mr-3 avatar" src="/images/warehouse.png" alt="avatar" />
         <div className="my-auto info-container">
@@ -24,6 +24,6 @@ export default function WarehouseItem({ item, editmodal, handleDelete }) {
           edit
         </button>
       </div>
-    </li>
+    </div>
   );
 }

@@ -15,37 +15,34 @@ export default function Warehouse(props) {
   const [modalState, setModalState] = useState({ item: {}, show: false });
 
   const token = useContext(TokenContext);
-  
+
   // load warehouses
   useEffect(() => {
+    setLoadingState(true);
     getWarehouses(token)
       .then(res => {
-        setWarehouseList(res.data.data);
+        setWarehouseList(JSON.parse(res.data));
+        setLoadingState(false);
       })
       .catch(err => {
-
+        setLoadingState(false);
       });
   }, []);
 
   function handleSubmit(data) {
-    setLoadingState(true);
     if (data.id) { // update
       updateWarehouse(token, data.id, data)
         .then(res => {
-          setLoadingState(false);
         })
         .catch(err => {
-          setLoadingState(false);
         });
     }
     else {
       createWarehouse(token, data.id, data)
-      .then(res => {
-        setLoadingState(false);
-      })
-      .catch(err => {
-        setLoadingState(false);
-      });
+        .then(res => {
+        })
+        .catch(err => {
+        });
     }
     setModalState({ ...modalState, show: false });
   }
@@ -96,8 +93,8 @@ export default function Warehouse(props) {
             + Add Warehouse
           </button>
         </div>
-        <ul className="items">
-          <li className="flex flex-wrap warehouse-item">
+        <div className="items">
+          <div className="flex flex-wrap warehouse-item">
             <div className="name-container">
               <label className="title">Name</label>
             </div>
@@ -107,19 +104,22 @@ export default function Warehouse(props) {
             <div className="action-container">
               <label className="title">Action</label>
             </div>
-          </li>
-          {warehouseList.map(item => {
-            <WarehouseItem
-              item={item}
-              handleEdit={() => setModalState({ item, show: true })}
-              handleDelete={handleDelete}
-            />
-          })}
-        </ul>
+          </div>
+          {loadingState ?
+            <div className="text-center">Loading Warehouses ...</div> :
+            warehouseList.map(item => {
+              <WarehouseItem
+                item={item}
+                handleEdit={() => setModalState({ item, show: true })}
+                handleDelete={handleDelete}
+              />
+            })
+          }
+        </div>
       </div>
       <WarehouseModal
         open={modalState.show}
-        data={modalState.item}
+        initialData={modalState.item}
         submitFunc={handleSubmit}
         closeFunc={() => setModalState({ ...modalState, show: false })}
       />

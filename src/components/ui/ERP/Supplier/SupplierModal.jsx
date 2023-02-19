@@ -1,8 +1,17 @@
 import { useState } from "react";
 import Modal from "../../Modal/Modal";
 
-const SupplierModal = ({ open, data, submitFunc, closeFunc }) => {
-  const [supplier, setSupplier] = useState(data);
+const SupplierModal = ({ open, initialData, submitFunc, closeFunc }) => {
+  const [supplier, setSupplier] = useState(initialData ? initialData : {
+    id: '',
+    name: '',
+    supplier: '',
+    quantity: 0
+  });
+
+  function handleChange(e) {
+    setSupplier({ ...supplier, [e.target.name]: e.target.value });
+  }
 
   return (
     <Modal show={open} onClose={closeFunc}>
@@ -11,14 +20,14 @@ const SupplierModal = ({ open, data, submitFunc, closeFunc }) => {
           {supplier && supplier.id ? "Edit Supplier" : "New Supplier"}
         </label>
       </div>
-      <input type="hidden" name="id" value={supplier.id} />
       <div className="text-center modal-item">
         <input
           className="item"
           type="text"
+          name="name"
           placeholder="Input product name"
           value={supplier.name}
-          onChange={(e) => setSupplier({ ...supplier, name: e.target.value })}
+          onChange={handleChange}
         />
       </div>
       <div className="text-center modal-item">
@@ -26,8 +35,9 @@ const SupplierModal = ({ open, data, submitFunc, closeFunc }) => {
           className="item"
           type="text"
           placeholder="Input Supplier"
-          value={supplier.name}
-          onChange={(e) => setSupplier({ ...supplier, name: e.target.value })}
+          name="supplier"
+          value={supplier.supplier}
+          onChange={handleChange}
         />
       </div>
       <div className="text-center modal-item">
@@ -36,8 +46,9 @@ const SupplierModal = ({ open, data, submitFunc, closeFunc }) => {
           type="number"
           placeholder="Quantity"
           min={0}
-          value={supplier.name}
-          onChange={(e) => setSupplier({ ...supplier, name: e.target.value })}
+          name="quantity"
+          value={supplier.quantity}
+          onChange={handleChange}
         />
       </div>
       <div className="text-center">

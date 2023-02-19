@@ -4,14 +4,22 @@ import TableSearch from "../../../../ui/TableSearch/TableSearch";
 import CategoryModal from './CategoryModal';
 import { TokenContext } from "../../../../../context/TokenContext";
 import Swal from "sweetalert2";
+import { getCategories } from "../../../../../utils/api";
 
 export default function CategoryList({ }) {
   const [categories, setCategories] = useState([]);
+  const [loadingState, setLoadingState] = useState(false);
   const [modalState, setModalState] = useState({ category: {}, show: false });
   const token = useContext(TokenContext);
 
   useEffect(() => {
     // get categories from api server
+    loadCategories();
+  }, []);
+
+  function loadCategories() {
+    if (!token) return;
+
     setCategories([
       { name: 'Category1', tax_rate: 10 },
       { name: 'Category2', tax_rate: 10 },
@@ -24,7 +32,17 @@ export default function CategoryList({ }) {
       { name: 'Category9', tax_rate: 10 },
       { name: 'Category10', tax_rate: 10 },
     ]);
-  }, []);
+    return;
+    // this is loading from server
+    setLoadingState(true);
+    getCategories(token)
+      .then(res => {
+        setLoadingState(false);
+      })
+      .catch(err => {
+        setLoadingState(false);
+      });
+  }
 
   function handleNewCategory() {
     setModalState({ category: {}, show: true });
@@ -87,14 +105,16 @@ export default function CategoryList({ }) {
           </select>
         </div>
         <div className="pl-2 mt-3">
-          {categories.map(category => (
-            <CategoryItem
-              key={category.name}
-              category={category}
-              handleEdit={(category) => { setModalState({ category, show: true }) }}
-              handleDelete={handleDelete}
-            />
-          ))
+          {loadingState ?
+            <div className="text-center">Loading Categories ...</div> :
+            categories.map(category => (
+              <CategoryItem
+                key={category.name}
+                category={category}
+                handleEdit={(category) => { setModalState({ category, show: true }) }}
+                handleDelete={handleDelete}
+              />
+            ))
           }
         </div>
       </div>

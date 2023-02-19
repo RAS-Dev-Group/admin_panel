@@ -51,7 +51,6 @@ const router = createBrowserRouter([
   }
 ])
 
-
 export default function App() {
   const refIntervalID = createRef(0);
   const token = useTokenContext();

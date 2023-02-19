@@ -1,7 +1,4 @@
-import
-React,
-{ useState }
-  from "react";
+import React, { useState } from "react";
 import ProjectSchedule from "./Components/ProjectSchedule/ProjectSchedule";
 import ProjectsContainer from "./Components/ProjectContainer/ProjectsContainer";
 import TaskContainer from "./Components/TaskContainer/TaskContainer";

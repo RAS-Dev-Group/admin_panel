@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ProjectItem({ project, showdetail, handleComplete }) {
   const createdAt = new Date(project.created_at.$date);
+
   return (
     <div className="project-item">
       <div className="flex" style={{ marginBottom: "27px" }}>
         <button className="btn-edit" onClick={showdetail}>Edit</button>
         <label className="flex my-auto ml-auto label-check">
           Mark as complete
-          <input type="checkbox" onChange={handleComplete} checked={project.completed} />
+          <input type="checkbox" onChange={(e) => handleComplete(e, project)} checked={project.completed} />
         </label>
       </div>
       <div className="flex users-container">

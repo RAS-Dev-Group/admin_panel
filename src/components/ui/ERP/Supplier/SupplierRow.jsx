@@ -1,6 +1,8 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 export default function SupplierRow({ supplier, handleDelete, handleEdit }) {
   return (
-    <tr className="my-2" key={index}>
+    <tr className="my-2">
       <td className="font-bold text-left">
         <img className="mt-2 mb-1" src={supplier.image} alt="img" />
         <label>{supplier.name}</label>
@@ -8,7 +10,7 @@ export default function SupplierRow({ supplier, handleDelete, handleEdit }) {
       <td>{supplier.date}</td>
       <td className="color1">{supplier.supplier}</td>
       <td className="color1">{supplier.quantity}</td>
-      <td className="color2">{supplier.status}</td>
+      <td className="color2">{supplier.status ? 'X' : ''}</td>
       <td className="color1">
         <button
           className="ml-auto font-icon-wrapper"
@@ -19,7 +21,7 @@ export default function SupplierRow({ supplier, handleDelete, handleEdit }) {
             icon="trash"
           />
         </button>
-        <button className="ml-1" onClick={() => handleEdit(supplier)}>
+        <button className="ml-1" onClick={handleEdit}>
           Edit
         </button>
       </td>

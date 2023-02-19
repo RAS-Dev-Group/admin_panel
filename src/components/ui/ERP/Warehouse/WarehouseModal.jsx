@@ -1,24 +1,25 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import Modal from "../../../ui/Modal/Modal";
 
-const WarehouseModal = ({ open, initialData, closeFunc, submitFunc }) => {
-  const [item, setItem] = useState(initialData ? initialData : {
-    name: '',
-    location: '',
-  });
+const WarehouseModal = ({ open, initialData, handleClose, handleSubmit }) => {
+  const [item, setItem] = useState(initialData);
+
+  useEffect(() => {
+    setItem(initialData);
+  }, [initialData]);
 
   function handleChange(e) {
     setItem({ ...item, [e.target.name]: e.target.value });
   }
 
   return (
-    <Modal show={open} onClose={closeFunc}>
+    <Modal show={open} onClose={handleClose}>
       <div className="text-center modal-header">
         <label className="modal-title">
-          {item && item.id ? "Edit Warehouse" : "New Warehouse"}
+          {item.id ? "Edit Warehouse" : "New Warehouse"}
         </label>
       </div>
-      <input type="hidden" name="id" value={item.id} readOnly={true} />
       <div className="text-center modal-item">
         <input
           className="item"
@@ -40,8 +41,8 @@ const WarehouseModal = ({ open, initialData, closeFunc, submitFunc }) => {
         />
       </div>
       <div className="text-center">
-        <button className="item button" onClick={() => submitFunc(item)}>
-          {item && item.id ? "Update" : "Add"}
+        <button className="item button" onClick={() => handleSubmit(item)}>
+          {item.id ? "Update" : "Add"}
         </button>
       </div>
     </Modal>

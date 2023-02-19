@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../../Modal/Modal";
 
-const SupplierModal = ({ open, initialData, submitFunc, closeFunc }) => {
+const SupplierModal = ({ open, initialData, handleSubmit, handleClose }) => {
   const [supplier, setSupplier] = useState(initialData ? initialData : {
     id: '',
     name: '',
@@ -9,12 +9,16 @@ const SupplierModal = ({ open, initialData, submitFunc, closeFunc }) => {
     quantity: 0
   });
 
+  useEffect(() => {
+    setSupplier(initialData);
+  }, [initialData]);
+
   function handleChange(e) {
     setSupplier({ ...supplier, [e.target.name]: e.target.value });
   }
 
   return (
-    <Modal show={open} onClose={closeFunc}>
+    <Modal show={open} onClose={handleClose}>
       <div className="text-center modal-header">
         <label className="modal-title">
           {supplier && supplier.id ? "Edit Supplier" : "New Supplier"}
@@ -52,7 +56,7 @@ const SupplierModal = ({ open, initialData, submitFunc, closeFunc }) => {
         />
       </div>
       <div className="text-center">
-        <button className="item button" onClick={() => submitFunc(supplier)}>
+        <button className="item button" onClick={() => handleSubmit(supplier)}>
           {supplier && supplier.id ? "Update" : "Add"}
         </button>
       </div>

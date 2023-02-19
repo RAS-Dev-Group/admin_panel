@@ -104,38 +104,72 @@ export default function ProjectsContainer({ }) {
   useEffect(() => {
     // load users(members)
     // load projects on mount
+    // loadProjects();
+
+    // fake load projects
+    const fakeProjects = [];
+    for (let i = 0; i < 12; i += 1) {
+      const completed = Math.random() * 3 < 1;
+      fakeProjects.push({
+        _id: { $oid: Math.random() },
+        completed,
+        created_at: { $date: '2023-02-18' },
+        title: completed ? ('Completed Project ' + i) : ('Ongoing Project ' + i),
+        progress: completed ? 100 : Math.random() * 80 + 10,
+        description: 'Lorem ipsum dolor sit amet consectetur. In nunc nunc donec bibendum risus. Amet amet est viverra condimentum sed praesent. Velit quis lectus pulvinar elementum nulla. Et rhoncus id habitant augue neque. Elementum tempor amet bibendum consectetur sem mattis est elementum sed. Odio velit egestas elit nulla nunc consequat diam morbi nec. Nec arcu sagittis orci fames gravida sed etiam. Feugiat maecenas pellentesque massa tempor. Fermentum placerat dictum vivamus et accumsan consequat mauris lorem feugiat. Nisi lorem pellentesque proin lacus convallis at. Luctus massa vitae diam volutpat ipsum eget.'
+      });
+    }
+
+    setProjects(fakeProjects);
+  }, []);
+
+  function loadProjects() {
     console.log('projectContainer-effect -> token', token);
 
-    if (token) {
-      setLoadingState(true);
-      getProjects(token)
-        .then(res => {
-          setLoadingState(false);
+    if (!token) return;
+
+    setLoadingState(true);
+    getProjects(token)
+      .then(res => {
+        setLoadingState(false);
+        // show projects
+        if (res.data.error) {
+          console.log(res.data.error);
+          dispatch({
+            type: 'clear'
+          });
+          // navigate('/login');
+          if (res.data.error === 'Signature has expired.') {
+          }
+        }
+        else {
           // show projects
-          if (res.data.error) {
-            console.log(res.data.error);
-            dispatch({
-              type: 'clear'
-            });
-            // navigate('/login');
-            if (res.data.error === 'Signature has expired.') {
-            }
+          setProjects(res.data.data);
+        }
+      })
+      .catch(err => {
+        // error occured
+        setLoadingState(false);
+      });
+  }
+
+  function handleComplete(e, _project) {
+    if (e.target.checked) {
+      // set project to completed
+      setProjects(projects.map(project => {
+        return project._id.$oid != _project._id.$oid ?
+          project :
+          {
+            ...project,
+            completed: true,
+            progress: 100,
           }
-          else {
-            // show projects
-            setProjects(res.data.data);
-          }
-        })
-        .catch(err => {
-          // error occured
-          setLoadingState(false);
-        });
+      }));
     }
     else {
-      // not logged in
-      // navigate('/login');
+      // do something ...
     }
-  }, []);
+  }
 
   return (
     <>
@@ -158,6 +192,7 @@ export default function ProjectsContainer({ }) {
                   <ProjectItem
                     key={project._id.$oid}
                     project={project}
+                    handleComplete={handleComplete}
                     showdetail={() => setDetailModalState({ show: true, data: project })}
                   />
                 ))

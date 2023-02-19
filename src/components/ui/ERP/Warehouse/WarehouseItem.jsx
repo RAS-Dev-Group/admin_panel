@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function WarehouseItem({ item, editmodal, handleDelete }) {
+export default function WarehouseItem({ item, handleEdit, handleDelete }) {
   return (
     <div className="flex flex-wrap warehouse-item">
       <div className="name-container">
@@ -20,8 +20,8 @@ export default function WarehouseItem({ item, editmodal, handleDelete }) {
           <FontAwesomeIcon className="pr-1 fa-icon opacity-20" icon="trash" />
         </button>
         <button className="font-icon-wrapper"
-          onClick={editmodal}>
-          edit
+          onClick={handleEdit}>
+          Edit
         </button>
       </div>
     </div>

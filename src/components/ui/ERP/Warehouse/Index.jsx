@@ -8,16 +8,40 @@ import { TokenContext } from "../../../../context/TokenContext";
 import "./warehouse.scss";
 
 import { createWarehouse, deleteWarehouse, getWarehouses, updateWarehouse } from "../../../../utils/api";
+import { useRef } from "react";
+import Swal from "sweetalert2";
 
 export default function Warehouse(props) {
+  const emptyItem = {
+    id: 0,
+    name: '',
+    location: '',
+  };
   const [loadingState, setLoadingState] = useState(false);
   const [warehouseList, setWarehouseList] = useState([]);
   const [modalState, setModalState] = useState({ item: {}, show: false });
 
   const token = useContext(TokenContext);
+  // this is temporary
+  const nextId = useRef(1);
 
   // load warehouses
   useEffect(() => {
+    loadWarehouses();
+  }, []);
+
+  function loadWarehouses() {
+    let fakeList = [];
+    for (let i = 0; i < 10; i += 1) {
+      fakeList.push({
+        id: nextId.current,
+        name: 'Warehouse' + i,
+        location: 'Location' + i
+      });
+      nextId.current += 1;
+    }
+    setWarehouseList(fakeList);
+    return;
     setLoadingState(true);
     getWarehouses(token)
       .then(res => {
@@ -27,10 +51,18 @@ export default function Warehouse(props) {
       .catch(err => {
         setLoadingState(false);
       });
-  }, []);
+  }
 
   function handleSubmit(data) {
     if (data.id) { // update
+      setWarehouseList(warehouseList.map(item => item.id === data.id ? data : item));
+      Swal.fire(
+        'Saved',
+        'Your item successfully updated',
+        'success'
+      );
+      setModalState({ show: false, item: emptyItem });
+      return;
       updateWarehouse(token, data.id, data)
         .then(res => {
         })
@@ -38,6 +70,16 @@ export default function Warehouse(props) {
         });
     }
     else {
+      nextId.current += 1;
+      data.id = nextId.current;
+      setWarehouseList([...warehouseList, data]);
+      setModalState({ show: false, item: emptyItem });
+      Swal.fire(
+        'Saved',
+        'Your item successfully added',
+        'success'
+      );
+      return;
       createWarehouse(token, data.id, data)
         .then(res => {
         })
@@ -58,6 +100,13 @@ export default function Warehouse(props) {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
+        setWarehouseList(warehouseList.filter(item => item.id !== itemId));
+        Swal.fire(
+          'Deleted',
+          'Your item successfully deleted',
+          'success'
+        );
+        return;
         deleteWarehouse(token, itemId)
           .then(res => {
             if (res.status === 'success') {
@@ -107,21 +156,21 @@ export default function Warehouse(props) {
           </div>
           {loadingState ?
             <div className="text-center">Loading Warehouses ...</div> :
-            warehouseList.map(item => {
-              <WarehouseItem
+            warehouseList.map(item => (
+              <WarehouseItem key={item.id}
                 item={item}
                 handleEdit={() => setModalState({ item, show: true })}
                 handleDelete={handleDelete}
               />
-            })
+            ))
           }
         </div>
       </div>
       <WarehouseModal
         open={modalState.show}
         initialData={modalState.item}
-        submitFunc={handleSubmit}
-        closeFunc={() => setModalState({ ...modalState, show: false })}
+        handleSubmit={handleSubmit}
+        handleClose={() => setModalState({ show: false, item: emptyItem })}
       />
     </>
   );

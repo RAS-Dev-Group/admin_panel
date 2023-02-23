@@ -10,7 +10,7 @@ import { TokenContext } from "../context/TokenContext";
 export default function AdminLayout({ mode, submenu, onSubmenu, children, onFinanceType }) {
   const [contentHeight, setContentHeight] = React.useState(window.innerHeight);
 
-  // check for authenticated, if not --> redirect to login
+  // check for authenticated, if not ---> redirect to login
   const token = useContext(TokenContext);
   const navigate = useNavigate();
 

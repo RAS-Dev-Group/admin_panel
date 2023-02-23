@@ -1,23 +1,31 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import Modal from "../../../ui/Modal/Modal";
 
-const WarehouseModal = ({ open, data, closeFunc, submitFunc }) => {
-  const [item, setItem] = useState(data);
+const WarehouseModal = ({ open, initialData, handleClose, handleSubmit }) => {
+  const [item, setItem] = useState(initialData);
+
+  useEffect(() => {
+    setItem(initialData);
+  }, [initialData]);
+
+  function handleChange(e) {
+    setItem({ ...item, [e.target.name]: e.target.value });
+  }
 
   return (
-    <Modal show={open} onClose={closeFunc}>
+    <Modal show={open} onClose={handleClose}>
       <div className="text-center modal-header">
         <label className="modal-title">
-          {item && item.id ? "Edit Warehouse" : "New Warehouse"}
+          {item.id ? "Edit Warehouse" : "New Warehouse"}
         </label>
       </div>
-      <input type="hidden" name="id" value={item.id} readOnly={true} />
       <div className="text-center modal-item">
         <input
           className="item"
           name="name"
           value={item.name}
-          onChange={(e) => { setItem({ ...item, name: e.target.value }) }}
+          onChange={handleChange}
           type="text"
           placeholder="Input WareHouse name"
         />
@@ -26,14 +34,15 @@ const WarehouseModal = ({ open, data, closeFunc, submitFunc }) => {
         <input
           className="item"
           type="text"
+          name="location"
           value={item.location}
-          onChange={(e) => { setItem({ ...item, location: e.target.value }) }}
+          onChange={handleChange}
           placeholder="Input Location"
         />
       </div>
       <div className="text-center">
-        <button className="item button" onClick={() => submitFunc(item)}>
-          {item && item.id ? "Update" : "Add"}
+        <button className="item button" onClick={() => handleSubmit(item)}>
+          {item.id ? "Update" : "Add"}
         </button>
       </div>
     </Modal>

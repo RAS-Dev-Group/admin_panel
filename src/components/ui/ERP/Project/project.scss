@@ -180,10 +180,9 @@
   }
 
   .sel-project-title {
-    padding: 6px 15px;
+    padding: 8px 15px;
     border: solid 0.5px #8B5E83;
-    border-radius: 10px;
-    width: 454px;
+    border-radius: 7px;
   }
 
   textarea {
@@ -461,4 +460,41 @@
   .task-item:last-child {
     margin-bottom: 0;
   }
+}
+
+.MuiPickersDay-root {
+  line-height: 36px !important;
+}
+
+.modal-project {
+  width: 748px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal-project-detail {
+  width: 786px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.more-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1057;
+  background-color: #0000005f;
+  overflow-y: scroll;
+}
+
+.modal-task {
+  margin-top: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }

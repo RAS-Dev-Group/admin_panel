@@ -14,11 +14,7 @@
     padding: 10px 0;
   }
 
-  .color1 {
-    color: #82567A;
-  }
-
-  .status1 {
+  .status-paid {
     margin: 0 auto;
     display: block;
     border-radius: 3px;
@@ -27,7 +23,7 @@
     color: #004d3e;
   }
 
-  .status2 {
+  .status-pending {
     margin: 0 auto;
     display: block;
     border-radius: 3px;
@@ -36,7 +32,7 @@
     color: white;
   }
 
-  .status3 {
+  .status-decline {
     margin: 0 auto;
     display: block;
     border-radius: 3px;
@@ -44,9 +40,4 @@
     background-color: #FD3838;
     color: white;
   }
-
-  .fa-icon {
-    color: #F24E1E;
-  }
-
 }

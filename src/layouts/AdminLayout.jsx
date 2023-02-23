@@ -4,7 +4,6 @@ import "./admin.scss";
 
 import Sidebar from "./Sidebar/Sidebar";
 import Header from "./Header/Header";
-import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../context/TokenContext";
 
 export default function AdminLayout({ mode, submenu, onSubmenu, children, onFinanceType }) {
@@ -12,7 +11,6 @@ export default function AdminLayout({ mode, submenu, onSubmenu, children, onFina
 
   // check for authenticated, if not ---> redirect to login
   const token = useContext(TokenContext);
-  const navigate = useNavigate();
 
   // for resize
   useEffect(() => {

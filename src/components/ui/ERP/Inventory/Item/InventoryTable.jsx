@@ -2,47 +2,83 @@ import React, { useContext, useEffect, useState } from "react";
 
 import TableSearch from "../../../TableSearch/TableSearch";
 import ItemModal from './ItemModal';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Swal from "sweetalert2";
 import { getInventories } from "../../../../../utils/api";
 import { TokenContext } from "../../../../../context/TokenContext";
 import { useNavigate } from "react-router-dom";
+import InventoryItem from "./InventoryItem";
 
-export default function InventoryTable({ description }) {
+export default function InventoryTable({ showNewItemModal }) {
   const [inventories, setInventories] = useState([]);
+  const [loadingState, setLoadingState] = useState(false);
+  const [filter, setFilter] = useState({});
+
+  const emptyItem = {
+    id: '',
+    name: '',
+    category: '',
+    quantity: '',
+    tax_rate: '',
+    amount: '',
+  };
+
   const [modalState, setModalState] = useState({
-    item: {},
-    show: false
+    show: false, item: emptyItem
   });
   const token = useContext(TokenContext);
 
   const navigate = useNavigate();
 
+  // load inventories
   useEffect(() => {
-    if (token) {
-      getInventories(token)
-      .then(res => {
-        setInventories(res.data);
-      })
-      .catch(err => {
+    // loadInventories();
 
+    // fake inventories
+    let fakeInventories = [];
+    for (let i = 0; i < 10; i += 1) {
+      fakeInventories.push({
+        id: i + 1,
+        name: 'Item ' + i,
+        tag: 'Tag ' + i,
+        description: 'This is iventory item',
+        sku: '1267',
+        vendor: 'Vendor ' + Math.round(Math.random() * 4),
+        category: 'Category ' + Math.round(Math.random() * 3),
+        quantity: Math.round(Math.random() * 30 + 5),
+        tax_rate: Math.round(Math.random() * 12 + 3),
+        amount: Math.round(Math.random() * 12)
       });
     }
-    else {
-      navigate('/login');
-    }
+    setInventories(fakeInventories);
   }, []);
+
+  function loadInventories() {
+    if (!token) return;
+    setLoadingState(true);
+    getInventories(token)
+      .then(res => {
+        setInventories(JSON.parse(res.data));
+        setLoadingState(false);
+      })
+      .catch(err => {
+        setLoadingState(false);
+      });
+  }
+
+  // showing modal
+  useEffect(() => {
+    if (showNewItemModal)
+      setModalState({ show: true, item: emptyItem });
+  }, [showNewItemModal]);
 
   const options = [
     { value: "", label: "none" },
     { value: "input details", label: "input details" },
   ];
 
-  function handleNewEdit() {
-    setModalState({
-      item: {}, show: true
-    });
+  function handleFilterChange(e) {
+    setFilter({ ...filter, [e.target.name]: e.target.value });
   }
 
   function handleItemDelete(itemId) {
@@ -56,6 +92,9 @@ export default function InventoryTable({ description }) {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
+        setInventories(inventories.filter(inventory => inventory.id !== itemId));
+        return;
+        // dont do api
         deleteInventory(token, itemId)
           .then(res => {
             if (res.status === 'success') {
@@ -79,13 +118,16 @@ export default function InventoryTable({ description }) {
     })
   }
 
-  function handleSubmit(res) {
+  function handleSubmit(data) {
     // res ; response from server
-    if (res.is_update) {
-      // setInventories(inventories);
+    if (data.id) {
+      // update inventory
+      setInventories(inventories.map(inventory => data.id == inventory.id ? data : inventory));
+      setModalState({ show: false, item: emptyItem });
     }
-    else if (res.is_add) {
-      setInventories([...inventories, res.data]);
+    else {
+      // add new
+      setInventories([...inventories, data]);
     }
   }
 
@@ -93,75 +135,52 @@ export default function InventoryTable({ description }) {
     <>
       <div className="flex table-filter">
         <TableSearch />
-        <select className="ml-auto mr-2 filter" placeholder="Date">
+        <select className="ml-auto mr-2 filter" placeholder="Date" onChange={handleFilterChange}>
           <option>Date</option>
         </select>
-        <select className="mr-2 filter" placeholder="Product Category">
+        <select className="mr-2 filter" placeholder="Product Category" onChange={handleFilterChange}>
           <option>Product Category</option>
         </select>
-        <select className="mr-2 filter" placeholder="Status Delivery">
+        <select className="mr-2 filter" placeholder="Status Delivery" onChange={handleFilterChange}>
           <option>Status Devlivery</option>
         </select>
-        <select className="mr-2 filter" placeholder="More Filters">
+        <select className="mr-2 filter" placeholder="More Filters" onChange={handleFilterChange}>
           <option>More Filters</option>
         </select>
       </div>
       <div className="pl-2 mt-3">
-        <table className="table w-full text-center inventory-table">
-          <thead>
-            <tr>
-              <th className="text-left">Item Name</th>
-              <th>Category</th>
-              <th>Image</th>
-              <th>Tags</th>
-              <th>Description</th>
-              <th>Quantity</th>
-              <th>SKU</th>
-              <th>Vendor</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {inventories.map((row, index) => (
-              <tr className="my-2" key={index}>
-                <td className="font-bold text-left">{row.name}</td>
-                <td>{row.category}</td>
-                <td>
-                  <img className="mx-auto mt-2" src={row.image} alt="img" />
-                </td>
-                <td className="color1">{row.tag}</td>
-                <td>
-                  <select
-                    className="filter"
-                    options={options}
-                    placeholder="input details"
-                    value={description}
-                  />
-                </td>
-                <td className="color1">{row.quantity}</td>
-                <td className="color1">{row.sku}</td>
-                <td>{row.vendor}</td>
-                <td className="color1">
-                  <button className="ml-auto font-icon-wrapper"
-                    onClick={() => { handleItemDelete(row.id) }}>
-                    <FontAwesomeIcon
-                      className="pr-1 fa-icon opacity-20"
-                      icon="trash"
-                    />
-                  </button>
-                  <button onClick={() => { setModalState({ item: row, show: true }) }}>
-                    Edit
-                  </button>
-                </td>
+        {loadingState ?
+          <div className="text-center">Loading Inventories ...</div> :
+          <table className="table w-full text-center inventory-table">
+            <thead>
+              <tr>
+                <th className="text-left">Item Name</th>
+                <th>Category</th>
+                <th>Image</th>
+                <th>Tags</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>SKU</th>
+                <th>Vendor</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {inventories.map((row) => (
+                <InventoryItem key={row.id}
+                  item={row}
+                  handleDelete={handleItemDelete}
+                  handleEdit={(item) => setModalState({ show: true, item })}
+                />
+              ))}
+            </tbody>
+          </table>}
+
       </div>
       <ItemModal
         open={modalState.show}
-        item={modalState.item}
-        handleClose={() => { setModalState({ show: false }) }}
+        initialData={modalState.item}
+        handleClose={() => { setModalState({ show: false, item: emptyItem }) }}
         handleSubmit={handleSubmit}
       />
     </>

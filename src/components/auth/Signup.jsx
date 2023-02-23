@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { signupFields } from "../../data/formFields";
 import { signUp } from "../../utils/api";
 import FormAction from "./FormAction";
@@ -11,6 +12,7 @@ fields.forEach((field) => (fieldsState[field.name] = ""));
 
 export default function Signup() {
   const [signupState, setSignupState] = useState(fieldsState);
+  const navigate = useNavigate();
 
   const handleChange = (e) =>
     setSignupState({ ...signupState, [e.target.name]: e.target.value });
@@ -25,9 +27,10 @@ export default function Signup() {
   const createAccount = () => {
     signUp(signupState)
       .then(res => {
+        navigate('login');
       })
       .catch(err => {
-
+        alert('error occurred');
       });
   };
 

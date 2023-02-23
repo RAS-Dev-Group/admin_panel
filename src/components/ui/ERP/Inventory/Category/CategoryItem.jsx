@@ -7,11 +7,11 @@ export default function CategoryItem({ category, handleEdit, handleDelete }) {
       <label>{category.name}</label>
       <button className="ml-auto" onClick={() => { handleDelete(category.id) }}>
         <FontAwesomeIcon
-          className="pr-1 text-red-500 fa-icon opacity-20"
+          className="pr-1 color-delete fa-icon opacity-20"
           icon="trash"
         />
       </button>
-      <button className="ml-1" onClick={() => {handleEdit(category)}}>
+      <button className="ml-1" onClick={() => { handleEdit(category) }}>
         Edit
       </button>
     </div>

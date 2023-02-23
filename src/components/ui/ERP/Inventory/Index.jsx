@@ -6,34 +6,29 @@ import InventoryTable from "./Item/InventoryTable";
 import "./inventory.scss";
 import CategoryList from "./Category/CategoryList";
 
-import Swal from 'sweetalert2';
-import { deleteInventory, getInventories, getInventory, updateInventory, createInventory } from "../../../../utils/api";
-
 export default function Inventory() {
+  const [showNewItem, setShowNewItem] = useState(0);
+  const [showNewCategory, setShowNewCategory] = useState(0);
   const [currentRole, setCurrentRole] = useState('ITEM');
 
-  const handleNewItemModal = () => {
+  function handleNewItem() {
     if (currentRole === 'ITEM') {
       // open dialog --> call inventoryTable's func
+      setShowNewItem(showNewItem + 1);
     }
     else {
       setCurrentRole('ITEM');
     }
-  };
-
-  const handleNewCatModal = () => {
-    setCatModalType('NEW');
-    handleCatOpen();
-  };
+  }
 
   return (
     <>
       <div className="flex float-right w-480">
         <div className="mx-auto text-center bg-white w-96 buttons">
-          <button className="common-button" onClick={handleNewItemModal}>New Item</button>
+          <button className="common-button" onClick={handleNewItem}>New Item</button>
           <button className="common-button">Export CSV</button>
           <button className="common-button">Import Items</button>
-          <button className="common-button" onClick={handleNewCatModal}>Create Category</button>
+          <button className="common-button" onClick={() => setShowNewCategory(showNewCategory + 1)}>Create Category</button>
           <button className="common-button" onClick={() => setCurrentRole('CATEGORY')}>Edit Category</button>
         </div>
       </div>
@@ -44,8 +39,8 @@ export default function Inventory() {
         </div>
         {
           currentRole === 'ITEM' ?
-            <InventoryTable /> :
-            <CategoryList />
+            <InventoryTable showNewItemModal={showNewItem} /> :
+            <CategoryList showNewCategory={showNewCategory} />
         }
       </div>
     </>
